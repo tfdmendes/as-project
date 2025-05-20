@@ -1,0 +1,201 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cabecalho {
+  background-image: url('assets/header/Bg-image.png'); /* Caminho da imagem */
+  background-size: cover;            /* Cobre todo o espaço do cabeçalho */
+  background-color: lightgray 50%;
+  height: 651px;
+  color: white;
+  flex-shrink: 0;
+}
+
+h1 {
+    color: #484848;;
+    font-family: Montserrat;
+    font-size: 120px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-menu a {
+  text-decoration: none;
+  color: #484848;;
+  font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+/* Reutilizado do passo anterior */
+.menu-utilizador {
+  background-color: white;
+  border-radius: 900px;
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.icon-menu {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-user {
+  width: 40px;
+  height: 40px;
+}
+
+.botao-prestador {
+  background-color: #196085;
+  color: white;
+  padding: 12px 14px;
+  border-radius: 23px;
+  text-decoration: none;
+  color: #FFF;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.conteudo-central {
+  text-align: center;
+  margin-top: 100px;
+  
+}
+
+.logo-com-texto {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.texto-atras {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;
+    font-weight: bold;
+    color: #196085; 
+    font-family: Montserrat;
+    font-size: 120px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    z-index: 0;
+    white-space: nowrap;
+}
+
+.logo-com-texto .logo {
+  position: relative;
+  max-width: 100px;
+  display: inline-block;
+  text-align: center;
+  margin-left: 35px; /* ajusta este valor como quiseres */
+}
+
+/*logo no meio de Pet-o-tel*/
+.meio {
+  visibility: hidden;
+  align-self: center;
+  display: inline-block;
+  width: 102.5px;
+height: 82px;
+flex-shrink: 0;
+aspect-ratio: 102.50/82.00;
+  
+}
+
+.linha {
+  margin: 20px auto;
+  display: block;
+  max-width: 500px;
+}
+
+.menu-categorias {
+  margin: 20px 0;
+}
+
+.menu-categorias a {
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  color: #000;;
+}
+
+.barra-pesquisa {
+  margin: 60px auto;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 999px;
+  padding: 10px 15px;
+  width: 600px;
+  margin-left: 450px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.search-input {
+  color: #c2c6cc;
+  font-family: 'Montserrat', sans-serif;
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 10px;
+}
+
+.filter-select {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  margin-left: 10px;
+  color: rgba(0, 0, 0, 0.51);
+}
+
+.search-button {
+  background-color: #6ec1a6;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
