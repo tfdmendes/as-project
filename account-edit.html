@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Edit</title>
+    <link rel="stylesheet" href="css/account-edit.css" type="text/css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <!--<div hx-get="/header.html" hx-trigger="load"></div>-->
+
+    <main>
+        <h2>A editar o meu perfil</h2>
+
+        <form action="http://httpbin.org/get" method="get"></form>
+            <section class="profile-section">
+                <figure class="profile-picture">
+                    <img src="assets/account-edit/RyanMatos.png" alt="Ryan Matos" title="Ryan Matos" width="320" height="319">
+                    <input type="file" name="fileInput" id="fileInput" accept="image/" style="display: none">
+                    <figcaption>
+                        <label for="fileInput" class="upload-btn">Carregar Foto</label>
+                    </figcaption>
+                </figure>
+
+                <div class="profile-info">
+                    <p class="name">Rhyan Matos</p>
+                    <ul class="verification">
+                        <li>Email Confirmado</li>
+                        <li>Telemóvel Confirmado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="pets-section">
+                <div class="share-tel">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="tel">Partilhar número de telemóvel</span>
+                </div>
+                <div class="container">
+                    <h3>Os meus pets</h3>
+
+                    <div class="pets-grid">
+                        <div class="pet-card">
+                              <img src="assets/account-edit/Dog.png" alt="Dog" title="dog" width="364" height="364" loading="lazy">
+                         <h4>Sasha</h4>
+                        <p class="breed">Golden Retriver</p>
+                        </div>
+                        <div class="pet-card">
+                            <img src="assets/account-edit/Cat.png" alt="Cat" title="cat"  width="364" height="364" loading="lazy">
+                            <h4>Marcos</h4>
+                            <p class="breed">Khao Manee</p>
+                        </div>
+
+                        <div class="add-pet">
+                            <div class="add-icon">+</div>
+                            <p>Adicionar Pet</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="window.history.back()">Cancel</button>
+                <button type="submit" class="save-tbn">Save</button>
+            </div>
+        </form>
+    </main>
+
+    <!--<div hx-get="/footer.html" hx-trigger="load"></div>-->
+</body>
+</html>

@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+ 
+ /* || RESET */
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+ img {
+    display: block;
+ }
+
+ /* || VARIABLES */
+
+ :root {
+    --F: 2rem 'Montserrat';
+
+    --BGCOLOR: #fff;
+    --PROFILE-BGCOLOR: rgba(133, 198, 178, 0.20);
+    --TEL-BGCOLOR: rgba(252, 201, 170, 0.28);
+    --CHECKMARK-COLOR: #E5C31D;
+    --COLOR: #484848;
+    --LIGHT-COLOR: #9A9A9A;
+    --DARK-COLOR: #000;
+
+    --PROFILE-MARGIN: 17.4375rem;
+ }
+
+ /* || GENERAL STYLES */
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font: var(--F);
+    font-weight: 700;
+    min-height: 100vh;
+
+    background-color: var(--BGCOLOR);
+    Color: var(--COLOR);
+
+    display: flex;
+}
+
+form {
+    position: relative;
+}
+
+h2 {
+    position: absolute;
+    top: var(--PROFILE-MARGIN);
+    left: 60rem;
+
+    font-size: 4rem;
+}
+
+
+
+/* || PROFILE STYLES */
+
+.profile-section {
+    background-color: var(--PROFILE-BGCOLOR);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    margin: var(--PROFILE-MARGIN);
+    padding: 5rem 6rem 28rem;
+    border-radius: 0.5rem;
+
+    gap: 2rem;
+}
+
+.profile-picture {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-weight: 600;
+}
+
+.profile-picture figcaption {
+    margin-top: 0.75rem;
+    font-weight: 600;
+}
+
+.profile-info {
+    line-height: 4rem;
+}
+
+.profile-info p {
+    margin: 2rem 0rem;
+    font-size: 3rem;
+}
+
+.verification {
+    list-style: none;
+    color: var(--LIGHT-COLOR);
+    font-weight: 500;
+}
+
+.verification li::before {
+    content: "✔";
+    margin-right: 8px;
+    display: inline-block;
+    width: 2.8rem;
+}
+
+.name {
+    font-size: 1.375rem;
+}
+
+
+
+/* || TEL STYLES */
+
+.share-tel {
+    background-color: var(--TEL-BGCOLOR);
+    padding: 2rem;
+    border-radius: 3rem;
+
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;  /* Alinha verticalmente o toggle com o texto */
+    gap: 1rem;           /* Espaço entre o toggle e o texto */
+    margin: 1.5rem 0;    /* Espaçamento externo */
+    font-size: 1rem;     /* Tamanho do texto */
+}
+
+.tel {
+    font-size: 2.7rem;
+    font-weight: 600;
+    color: var(--DARK-COLOR);
+
+    margin-right: 7rem;
+}
+
+.switch input {
+    margin-left: 8rem;
+    opacity: 0;
+    position: relative;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;         /* Largura do toggle */
+    height: 24px;        /* Altura do toggle */
+}
+
+/* Esconde o checkbox padrão */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Estilo do slider (fundo do toggle) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;  /* Cor quando desativado */
+    transition: .4s;
+    border-radius: 24px;     /* Borda arredondada */
+}
+
+/* Bolinha do toggle */
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 10px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* Cor quando ativado (verde Pet-o-Tel) */
+input:checked + .slider {
+    background-color: #85C6B2;
+}
+
+/* Movimento da bolinha */
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+
+
+/* || PETS STYLES */
+
+h3 {
+    font-size: 2.7rem;
+    font-weight: 600;
+    padding: 1.8rem 0 2.8rem;
+}
+
+.pets-section {
+    position: absolute;
+    top: 30rem;
+    left: 70rem;
+}
+
+.pets-grid {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.pet-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-left: 0;
+}
+
+.container {
+    
+}
