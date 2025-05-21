@@ -1,0 +1,156 @@
+/* =====================================================
+   RESET & VARIÁVEIS GLOBAIS
+   ===================================================== */
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:'Montserrat',sans-serif;color:#484848;}
+img{display:block;max-width:100%;height:auto;}
+
+:root{
+  --container-max:1280px;  /* largura total do mockup Figma */
+  --side-pad:40px;         /* padding horizontal consistente */
+  --brand-blue:#196085;
+  --brand-yellow:#f2cc4d;
+}
+
+/* =====================================================
+   CABEÇALHO
+   ===================================================== */
+.cabecalho{background:#e8f1f5;padding-bottom:30px;}
+.menu-bar{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:15px var(--side-pad);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+}
+
+/* logo */
+.logo-container{display:flex;align-items:center;}
+.logo-small{width:32px;height:32px;margin-right:10px;}
+.logo-text{color:var(--brand-blue);font-size:22px;font-weight:700;}
+
+/* navegação */
+.nav-menu{display:flex;align-items:center;gap:20px;}
+.nav-menu a{text-decoration:none;color:#484848;font-size:16px;font-weight:600;}
+
+/* utilizador */
+.menu-utilizador{
+  display:flex;align-items:center;gap:8px;padding:2px 10px;
+  background:#fff;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.icon-menu{width:24px;height:24px;}
+.icon-user{width:40px;height:40px;}
+
+/* =====================================================
+   HERO SECTION
+   ===================================================== */
+.hero-section{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:60px var(--side-pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:60px;
+}
+.hero-content{flex:0 1 520px;}
+.hero-content h2{
+  color:var(--brand-blue);font-size:48px;font-weight:700;
+  margin-bottom:20px;line-height:1.2;
+}
+.hero-content p{font-size:18px;line-height:1.5;margin-bottom:30px;}
+.hero-image{flex:0 0 400px;display:flex;justify-content:flex-end;}
+.pessoa-cao{max-width:380px;width:100%;}
+
+/* =====================================================
+   WHY SECTION
+   ===================================================== */
+.why-section{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:80px var(--side-pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;                /* <— reduzido para aproximar */
+}
+.dog-question{flex:0 0 260px;}
+.cao-duvida{width:100%;max-width:260px;}
+.benefits-content{flex:1 1 480px;}
+.benefits-content h3{font-size:32px;font-weight:600;margin-bottom:20px;}
+.benefits-list{list-style:none;padding-left:0;}
+.benefits-list li{
+  position:relative;padding-left:20px;margin-bottom:15px;
+  font-size:16px;color:#666;
+}
+.benefits-list li::before{content:"•";position:absolute;left:0;color:#666;}
+.cta-button{
+  display:inline-block;background:var(--brand-yellow);color:#484848;
+  text-decoration:none;padding:15px 30px;border-radius:25px;
+  font-weight:600;margin-top:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);
+  transition:all .3s ease;
+}
+.cta-button:hover{background:#e5c03e;transform:translateY(-2px);}
+
+/* =====================================================
+   TIPS SECTION
+   ===================================================== */
+.tips-section{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:60px var(--side-pad);
+}
+.tips-header h3{font-size:32px;font-weight:600;margin-bottom:10px;}
+.tips-header p{font-size:18px;color:#666;}
+.tips-cards{display:flex;justify-content:space-between;gap:20px;}
+.tip-card{
+  background:#f9f9f9;border-radius:8px;overflow:hidden;width:32%;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.tip-card img{width:100%;object-fit:cover;}
+.tip-card h4{padding:15px 20px 5px;font-size:18px;font-weight:600;}
+.card-category{padding:0 20px 15px;font-size:14px;color:#999;}
+
+/* =====================================================
+   RODAPÉ
+   ===================================================== */
+.rodape{background:#f0f0f0;padding:50px 0 20px;color:#484848;}
+.footer-top{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:0 var(--side-pad) 30px;
+  display:flex;justify-content:space-between;
+}
+.footer-logo{display:flex;align-items:flex-start;gap:15px;}
+.logo-footer{width:40px;height:40px;}
+.footer-brand{display:flex;flex-direction:column;}
+.footer-logo-text{font-size:24px;font-weight:700;color:var(--brand-blue);}
+.footer-slogan{margin-top:5px;font-size:14px;color:#666;}
+.footer-links{display:flex;gap:60px;}
+.footer-column h5{
+  font-size:14px;font-weight:700;margin-bottom:20px;color:#484848;
+}
+.footer-column ul{list-style:none;}
+.footer-column li{margin-bottom:10px;}
+.footer-column a{text-decoration:none;color:#666;font-size:14px;}
+.social-icons{display:flex;gap:10px;margin-top:15px;}
+.social-icons img{width:24px;height:24px;}
+.app-buttons{display:flex;gap:15px;margin-bottom:40px;}
+.app-button{
+  display:flex;align-items:center;gap:8px;background:#e0e0e0;
+  padding:8px 15px;border-radius:5px;text-decoration:none;
+  color:#484848;font-size:14px;font-weight:500;
+}
+.app-button img{width:18px;height:18px;}
+.footer-bottom{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:20px var(--side-pad) 0;
+  border-top:1px solid #ddd;
+  display:flex;justify-content:space-between;
+  font-size:14px;color:#777;
+}
+.footer-bottom p{margin:0;}
