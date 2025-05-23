@@ -17,8 +17,8 @@
         <a href="#">Baixa a aplicação móvel</a>
         <a href="#">Login</a>
         <div class="menu-utilizador">
-            <img src="assets/header/menu.svg" alt="Menu" class="icon-menu">
-            <a href="conta_dono_animal.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+            <img src="assets/index/header/menu.svg" alt="Menu" class="icon-menu">
+            <a href="account-edit.html"><img src="assets/index/header/user.svg" alt="Utilizador" class="icon-user"></a>
         </div>
       </div>
     </div>
@@ -26,11 +26,11 @@
     <div class="conteudo-central">
         <div class="logo-com-texto">
             <span class="texto-atras">Pet-<span class="meio">O</span>-Tel</span>
-                <img src="assets/header/logo2.svg" alt="Logo Pet-O-Tel" class="logo">
+                <img src="assets/index/header/logo2.svg" alt="Logo Pet-O-Tel" class="logo">
         </div>
 
       
-      <img src="assets/header/linear-indeterminate progress indicator (1).svg" alt="Linha decorativa" class="linha">
+      <img src="assets/index/header/linear-indeterminate progress indicator (1).svg" alt="Linha decorativa" class="linha">
       <nav class="menu-categorias">
         <a href="#">Cães</a>
         <a href="#">Gatos</a>
@@ -46,12 +46,13 @@
             <!-- Adicione mais opções aqui -->
         </select>
         <button class="search-button">
-            <img src="assets/header/search.svg" alt="Utilizador" class="icon-user">
+            <img src="assets/index/header/search.svg" alt="Utilizador" class="icon-user">
         </button>
       </div>
     </div>
   </header>
 
+<!--Categorias-->
   <div class="categorias">
       <div class="linha-superior">
         <div class="categorias-titulo">
@@ -61,17 +62,17 @@
 
         <div class="categorias-grid linha-1x3">
           <a href="/pesquisa?categoria=alojamento" class="categoria-card">
-            <img src="assets/categorias/alojamento.png" alt="Alojamento">
+            <img src="assets/index/categorias/alojamento.png" alt="Alojamento">
             <h3>Alojamento</h3>
             <p>Encontre o melhor lar temporário!</p>
           </a>
           <a href="/pesquisa?categoria=petsitting" class="categoria-card">
-            <img src="assets/categorias/pet-sitting.png" alt="Pet Sitting">
+            <img src="assets/index/categorias/pet-sitting.png" alt="Pet Sitting">
             <h3>Pet Sitting</h3>
             <p>A companhia, quando não podes!</p>
           </a>
           <a href="/pesquisa?categoria=higiene" class="categoria-card">
-            <img src="assets/categorias/higiene.png" alt="Higiene e Estética">
+            <img src="assets/index/categorias/higiene.png" alt="Higiene e Estética">
             <h3>Higiene & Estética</h3>
             <p>Beleza e bem-estar animal</p>
           </a>
@@ -80,29 +81,116 @@
 
       <div class="categorias-grid linha-1x4">
         <a href="/pesquisa?categoria=atividade" class="categoria-card">
-          <img src="assets/categorias/atividade.png" alt="Atividade e Exercício">
+          <img src="assets/index/categorias/atividade.png" alt="Atividade e Exercício">
           <h3>Atividade & Exercício</h3>
           <p>Pet walking e atividades de outdoor</p>
         </a>
         <a href="/pesquisa?categoria=treino" class="categoria-card">
-          <img src="assets/categorias/treino.png" alt="Treino">
+          <img src="assets/index/categorias/treino.png" alt="Treino">
           <h3>Treino & Comportamento</h3>
           <p>Educar com carinho</p>
         </a>
         <a href="/pesquisa?categoria=transporte" class="categoria-card">
-          <img src="assets/categorias/transporte.png" alt="Transporte">
+          <img src="assets/index/categorias/transporte.png" alt="Transporte">
           <h3>Transporte</h3>
           <p>Mobilidade com conforto</p>
         </a>
         <a href="/pesquisa?categoria=compras" class="categoria-card">
-          <img src="assets/categorias/compras.png" alt="Compras">
+          <img src="assets/index/categorias/compras.png" alt="Compras">
           <h3>Compras & Entregas</h3>
           <p>Tudo para pets, sem sair de casa</p>
         </a>
       </div>
     </div>
-
   </div>
+
+  <!-- Serviços 5 estrelas -->
+<div class="servicos">
+    <h2>Serviços <span class="estrelas">⭐️⭐️⭐️⭐️⭐️</span> para o seu melhor amigo</h2>
+    <div class="cards-servicos">
+
+      <div class="card">
+        <img src="assets/index/serviços/Rectangle 72 (1).png" alt="Estadia com Recreação" />
+        <div class="info">
+          <h3>Estadia com Recreação</h3>
+          <p>Lisboa, Portugal</p>
+        </div>
+        <div class="favorito" onclick="toggleFavorito(this)">
+          <img src="assets/index/serviços/heart.svg" class="coracao vazio" alt="Favorito vazio" />
+          <img src="assets/index/serviços/heart-fill.svg" class="coracao cheio" alt="Favorito cheio" />
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="assets/index/serviços/Rectangle 72 (2).png" alt="Tratamento Anti-Parasitas" />
+        <div class="info">
+          <h3>Tratamento Anti-Parasitas</h3>
+          <p>Aveiro, Portugal</p>
+        </div>
+        <div class="favorito" onclick="toggleFavorito(this)">
+          <img src="assets/index/serviços/heart.svg" class="coracao vazio" alt="Favorito vazio" />
+          <img src="assets/index/serviços/heart-fill.svg" class="coracao cheio" alt="Favorito cheio" />
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="assets/index/serviços/Rectangle 72 (3).png" alt="Delivery Produtos Petcentro" />
+        <div class="info">
+          <h3>Delivery Produtos Petcentro</h3>
+          <p>Coimbra, Portugal</p>
+        </div>
+        <div class="favorito" onclick="toggleFavorito(this)">
+          <img src="assets/index/serviços/heart.svg" class="coracao vazio" alt="Favorito vazio" />
+          <img src="assets/index/serviços/heart-fill.svg" class="coracao cheio" alt="Favorito cheio" />
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="assets/index/serviços/Rectangle 72 (4).png" alt="Banho & Tosquia Pro" />
+        <div class="info">
+          <h3>Banho & Tosquia Pro</h3>
+          <p>Porto, Portugal</p>
+        </div>
+        <div class="favorito" onclick="toggleFavorito(this)">
+          <img src="assets/index/serviços/heart.svg" class="coracao vazio" alt="Favorito vazio" />
+          <img src="assets/index/serviços/heart-fill.svg" class="coracao cheio" alt="Favorito cheio" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleFavorito(el) {
+      el.classList.toggle('ativo');
+    }
+  </script>
+
+  <!--Slogan-->
+  <section class="slogan">
+    <div class="texto">
+      <h2>Tornamos simples cuidar de<br><span class="destacado">quem te faz bem!</span></h2>
+      <p>No Pet-O-Tel, reunimos num só lugar todos os serviços de que o teu animal de estimação pode precisar. <br>
+        Explora uma variedade de opções que vão desde hotéis para cães e gatos, a serviços de dog walking, pet sitting, grooming e <br> muito mais. <br>
+        Descobre mais sobre os cuidados pets!</p>
+      <button class="btn-descobrir">Descobrir mais!</button>
+    </div>
+    <div class="imagem">
+      <img src="assets/index/slogan/cobaias.png" alt="Dois porquinhos da índia" />
+    </div>
+  </section>
+
+  <!--Trona-te Prestador-->
+  <section class="prestador">
+    <div class="texto">
+      <h2>És cuidador de animais?<br>Junta-te ao <strong>Pet-O-Tel!</strong></h2>
+      <p>Dá o próximo passo com o Pet-O-Tel! <br> Começa hoje mesmo a aceitar reservas através da nossa plataforma e leva os teus serviços a mais clientes.</p>
+      <button class="btn-prestador">Torna-te Prestador</button>
+    </div>
+    <div class="card-prestador">
+      <img src="assets/index/prestador/prestador.png" alt="Ilustração cuidador" />
+    </div>
+  </section>
 
 </body>
 </html>
