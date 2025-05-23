@@ -4,6 +4,7 @@ body, html {
   font-family: 'Montserrat', sans-serif;
 }
 
+/*header*/
 .cabecalho {
   background-image: url('../assets/header/Bg-image.png'); /* Caminho da imagem */
   background-size: cover;            /* Cobre todo o espaço do cabeçalho */
@@ -197,5 +198,46 @@ aspect-ratio: 102.50/82.00;
   margin-left: 10px;
   cursor: pointer;
   font-size: 16px;
+}
+
+/*Categorias ------------------------------------*/
+.categorias {
+  padding: 80px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* Linha superior: Título + 3 cartões */
+.linha-superior {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Grid de 3 colunas */
+.linha-1x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  flex: 3;
+}
+
+/* Grid de 4 colunas */
+.linha-1x4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+}
+
+/* Reutilização do estilo dos cartões */
+.categoria-card {
+  width: 100%;
+}
+
+/* Remove estilos antigos que causavam problemas */
+.categoria-odd {
+  display: none;
 }
 
