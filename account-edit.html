@@ -1,76 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Edit</title>
-    <link rel="stylesheet" href="css/account-edit.css" type="text/css">
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>Pet-O-Tel - Editar Perfil</title>
+    <link rel="stylesheet" href="css/account-edit.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
-    <!--<div hx-get="/header.html" hx-trigger="load"></div>-->
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo">
+                <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <a href="#" class="nav-link">Login</a>
+            <div class="menu-user">
+                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle">
+                <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" id="headerProfileImg">
+                
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-section">
+                        <a href="messages.html" class="dropdown-item">Messages</a>
+                        <a href="notifications.html" class="dropdown-item">Notifications</a>
+                        <a href="reservations.html" class="dropdown-item">Reservations</a>
+                        <a href="wishlists.html" class="dropdown-item">Wishlists</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-section">
+                        <a href="account.html" class="dropdown-item">Account</a>
+                        <a href="help-center.html" class="dropdown-item">Help Center</a>
+                        <a href="logout.html" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-        <h2>A editar o meu perfil</h2>
+    <!-- Overlay para fechar o menu ao clicar fora -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
 
-        <form action="http://httpbin.org/get" method="get"></form>
-            <section class="profile-section">
-                <figure class="profile-picture">
-                    <img src="assets/account-edit/RyanMatos.png" alt="Ryan Matos" title="Ryan Matos" width="320" height="319">
-                    <input type="file" name="fileInput" id="fileInput" accept="image/" style="display: none">
-                    <figcaption>
-                        <label for="fileInput" class="upload-btn">Carregar Foto</label>
-                    </figcaption>
-                </figure>
-
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-section">
+                <!-- Left Profile Info -->
                 <div class="profile-info">
-                    <p class="name">Rhyan Matos</p>
-                    <ul class="verification">
-                        <li>Email Confirmado</li>
-                        <li>Telemóvel Confirmado</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="pets-section">
-                <div class="share-tel">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="tel">Partilhar número de telemóvel</span>
-                </div>
-                <div class="container">
-                    <h3>Os meus pets</h3>
-
-                    <div class="pets-grid">
-                        <div class="pet-card">
-                              <img src="assets/account-edit/Dog.png" alt="Dog" title="dog" width="364" height="364" loading="lazy">
-                         <h4>Sasha</h4>
-                        <p class="breed">Golden Retriver</p>
+                    <div class="profile-photo-container">
+                        <img src="assets/people/RyanMatos.png" alt="Profile" class="profile-photo" id="profilePhoto">
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                    </div>
+                    <button class="upload-button" id="uploadButton">Carregar Foto</button>
+                    
+                    <h2 class="profile-name">Rhyan Matos</h2>
+                    
+                    <div class="verification-items">
+                        <div class="verification-item">
+                            <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="#4CAF50">
+                                <path d="M6.5 12.5L2 8l1.5-1.5L6.5 9.5l7-7L15 4z"/>
+                            </svg>
+                            <span>Email Confirmado</span>
                         </div>
-                        <div class="pet-card">
-                            <img src="assets/account-edit/Cat.png" alt="Cat" title="cat"  width="364" height="364" loading="lazy">
-                            <h4>Marcos</h4>
-                            <p class="breed">Khao Manee</p>
-                        </div>
-
-                        <div class="add-pet">
-                            <div class="add-icon">+</div>
-                            <p>Adicionar Pet</p>
+                        <div class="verification-item">
+                            <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="#4CAF50">
+                                <path d="M6.5 12.5L2 8l1.5-1.5L6.5 9.5l7-7L15 4z"/>
+                            </svg>
+                            <span>Telemóvel Confirmado</span>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <div class="form-actions">
-                <button type="button" class="cancel-btn" onclick="window.history.back()">Cancel</button>
-                <button type="submit" class="save-tbn">Save</button>
+                <!-- Right Edit Section -->
+                <div class="edit-section">
+                    <h1 class="section-title">A editar o meu perfil</h1>
+                    
+                    <div class="share-toggle">
+                        <span>Partilhar Número de Telemóvel</span>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="pets-section">
+                        <h3 class="pets-title">Os meus pets</h3>
+                        
+                        <div class="pets-grid">
+                            <div class="pet-card">
+                                <img src="assets/animals/Dog.png" alt="Sasha" class="pet-photo">
+                                <h4 class="pet-name">Sasha</h4>
+                                <p class="pet-breed">Golden Retriever</p>
+                            </div>
+                            
+                            <div class="pet-card">
+                                <img src="assets/animals/Cat.png" alt="Marcos" class="pet-photo">
+                                <h4 class="pet-name">Marcos</h4>
+                                <p class="pet-breed">Khao Manee</p>
+                            </div>
+                            
+                            <button class="add-pet-button" id="addPetButton">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="#196085">
+                                    <path d="M20 8v24M8 20h24" stroke="#196085" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                                <span>Adicionar Pet</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-cancel" id="cancelButton">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#666">
+                                <path d="M2.5 2.5l11 11M13.5 2.5l-11 11" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Cancel
+                        </button>
+                        <button class="btn-save" id="saveButton">Save</button>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </main>
 
-    <!--<div hx-get="/footer.html" hx-trigger="load"></div>-->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 1234567890</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/account-edit.js"></script>
 </body>
 </html>
