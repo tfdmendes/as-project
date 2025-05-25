@@ -299,11 +299,11 @@ h2 {
 
 /* Grade geral das categorias */
 .categorias {
-    padding: 60px 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    background-color: #fff;
+  padding: 40px 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: #fff;
 }
 
 /* Linha superior: Título + 3 cartões */
@@ -398,11 +398,11 @@ a {
 /*__________________________________________*/
 /* Serviços */
 .servicos {
-    padding: 40px 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #fff;
+  padding: 40px 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
 }
 
 .estrelas img {
@@ -486,14 +486,39 @@ a {
     opacity: 1;
 }
 
+.imagem-circular {
+  position: absolute;
+  top: 230px;          /* Ajuste conforme desejar */
+  left: 10px;         /* Ajuste conforme desejar */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 2; /* Garante que fique acima da imagem */
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.imagem-circular:hover{
+  transform: scale(1.1);
+}
+.imagem-circular img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* Cobre todo o espaço mantendo o centro da imagem */
+  display: block;
+}
+
+
 /*-------------------------------------------*/
 /* Slogan */
 .slogan {
-    display: flex;
-    background-color: white;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 200px;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 150px;
 }
 
 .slogan .destacado {
@@ -523,11 +548,11 @@ a {
 
 /* Prestador */
 .prestador {
-    display: flex;
-    background-color: #fff5eb;
-    padding: 80px 200px;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  background-color: #fff5eb;
+  padding: 80px 150px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .btn-prestador {
@@ -548,8 +573,8 @@ a {
 }
 
 .card-prestador img {
-    width: 600px;
-    border-radius: 16px;
+  width: 450px;
+  border-radius: 16px;
 }
 
 /* Rodapé */
@@ -558,11 +583,46 @@ a {
     padding: 60px 0 20px;
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 60px;
+/* =====================================================
+   RODAPÉ
+   ===================================================== */
+.rodape{background:#f0f0f0;padding:50px 0 20px;color:#484848;}
+.footer-top{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:0 var(--side-pad) 30px;
+  display:flex;justify-content:space-between;
 }
+.footer-logo{display:flex;align-items:flex-start;gap:15px;}
+.logo-footer{width:40px;height:40px;}
+.footer-brand{display:flex;flex-direction:column;}
+.footer-logo-text{font-size:24px;font-weight:700;color:var(--brand-blue);}
+.footer-slogan{margin-top:5px;font-size:14px;color:#666;}
+.footer-links{display:flex;gap:60px;}
+.footer-column h5{
+  font-size:14px;font-weight:700;margin-bottom:20px;color:#484848;
+}
+.footer-column ul{list-style:none;}
+.footer-column li{margin-bottom:10px;}
+.footer-column a{text-decoration:none;color:#666;font-size:14px;}
+.social-icons{display:flex;gap:10px;margin-top:15px;}
+.social-icons img{width:24px;height:24px;}
+.app-buttons{display:flex;gap:15px;margin-bottom:40px;}
+.app-button{
+  display:flex;align-items:center;gap:8px;background:#e0e0e0;
+  padding:8px 15px;border-radius:5px;text-decoration:none;
+  color:#484848;font-size:14px;font-weight:500;
+}
+.app-button img{width:18px;height:18px;}
+.footer-bottom{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:20px var(--side-pad) 0;
+  border-top:1px solid #ddd;
+  display:flex;justify-content:space-between;
+  font-size:14px;color:#777;
+}
+.footer-bottom p{margin:0;}
 
 .footer-top {
     display: flex;
