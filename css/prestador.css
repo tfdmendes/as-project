@@ -70,6 +70,17 @@ body {
   height: 40px;
 }
 
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-link:hover {
+    text-decoration: none;
+}
+
 /* Seção Hero */
 .hero-section {
   display: flex;
