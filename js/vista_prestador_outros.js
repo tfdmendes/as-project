@@ -659,9 +659,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.style.transform = 'scale(1)';
                     this.style.background = 'linear-gradient(135deg, #196085, #85C6B2)';
                 }, 150);
-                
-                // Simular envio de mensagem
-                alert('Mensagem enviada com sucesso! O prestador irá responder em breve.');
             });
         }
         
