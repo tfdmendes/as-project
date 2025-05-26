@@ -1,121 +1,192 @@
 <!DOCTYPE html>
 <html>
-<header>
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/vista_prestador_outros.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="css/navbar.css">
 
-
-</header>
+</head>
 <body>
-    <div class="container">
-        <!-- Barra de navegação -->
-        <nav class="menu-bar">
-            <div class="logo-container">
-                <img src="assets/index/header/logo2.png" alt="Logo Pet-O-Tel" class="logo-small">
-                <span class="logo-text">Pet-o-Tel</span>
+    <header>
+        <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+            <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo">
+            <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <a href="#" class="nav-link">Login</a>
+            <div class="menu-user">
+            <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle">
+            <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
             </div>
-            
-            <div class="nav-menu">
-                <a href="#">Baixa a aplicação móvel</a>
-                <a href="#">Login</a>
-                <div class="menu-utilizador">
-                <img src="assets/index/header/menu.svg" alt="Menu" class="icon-menu">
-                <img src="assets/index/header/user.svg" alt="Utilizador" class="icon-user">
+        </div>
+        </nav>
+    </header>
+
+    <main>
+    <div class="container">
+        <div class="profile-section">
+            <!-- Card do Prestador -->
+            <div class="card-profile">
+                <img src="assets/vista_prestador_outros/profile_pic.svg" alt="Logo" class="profile-logo">
+                <h2>TOP<br><span>Spa & Grooming</span></h2>
+                <div class="rating">
+                    <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                    <strong>5/5</strong>
+                </div>
+                <p class="joined">Juntou-se em 2024</p>
+                <a href="messages.html"><button class="message-btn">Enviar Mensagem</button></a>
+            </div>
+
+            <!-- Galeria -->
+            <div class="gallery">
+                <img src="assets/vista_prestador_outros/ChatGPT Image 15_04_2025, 18_11_02 1.png" alt="fachada">
+                <div>
+                    <img src="assets/vista_prestador_outros/Rectangle 8.png" alt="foto1">
+                    <img src="assets/vista_prestador_outros/Rectangle 8 (1).png" alt="foto2" style="margin-top:10px">                
+                </div>
+
+            </div>
+        </div>
+
+    <div class="info-map-section">
+        <div class="info-block">
+            <h3>Informações</h3>
+            <div class="info-card">
+                <img src="assets/vista_prestador_outros/clock.svg" class="icon-info" alt="Horário">
+                <div>
+                    <strong><span class="blue">Horário</span></strong>
+                    <p>Aberto das 9h às 19h<br>De segunda ao sábado</p>
                 </div>
             </div>
-     </nav>
 
-    <div class="profile-section">
-        <!-- Card do Prestador -->
-        <div class="card-profile">
-            <img src="assets/vista_prestador_outros/profile_pic.svg" alt="Logo" class="profile-logo">
-            <h2>TOP<br><span>Spa & Grooming</span></h2>
-            <div class="rating">
-                <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-                <strong>5/5</strong>
-            </div>
-            <p class="joined">Juntou-se em 2024</p>
-            <button class="message-btn">Enviar Mensagem</button>
-        </div>
-
-        <!-- Galeria -->
-        <div class="gallery">
-            <img src="assets/vista_prestador_outros/ChatGPT Image 15_04_2025, 18_11_02 1.png" alt="fachada">
-            <div>
-                <img src="assets/vista_prestador_outros/Rectangle 8.png" alt="foto1">
-                <img src="assets/vista_prestador_outros/Rectangle 8 (1).png" alt="foto2" style="margin-top:10px">                
+            <div class="info-card">
+                <img src="assets/vista_prestador_outros/fluent-emoji-high-contrast_paw-prints.svg" class="icon-info" alt="Pets aceites">
+                <div>
+                    <strong><span class="blue">Pets aceites</span></strong>
+                    <p>Cães e gatos</p>
+                </div>
             </div>
 
-        </div>
-    </div>
-
-<div class="info-map-section">
-    <div class="info-block">
-         <h3>Informações</h3>
-        <div class="info-card">
-            <img src="assets/vista_prestador_outros/clock.svg" class="icon-info" alt="Horário">
-            <div>
-                <strong><span class="blue">Horário</span></strong>
-                <p>Aberto das 9h às 19h<br>De segunda ao sábado</p>
+            <div class="info-card">
+                <img src="assets/vista_prestador_outros/mingcute_phone-fill.svg" class="icon-info" alt="Contacto">
+                <div>
+                    <strong><span class="blue">Contacto</span></strong>
+                    <p>123456789<br>255255255</p>
+                </div>
             </div>
         </div>
 
-        <div class="info-card">
-            <img src="assets/vista_prestador_outros/fluent-emoji-high-contrast_paw-prints.svg" class="icon-info" alt="Pets aceites">
-            <div>
-                <strong><span class="blue">Pets aceites</span></strong>
-                <p>Cães e gatos</p>
-            </div>
+        <div class="map-block">
+            <h3>Localização</h3>
+            <img src="assets/vista_prestador_outros/mapa.png" alt="mapa" class="map-img">
         </div>
-
-        <div class="info-card">
-            <img src="assets/vista_prestador_outros/mingcute_phone-fill.svg" class="icon-info" alt="Contacto">
-            <div>
-                <strong><span class="blue">Contacto</span></strong>
-                <p>123456789<br>255255255</p>
-            </div>
         </div>
-    </div>
-
-    <div class="map-block">
-        <h3>Localização</h3>
-        <img src="assets/vista_prestador_outros/mapa.png" alt="mapa" class="map-img">
-    </div>
-</div>
 
 
         <div class="about">
-        <h3>Acerca de...</h3>
-        <p>No Top Spa & Grooming, o bem-estar do seu animal está em primeiro lugar. Somos especialistas em proporcionar momentos de relaxamento e cuidado com qualidade premium, combinando higiene, estética e carinho num só lugar. </p>
-        <p>🐾 Serviços disponíveis:</p>    
-        <p>   Banhos relaxantes com óleos essenciais</p> 
-        <p>  Tosquias estéticas e terapêuticas</p>  
-        <p> Acunpuctura para recuperação e tratamento</p>   
-        <p>    Limpeza de ouvidos e corte de unhas</p>
-        <p>    Aromaterapia & massagem animal</p>
-        <p>    💡 Utilizamos apenas produtos hipoalergénicos e técnicas certificadas, garantindo um ambiente seguro e tranquilo para o seu patudo.</p>
-        <p>    📍 Localização central, fácil acesso e atendimento personalizado.</p>
-        </div>
-
-        <h3>Outros serviços pelo mesmo prestador</h3>
-        <div class="services">
-            <div class="service-card">
-                <img src="assets/vista_prestador_outros/cao.jpg" alt="Acupuntura para Cães e Gatos">
-                <h4>Acupuntura para Cães e Gatos</h4>
-                <p class="location">Aveiro, Portugal</p>
-                <p class="price">25€</p>
-                <p class="stars">★★★★☆ <span>4/5</span> <span class="reviews">12 avaliações</span></p>
+            <h3>Acerca de...</h3>
+            <p>No Top Spa & Grooming, o bem-estar do seu animal está em primeiro lugar. Somos especialistas em proporcionar momentos de relaxamento e cuidado com qualidade premium, combinando higiene, estética e carinho num só lugar. </p>
+            <p>🐾 Serviços disponíveis:</p>    
+            <p>   Banhos relaxantes com óleos essenciais</p> 
+            <p>  Tosquias estéticas e terapêuticas</p>  
+            <p> Acunpuctura para recuperação e tratamento</p>   
+            <p>    Limpeza de ouvidos e corte de unhas</p>
+            <p>    Aromaterapia & massagem animal</p>
+            <p>    💡 Utilizamos apenas produtos hipoalergénicos e técnicas certificadas, garantindo um ambiente seguro e tranquilo para o seu patudo.</p>
+            <p>    📍 Localização central, fácil acesso e atendimento personalizado.</p>
             </div>
-            <div class="service-card">
-                <img src="assets/vista_prestador_outros/gato.jpg" alt="Massagem para Cães e Gatos">
-                <h4>Massagem para Cães e Gatos</h4>
-                <p class="location">Aveiro, Portugal</p>
-                <p class="price">15€</p>
-                <p class="stars">★★★★★ <span>5/5</span> <span class="reviews">2 avaliações</span></p>
+
+            <h3>Outros serviços pelo mesmo prestador</h3>
+            <div class="services">
+                <div class="service-card">
+                    <img src="assets/vista_prestador_outros/cao.jpg" alt="Acupuntura para Cães e Gatos">
+                    <h4>Acupuntura para Cães e Gatos</h4>
+                    <p class="location">Aveiro, Portugal</p>
+                    <p class="price">25€</p>
+                    <p class="stars">★★★★☆ <span>4/5</span> <span class="reviews">12 avaliações</span></p>
+                </div>
+                <div class="service-card">
+                    <img src="assets/vista_prestador_outros/gato.jpg" alt="Massagem para Cães e Gatos">
+                    <h4>Massagem para Cães e Gatos</h4>
+                    <p class="location">Aveiro, Portugal</p>
+                    <p class="price">15€</p>
+                    <p class="stars">★★★★★ <span>5/5</span> <span class="reviews">2 avaliações</span></p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
             </div>
         </div>
-
-    </div>
-</body>
+    </footer>
+     <script src="js/navbar.js"></script>
+     <script src="js/vista_prestador_outros.js"></script>
+    </body>
 </html>
