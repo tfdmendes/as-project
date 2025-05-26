@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-O-Tel - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo">
+                <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <a href="login.html" class="nav-link">Login</a>
+            <div class="menu-user">
+                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu">
+                <img src="assets/header/user.svg" alt="Utilizador" class="icon-user">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <img src="assets/logos/logo2.png" alt="Pet-O-Tel Logo" class="login-logo">
+                    <h1 class="login-title">Bem-vindo de volta!</h1>
+                    <p class="login-subtitle">Faça login para continuar</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-input" 
+                            placeholder="Digite o seu email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="form-input" 
+                            placeholder="Digite a sua password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Lembrar-me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Esqueceu a password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login">Entrar</button>
+
+                    <div class="error-message" id="errorMessage"></div>
+                </form>
+
+                <div class="login-footer">
+                    <p>Não tem uma conta? <a href="prestador.html" class="signup-link">Torna-te Prestador!</a></p>
+                </div>
+
+                <!-- Demo credentials info -->
+                <div class="demo-info">
+                    <p class="demo-title">Credenciais de demonstração:</p>
+                    <div class="demo-credentials">
+                        <div class="credential">
+                            <strong>Utilizador:</strong><br>
+                            Email: user@petotel.com<br>
+                            Password: user123
+                        </div>
+                        <div class="credential">
+                            <strong>Prestador de Serviços:</strong><br>
+                            Email: prestador@petotel.com<br>
+                            Password: prestador123
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

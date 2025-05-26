@@ -131,3 +131,114 @@ function createNavbarMenu() {
 
 // Chamar a função quando a página carregar
 document.addEventListener('DOMContentLoaded', createNavbarMenu);
+
+
+
+
+// Check if user is logged in
+function checkUserSession() {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    return currentUser.isLoggedIn === true;
+}
+
+// Update user icon behavior based on login status
+function updateUserIconBehavior() {
+    const userIcons = document.querySelectorAll('.icon-user');
+    const isLoggedIn = checkUserSession();
+    
+    userIcons.forEach(icon => {
+        icon.style.cursor = 'pointer';
+        
+        if (!isLoggedIn) {
+            // If not logged in, clicking user icon goes to login
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href = 'login.html';
+            });
+        } else {
+            // If logged in, clicking user icon goes to account-edit
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href = 'account-edit.html';
+            });
+        }
+    });
+}
+
+// Handle dropdown menu (only for logged-in users)
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    const isLoggedIn = checkUserSession();
+    
+    // Update user icon behavior
+    updateUserIconBehavior();
+    
+    // Only show dropdown menu for logged-in users
+    if (menuToggle && dropdownMenu && isLoggedIn) {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+            dropdownOverlay.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking overlay
+        if (dropdownOverlay) {
+            dropdownOverlay.addEventListener('click', function() {
+                dropdownMenu.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            });
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            }
+        });
+    }
+    
+    // Update login/logout links
+    const loginLinks = document.querySelectorAll('a[href="login.html"], .nav-link:contains("Login")');
+    loginLinks.forEach(link => {
+        if (link.textContent.includes('Login')) {
+            if (isLoggedIn) {
+                link.textContent = 'Logout';
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Clear session
+                    sessionStorage.removeItem('currentUser');
+                    // Redirect to home
+                    window.location.href = 'index.html';
+                });
+            }
+        }
+    });
+    
+    // Update user name in header if logged in
+    if (isLoggedIn) {
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        const headerProfileImg = document.getElementById('headerProfileImg');
+        if (headerProfileImg && currentUser.role === 'user') {
+            headerProfileImg.src = 'assets/people/RyanMatos.png';
+        }
+    }
+});
+
+// Add logout functionality to logout links
+document.addEventListener('DOMContentLoaded', function() {
+    const logoutLinks = document.querySelectorAll('a[href="logout.html"]');
+    logoutLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Clear session
+            sessionStorage.removeItem('currentUser');
+            // Redirect to home
+            window.location.href = 'index.html';
+        });
+    });
+});
