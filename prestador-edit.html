@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-o-Tel | Prestador de Serviços</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/prestador-edit.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo">
+                <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <a href="login.html" class="nav-link login-link">Login</a>
+            <div class="menu-user">
+                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle">
+                <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" id="userIcon">
+                
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-section">
+                        <a href="messages.html" class="dropdown-item">Messages</a>
+                        <a href="notifications.html" class="dropdown-item">Notifications</a>
+                        <a href="reservations.html" class="dropdown-item">Reservations</a>
+                        <a href="wishlists.html" class="dropdown-item">Wishlists</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-section">
+                        <a href="account-edit.html" class="dropdown-item">Account</a>
+                        <a href="help-center.html" class="dropdown-item">Help Center</a>
+                        <a href="#" class="dropdown-item logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Dropdown Overlay -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
+
+    <main class="main-container">
+        <h1 class="page-title">Prestador de Serviços</h1>
+
+        <div class="content-wrapper">
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-photo-container">
+                        <img src="assets/people/tiago.jpg" alt="Tiago Fernandes" class="profile-photo">
+                        <button class="change-photo-btn">Carregar Foto</button>
+                    </div>
+                    
+                    <h2 class="profile-name">Tiago Fernandes</h2>
+                    
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-number">4.14/5</span>
+                    </div>
+                    
+                    <p class="reviews-count">14 Avaliações</p>
+                    
+                    <div class="verifications">
+                        <div class="verification-item">
+                            <span class="checkmark">✓</span>
+                            <span>Email Confirmado</span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="checkmark">✓</span>
+                            <span>Telemóvel Confirmado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Section -->
+                <div class="info-section">
+                    <h3>Olá, Tiago Fernandes</h3>
+                    <p class="join-date">Juntou-se em 2025</p>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-primary">Editar Perfil</button>
+                        <button class="btn-secondary">Mensagens</button>
+                        <button class="btn-secondary">Editar Serviços</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="notifications-section">
+                <h2 class="section-title">Todas as Notificações</h2>
+                
+                <div class="notification-item">
+                    <div class="notification-content">
+                        <h4>Rhyan Matos avaliou o seu serviço</h4>
+                        <p class="notification-date">16 Abr 2025</p>
+                    </div>
+                    <button class="close-btn">×</button>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-content">
+                        <h4>Mensagem de Prestador</h4>
+                        <p class="notification-date">12 Fev 2025</p>
+                    </div>
+                    <button class="close-btn">×</button>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-content">
+                        <h4>Reserva Confirmada</h4>
+                        <p class="notification-date">11 Fev 2025</p>
+                    </div>
+                    <button class="close-btn">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <h2 class="section-title">Calendário</h2>
+            <div class="calendar-placeholder">
+                <!-- Calendar component would go here -->
+                <p>Calendário de disponibilidade e reservas</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/prestador-edit.js"></script>
+</body>
+</html>
