@@ -95,13 +95,13 @@ h1 {
 /* detalhes-servico */
 
 .container {
-    max-width: 1200px;
+    max-width: 90vw;
     margin: 0 auto;
+    margin-top: 10px;
     padding: 30px 20px;
 }
 
 .service-header {
-    background: white;
     border-radius: 12px;
     padding: 0;
     margin-bottom: 30px;
@@ -112,33 +112,34 @@ h1 {
 .service-images {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 2px;
+    gap: 70px;
     height: 300px;
 }
 
 .main-image {
     position: relative;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23ddd" width="400" height="300"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999">Banho de Gato</text></svg>');
-    background-size: cover;
-    background-position: center;
 }
 
 .top-badge {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background: white;
     padding: 8px 12px;
-    border-radius: 8px;
+    gap: 8px;
+
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    
     display: flex;
     align-items: center;
-    gap: 8px;
     font-size: 12px;
     font-weight: bold;
 }
 
-.top-badge i {
-    color: #2c5aa0;
+.top-badge img {
+    border-radius: 50%;
 }
 
 .side-images {
