@@ -59,8 +59,7 @@
     position: relative;
 }
 
-
-.icon-menu{
+.icon-menu {
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -82,17 +81,18 @@
 /* Dropdown Menu */
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     right: 0;
-    margin-top: 1rem;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 220px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
+    z-index: 1001;
+    display: block; /* Always block, visibility controls showing/hiding */
 }
 
 .dropdown-menu.show {
@@ -112,16 +112,18 @@
     text-decoration: none;
     font-size: 0.9rem;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
 }
 
 .dropdown-item:hover {
     background-color: #f5f5f5;
+    color: #3DAAE5;
 }
 
 .dropdown-divider {
     height: 1px;
     background-color: #e0e0e0;
-    margin: 0.5rem 0;
+    margin: 0.5rem 1rem;
 }
 
 /* Dropdown Overlay */
@@ -143,6 +145,11 @@
     visibility: visible;
 }
 
+/* Prevent body scroll when menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .navbar {
@@ -159,5 +166,9 @@
     
     .nav-link:first-child {
         display: none; /* Hide "Baixa a aplicação móvel" on mobile */
+    }
+    
+    .dropdown-menu {
+        right: -10px;
     }
 }

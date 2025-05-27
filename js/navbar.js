@@ -1,139 +1,98 @@
-// Aguardar o carregamento do DOM
+// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos do menu
+    // Initialize navbar functionality
+    initializeNavbar();
+});
+
+function initializeNavbar() {
+    // Don't initialize navbar on index.html
+    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+        return;
+    }
+    
+    // Get navbar elements
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const dropdownOverlay = document.getElementById('dropdownOverlay');
+    const userIcon = document.getElementById('userIcon');
+    const loginLink = document.querySelector('.login-link');
+    const logoutLink = document.querySelector('.logout-link');
     
-    // Estado do menu
-    let isMenuOpen = false;
+    // Check if user is logged in
+    const isLoggedIn = checkUserSession();
     
-    // Toggle do menu
-    function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-            openMenu();
-        } else {
-            closeMenu();
-        }
-    }
+    // Update navbar based on login status
+    updateNavbarForAuthState(isLoggedIn);
     
-    // Abrir menu
-    function openMenu() {
-        dropdownMenu.classList.add('active');
-        dropdownOverlay.classList.add('active');
-        menuToggle.classList.add('active');
-        
-        // Prevenir scroll do body quando o menu está aberto
-        document.body.classList.add('menu-open');
-    }
-    
-    // Fechar menu
-    function closeMenu() {
-        dropdownMenu.classList.remove('active');
-        dropdownOverlay.classList.remove('active');
-        menuToggle.classList.remove('active');
-        
-        // Restaurar scroll do body
-        document.body.classList.remove('menu-open');
-        isMenuOpen = false;
-    }
-    
-    // Event listeners
-    if (menuToggle) {
+    // Setup dropdown menu toggle
+    if (menuToggle && dropdownMenu) {
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            toggleMenu();
+            toggleDropdown();
         });
     }
     
-    // Fechar ao clicar no overlay
-    if (dropdownOverlay) {
-        dropdownOverlay.addEventListener('click', closeMenu);
-    }
-    
-    // Fechar ao clicar em um item do menu
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', function() {
-            closeMenu();
-        });
-    });
-    
-    // Fechar ao pressionar ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isMenuOpen) {
-            closeMenu();
-        }
-    });
-    
-    // Prevenir fechamento ao clicar dentro do menu
-    if (dropdownMenu) {
-        dropdownMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    }
-    
-    // Fechar menu ao clicar fora
-    document.addEventListener('click', function(e) {
-        if (isMenuOpen && !dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            closeMenu();
-        }
-    });
-    
-    // Adicionar animação suave ao scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    // Setup user icon click behavior
+    if (userIcon) {
+        userIcon.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            e.stopPropagation();
+            
+            if (!isLoggedIn) {
+                // Redirect to login if not logged in
+                window.location.href = 'login.html';
+            } else {
+                // Check user role and redirect accordingly
+                const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+                if (currentUser.role === 'prestador-de-servicos') {
+                    window.location.href = 'prestador-edit.html';
+                } else {
+                    window.location.href = 'account-edit.html';
+                }
             }
         });
+    }
+    
+    // Setup overlay click to close dropdown
+    if (dropdownOverlay) {
+        dropdownOverlay.addEventListener('click', function() {
+            closeDropdown();
+        });
+    }
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (dropdownMenu && !dropdownMenu.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            closeDropdown();
+        }
     });
-});
-
-// Função para criar o menu em outras páginas
-function createNavbarMenu() {
-    // Esta função pode ser usada para injetar o menu dinamicamente
-    // se você preferir não repetir o HTML em cada página
     
-    const menuHTML = `
-        <div class="dropdown-menu" id="dropdownMenu">
-            <div class="dropdown-section">
-                <a href="messages.html" class="dropdown-item">Messages</a>
-                <a href="notifications.html" class="dropdown-item">Notifications</a>
-                <a href="reservations.html" class="dropdown-item">Reservations</a>
-                <a href="wishlists.html" class="dropdown-item">Wishlists</a>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-section">
-                <a href="account.html" class="dropdown-item">Account</a>
-                <a href="help-center.html" class="dropdown-item">Help Center</a>
-                <a href="logout.html" class="dropdown-item">Logout</a>
-            </div>
-        </div>
-    `;
+    // Close dropdown on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDropdown();
+        }
+    });
     
-    const overlayHTML = `<div class="dropdown-overlay" id="dropdownOverlay"></div>`;
+    // Setup login/logout functionality
+    if (loginLink) {
+        if (isLoggedIn) {
+            loginLink.textContent = 'Logout';
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+        }
+    }
     
-    // Adicionar ao menu-user se não existir
-    const menuUser = document.querySelector('.menu-user');
-    if (menuUser && !document.getElementById('dropdownMenu')) {
-        menuUser.insertAdjacentHTML('beforeend', menuHTML);
-        document.body.insertAdjacentHTML('beforeend', overlayHTML);
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
+        });
     }
 }
-
-// Chamar a função quando a página carregar
-document.addEventListener('DOMContentLoaded', createNavbarMenu);
-
-
-
 
 // Check if user is logged in
 function checkUserSession() {
@@ -141,104 +100,78 @@ function checkUserSession() {
     return currentUser.isLoggedIn === true;
 }
 
-// Update user icon behavior based on login status
-function updateUserIconBehavior() {
-    const userIcons = document.querySelectorAll('.icon-user');
-    const isLoggedIn = checkUserSession();
+// Update navbar UI based on authentication state
+function updateNavbarForAuthState(isLoggedIn) {
+    const menuToggle = document.getElementById('menuToggle');
     
-    userIcons.forEach(icon => {
-        icon.style.cursor = 'pointer';
-        
-        if (!isLoggedIn) {
-            // If not logged in, clicking user icon goes to login
-            icon.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.location.href = 'login.html';
-            });
-        } else {
-            // If logged in, clicking user icon goes to account-edit
-            icon.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.location.href = 'account-edit.html';
-            });
+    if (!isLoggedIn) {
+        // Hide menu icon for non-logged in users
+        if (menuToggle) {
+            menuToggle.style.display = 'none';
         }
-    });
+    } else {
+        // Show menu icon for logged in users
+        if (menuToggle) {
+            menuToggle.style.display = 'block';
+        }
+    }
 }
 
-// Handle dropdown menu (only for logged-in users)
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
+// Toggle dropdown menu
+function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const isLoggedIn = checkUserSession();
     
-    // Update user icon behavior
-    updateUserIconBehavior();
-    
-    // Only show dropdown menu for logged-in users
-    if (menuToggle && dropdownMenu && isLoggedIn) {
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('show');
-            dropdownOverlay.classList.toggle('show');
-        });
+    if (dropdownMenu && dropdownOverlay) {
+        const isOpen = dropdownMenu.classList.contains('show');
         
-        // Close dropdown when clicking overlay
-        if (dropdownOverlay) {
-            dropdownOverlay.addEventListener('click', function() {
-                dropdownMenu.classList.remove('show');
-                dropdownOverlay.classList.remove('show');
-            });
-        }
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-                dropdownOverlay.classList.remove('show');
-            }
-        });
-    }
-    
-    // Update login/logout links
-    const loginLinks = document.querySelectorAll('a[href="login.html"], .nav-link:contains("Login")');
-    loginLinks.forEach(link => {
-        if (link.textContent.includes('Login')) {
-            if (isLoggedIn) {
-                link.textContent = 'Logout';
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    // Clear session
-                    sessionStorage.removeItem('currentUser');
-                    // Redirect to home
-                    window.location.href = 'index.html';
-                });
-            }
-        }
-    });
-    
-    // Update user name in header if logged in
-    if (isLoggedIn) {
-        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        const headerProfileImg = document.getElementById('headerProfileImg');
-        if (headerProfileImg && currentUser.role === 'user') {
-            headerProfileImg.src = 'assets/people/RyanMatos.png';
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
         }
     }
-});
+}
 
-// Add logout functionality to logout links
-document.addEventListener('DOMContentLoaded', function() {
-    const logoutLinks = document.querySelectorAll('a[href="logout.html"]');
-    logoutLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Clear session
-            sessionStorage.removeItem('currentUser');
-            // Redirect to home
-            window.location.href = 'index.html';
-        });
-    });
-});
+// Open dropdown menu
+function openDropdown() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    
+    if (dropdownMenu && dropdownOverlay) {
+        dropdownMenu.classList.add('show');
+        dropdownOverlay.classList.add('show');
+        document.body.classList.add('menu-open');
+    }
+}
+
+// Close dropdown menu
+function closeDropdown() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    
+    if (dropdownMenu && dropdownOverlay) {
+        dropdownMenu.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+        document.body.classList.remove('menu-open');
+    }
+}
+
+// Logout function
+function logout() {
+    // Clear session
+    sessionStorage.removeItem('currentUser');
+    
+    // Redirect to homepage
+    window.location.href = 'index.html';
+}
+
+// Utility function to update user profile image if needed
+function updateUserProfileImage() {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    const userIcon = document.getElementById('userIcon');
+    
+    if (userIcon && currentUser.isLoggedIn && currentUser.profileImage) {
+        userIcon.src = currentUser.profileImage;
+    }
+}
