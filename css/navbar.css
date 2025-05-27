@@ -61,10 +61,17 @@
     position: relative;
 }
 
-.icon-menu,
-.icon-user {
+
+.icon-menu{
     width: 24px;
     height: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon-user {
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
