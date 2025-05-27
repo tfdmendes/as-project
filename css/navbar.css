@@ -1,8 +1,6 @@
 /* Navbar Styles */
 .navbar {
     background-color: white;
-    /*Oq acham disto?*/
-    background-image: url(../assets/index/header/Bg-image.png);
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -33,7 +31,7 @@
 .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #196085;
+    color: #333;
     font-family: 'Montserrat', sans-serif;
 }
 
