@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-O-Tel - Formulário Reserva</title>
+    <link rel="stylesheet" href="css/reserva-form.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script scr="js/reserva-form" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
+                    <span class="logo-text">Pet-o-Tel</span>
+                </a>
+            </div>
+    
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+                <div class="menu-user">
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" loading="lazy">
+                    <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" loading="lazy">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="main-content">
+        <div class="form-section">
+            <h1 class="form-title">Formulário<br>Reserva</h1>
+                
+            <form id="bookingForm">
+                <div class="pets-selection">
+                    <label class="pets-label">Seleciona um dos teus pets</label>
+                       <div class="pets-grid">
+                        <div class="pet-option" data-pet="sasha">
+                            <div class="pet-avatar">
+                                <a href="agenda.html">
+                                    <img src="assets/animals/Dog.png" alt="Sasha" loading="lazy">
+                                </a>
+                            </div>
+                            <div class="pet-name">Sasha</div>
+                            <div class="pet-breed">Golden Retriever</div>
+                        </div>
+                        <div class="pet-option" data-pet="marcos">
+                            <div class="pet-avatar">
+                                <a href="agenda.html">
+                                    <img src="assets/animals/Cat.png" alt="Marcos" loading="lazy">
+                                </a>
+                            </div>
+                            <div class="pet-name">Marcos</div>
+                            <div class="pet-breed">Khao Manee</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="form-fields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Data de Início</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Data de Fim</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+                        
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startTime">Hora de Início</label>
+                            <input type="time" id="startTime" name="startTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">Hora de Fim</label>
+                            <input type="time" id="endTime" name="endTime" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Serviço</label>
+                        <select id="service" name="service" required>
+                            <option value="">Selecione um serviço</option>
+                            <option value="banho-tosquia">Banho & Tosquia Profissional</option>
+                            <option value="hospedagem">Hospedagem</option>
+                            <option value="passeio">Passeio</option>
+                            <option value="veterinario">Consulta Veterinária</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Observações</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Informações adicionais sobre o seu pet ou serviço..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Fazer Reserva</button>-->
+            </form>
+        </div>
+
+        <div class="service-details">
+            <div class="service-header">
+                <div class="service-icon">
+                    <img src="assets/detalhes-servico/Cat_shower.png" alt="Serviço" width="100" height="80" loading="lazy">
+                </div>
+                <div class="service-info">
+                     <h3>Banho & Tosquia Profissional</h3>
+                     <p>TOP Spa & Grooming</p>
+                     <hr>
+                  </div>
+            </div>
+            <button class="details-btn" onclick="showServiceDetails()">Detalhes</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" loading="lazy">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn" loading="lazy"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store" loading="lazy">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store" loading="lazy">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

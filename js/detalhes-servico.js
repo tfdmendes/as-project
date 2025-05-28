@@ -217,7 +217,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Guarda a posição inicial
     const originalOffsetTop = titleRight.offsetTop;
-    const originalOffsetLeft = titleRight.offsetLeft;
+    let originalOffsetLeft = titleRight.offsetLeft;
+    
+    function updateOriginalPosition() {
+        // Remove temporariamente a classe fixed para calcular posição original
+        const wasFixed = titleRight.classList.contains('fixed');
+        if (wasFixed) {
+            titleRight.classList.remove('fixed');
+        }
+        
+        originalOffsetLeft = titleRight.offsetLeft;
+        
+        if (wasFixed) {
+            titleRight.classList.add('fixed');
+            titleRight.style.left = originalOffsetLeft + 'px';
+        }
+    }
     
     function handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -226,9 +241,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Se o scroll passou da posição original E ainda estamos dentro do container
         if (scrollTop > originalOffsetTop - 20 && scrollTop < containerBottom - titleRight.offsetHeight - 40) {
-            titleRight.classList.add('fixed');
+            if (!titleRight.classList.contains('fixed')) {
+                titleRight.classList.add('fixed');
+                titleRight.style.left = originalOffsetLeft + 'px';
+            }
         } else {
-            titleRight.classList.remove('fixed');
+            if (titleRight.classList.contains('fixed')) {
+                titleRight.classList.remove('fixed');
+                titleRight.style.left = ''; // Remove o estilo inline
+            }
         }
     }
     
@@ -249,6 +270,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Recalcula posições quando a janela é redimensionada
     window.addEventListener('resize', function() {
         titleRight.classList.remove('fixed');
-        setTimeout(handleScroll, 100);
+        titleRight.style.left = '';
+        
+        setTimeout(() => {
+            updateOriginalPosition();
+            handleScroll();
+        }, 100);
     });
+    
+    // Calcula a posição inicial
+    updateOriginalPosition();
 });
