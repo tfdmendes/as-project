@@ -327,15 +327,23 @@ h1 {
 
 .action-icons-right {
     margin-top: 50px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
     /*display: flex;
     justify-content: space-between;
     align-items: start;*/
 }
 
+.action-icons-right a {
+    color: var(--COLOR);
+    text-decoration: none;
+}
+
+.icon-container {
+    margin-bottom: 10px;
+}
+
 .icon-text {
     width: 300px;
+    display: inline-block;
 }
 
 .section {

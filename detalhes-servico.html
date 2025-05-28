@@ -34,13 +34,15 @@
             <div class="service-images">
                 <div class="main-image">
                     <img src="assets/detalhes-servico/Cat_shower.png" alt="Cat image" width="570" height="500" loading="lazy">
-                    <div class="top-badge">
-                        <img src="assets/detalhes-servico/Top_dog_icon.png" alt="dog top icon" width="50" height="50" loading="lazy">
-                        <div>
-                            <div class="spa_1">Spa & Grooming TOP</div>
-                            <div class="spa_2">gatos, cães</div>
+                    <a href="#descricao">
+                        <div class="top-badge">
+                            <img src="assets/detalhes-servico/Top_dog_icon.png" alt="dog top icon" width="50" height="50" loading="lazy">
+                            <div>
+                                <div class="spa_1">Spa & Grooming TOP</div>
+                                <div class="spa_2">gatos, cães</div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="side-images">
                     <div class="image">
@@ -60,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="service-info">
+            <div class="service-info" id="descricao">
                 <div class="service-title">
                     <div class="title-left">
                         <h1>Banho & Tosquia Profissional</h1>
@@ -104,12 +106,22 @@
                         <div class="price">20€ a 40€</div>
                         <hr>
                         <div class="price-note">O preço varia conforme o tamanho e tipo do animal.</div>
-                        <button class="reserve-btn">Reservar agora</button>
+                        <a href="reserva-form.html">
+                            <button class="reserve-btn">Reservar agora</button>
+                        </a>
                         <div class="action-icons action-icons-right">
-                            <button class="icon-btn"><i class="far fa-envelope"></i></button>
-                            <div class="icon-text">Enviar mensagem ao prestador</div>
-                            <button class="icon-btn"><i class="fas fa-phone"></i></button>
-                            <div class="icon-text">Contactar prestador</div>
+                            <a href="mailto:pet-p-tel@gmail.com">
+                                <div class="icon-container">
+                                    <button class="icon-btn"><i class="far fa-envelope"></i></button>
+                                    <div class="icon-text">Enviar mensagem ao prestador</div>
+                                </div>
+                            </a>
+                            <a href="tel+123456789">
+                                <div class="icon-container">
+                                    <button class="icon-btn"><i class="fas fa-phone"></i></button>
+                                    <div class="icon-text">Contactar prestador</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
