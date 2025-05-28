@@ -155,6 +155,54 @@ window.addEventListener('scroll', () => {
     }
 });
 
+let currentPosition = 0;
+        const cardWidth = 270; // 250px + 20px gap
+        const visibleCards = 3;
+        const totalCards = document.querySelectorAll('.service-card').length;
+        const maxPosition = Math.max(0, totalCards - visibleCards);
+
+        function navigateCarousel(direction) {
+            const servicesList = document.getElementById('servicesList');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (direction === 'next' && currentPosition < maxPosition) {
+                currentPosition++;
+            } else if (direction === 'prev' && currentPosition > 0) {
+                currentPosition--;
+            }
+
+            // Aplicar transformação
+            const translateX = -currentPosition * cardWidth;
+            servicesList.style.transform = `translateX(${translateX}px)`;
+
+            // Atualizar estado dos botões
+            updateButtonStates(prevBtn, nextBtn);
+        }
+
+        function updateButtonStates(prevBtn, nextBtn) {
+            // Botão anterior
+            if (currentPosition === 0) {
+                prevBtn.classList.add('disabled');
+            } else {
+                prevBtn.classList.remove('disabled');
+            }
+
+            // Botão próximo
+            if (currentPosition >= maxPosition) {
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.classList.remove('disabled');
+            }
+        }
+
+        // Inicializar estados dos botões
+        document.addEventListener('DOMContentLoaded', function() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            updateButtonStates(prevBtn, nextBtn);
+        });
+
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
     // Add fade-in animation to sections

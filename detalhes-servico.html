@@ -7,7 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/detalhes-servico.css">
     <link rel="stylesheet" href="css/navbar.css">
-    <script src="script.js" defer></script>
+    <script src="js/detalhes-servico.js" defer></script>
 </head>
 <body>
     <header>
@@ -194,17 +194,14 @@
                 </div>
             </div>
         </div>
-
         <div class="section">
-            <h2>Localização</h2>
-            <div class="map-container">
-                <i class="fas fa-map-marker-alt" style="font-size: 24px; margin-right: 10px;"></i>
-                <span>Mapa - 100 Rua Principal, Porto, Portugal</span>
+            <div class="map-block">
+                <h3>Localização</h3>
+                <img src="assets/vista_prestador_outros/mapa.png" alt="mapa" class="map-img">
             </div>
-            
-            <h3 style="margin-bottom: 15px;">Serviços Recomendados</h3>
-            <div class="recommended-services">
-                <div class="service-card">
+            <!--<h3 class="recommended-services-title">Serviços Recomendados</h3>
+                <div class="recommended-services">
+                    <div class="service-card">
                     <h4>Pet Shop Plus</h4>
                     <div class="distance">a 100 metros</div>
                     <div class="stars">★★★★★</div>
@@ -215,24 +212,66 @@
                     <div class="stars">★★★★</div>
                 </div>
                 <div class="service-card">
-                    <h4>CãoECo Spa</h4>
+                    <h4>Cão&Co Spa</h4>
                     <div class="distance">a 500 metros</div>
                     <div class="stars">★★★★</div>
                 </div>
+                </div>-->
+            <div class="services-container">
+                <div class="services-section">
+                    <div class="services-header">
+                        <h3 class="services-title">Serviços Recomendados</h3>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn disabled" id="prevBtn" onclick="navigateCarousel('prev')">
+                                <span class="arrow arrow-left"></span>
+                            </button>
+                            <button class="carousel-btn" id="nextBtn" onclick="navigateCarousel('next')">
+                                <span class="arrow arrow-right"></span>
+                            </button>
+                        </div>
+                    </div>
+        
+                    <div class="services-container">
+                        <div class="services-list" id="servicesList">
+                            <div class="service-card">
+                                <h4>Pet Shop Plus</h4>
+                                <div class="distance">a 100 metros</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <div class="service-card">
+                                <h4>Patada - Vila de Patos</h4>
+                                <div class="distance">a 200 metros</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                            <div class="service-card">
+                                <h4>Cão&Co Spa</h4>
+                                <div class="distance">a 500 metros</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                            <div class="service-card">
+                                <h4>Pet Care Center</h4>
+                                <div class="distance">a 800 metros</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <div class="service-card">
+                                <h4>Animal Paradise</h4>
+                                <div class="distance">a 1.2 km</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="view-map-btn">Ver no mapa</button>
             </div>
-            
-            <button class="view-map-btn">Ver no mapa</button>
         </div>
 
-        <div class="reviews-section">
-            <div class="reviews-header">
-                <div class="reviews-tab">📝 Reviews</div>
-            </div>
+        <div class="section reviews-section">
+            <h3>Avaliação</h3>
             
             <div class="rating-overview">
                 <div>
                     <div class="rating-score">
-                        <span class="score">4.7</span>
+                        <h3>4.7</h3>
                         <span class="stars">★</span>
                     </div>
                     <div class="rating-bars">
@@ -240,13 +279,13 @@
                             <div class="bar-label">Qualidade do serviço</div>
                             <div class="bar">
                                 <div class="bar-fill" style="width: 100%"></div>
-                            </div>
+                            </div>  
                             <div class="bar-score">5.0</div>
                         </div>
                         <div class="rating-bar">
                             <div class="bar-label">Atendimento</div>
                             <div class="bar">
-                                <div class="bar-fill" style="width: 100%"></div>
+                                <div class="bar-fill"></div>
                             </div>
                             <div class="bar-score">5.0</div>
                         </div>
@@ -281,35 +320,52 @@
 
             <div class="reviews-list">
                 <div class="review">
-                    <div class="review-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 40 40&quot;><circle fill=&quot;%23ddd&quot; cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;20&quot;/></svg>')"></div>
-                    <div class="review-content">
-                        <h4>Rhyan Matos</h4>
-                        <div class="review-date">12 Mar 2024</div>
-                        <div class="review-text">Excelente serviço, o meu cão saiu lindo, cheiroso e muito feliz!</div>
+                    <div class="review-profile rhyan">
+                        <div class="review-avatar">
+                            <img src="assets/people/RyanMatos.png" alt="Ryan Matos" width="55" height="55" loading="lazy">
+                        </div>
+                        <div class="review-content">
+                            <h4>Rhyan Matos</h4>
+                            <div class="review-date">12 Mar 2024</div>
+                        </div>
                     </div>
+                    <div class="review-text">Excelente serviço, o meu cão saiu lindo, cheiroso e muito feliz!</div> 
                 </div>
                 <div class="review">
-                    <div class="review-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 40 40&quot;><circle fill=&quot;%23ddd&quot; cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;20&quot;/></svg>')"></div>
-                    <div class="review-content">
-                        <h4>Íris Blague</h4>
-                        <div class="review-date">8 Nov 2024</div>
-                        <div class="review-text">Muito cuidadosos, recomendo a 100%! 🐾</div>
+                    <div class="review-profile">
+                        <div class="review-avatar">
+                            <img src="assets/people/IrisBiague.png" alt="Íris Biaguê" width="55" height="55" loading="lazy">
+                        </div>
+                        <div class="review-content">
+                            <h4>Íris Biaguê</h4>
+                            <div class="review-date">5 Nov 2024</div>
+                        </div>
                     </div>
+                    <div class="review-text">Muito cuidadosos, recomendo a 100%! Slayy💅</div>
                 </div>
                 <div class="review">
-                    <div class="review-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 40 40&quot;><circle fill=&quot;%23ddd&quot; cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;20&quot;/></svg>')"></div>
-                    <div class="review-content">
-                        <h4>Ellen Sales</h4>
-                        <div class="review-date">24 Jan 2025</div>
-                        <div class="review-text">Ambiente calmo, ideal para o meu gato! Salio! Voltarei com certeza!</div>
+                    <div class="review-profile">
+                        <div class="review-avatar">
+                            <img src="assets/people/EllenSales.svg" alt="Íris Biaguê" width="55" height="55" loading="lazy">
+                        </div>
+                        <div class="review-content">
+                            <h4>Ellen Sales</h4>
+                            <div class="review-date">24 Jan 2025</div>
+                        </div>
                     </div>
+                    <div class="review-text">Ambiente calmo, ideal para o meu gato Neko!<!--ideal para o meu gato! Salio! (eia bem AI hahaha)--> Voltaremos com certeza!!</div>
                 </div>
                 <div class="review">
-                    <div class="review-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 40 40&quot;><circle fill=&quot;%23ddd&quot; cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;20&quot;/></svg>')"></div>
-                    <div class="review-content">
-                        <h4>Manuel Pereira</h4>
-                        <div class="review-date">2 Fev 2025</div>
-                        <div class="review-text">O serviço foi bom e os preços não aceitei recomendo para pessoas o cães.</div>
+                    <div class="review-profile manuel">
+                        <div class="review-avatar">
+                            <img src="assets/people/ManuelPereira.svg" alt="Íris Biaguê" width="55" height="55" loading="lazy">
+                        </div>
+                        <div class="review-content">
+                            <h4>Manuel Pereira</h4>
+                            <div class="review-date">2 Fev 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-text">O serviço foi bom 👍  as foi muito difícil encontar sítio para estacionar o carro.<!--O serviço foi bom e os preços não aceitei recomendo para pessoas o cães. (eia bem, fun time hahaha, ai poderosa)--></div>
                     </div>
                 </div>
             </div>
