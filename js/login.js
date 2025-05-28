@@ -9,8 +9,8 @@ const users = {
     "prestador@petotel.com": {
         password: "prestador123",
         role: "prestador-de-servicos",
-        name: "João Silva",
-        redirectUrl: "" // Updated to match your existing prestador page
+        name: "Tiago Fernandes",
+        redirectUrl: "prestador-edit.html" 
     }
 };
 

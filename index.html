@@ -11,11 +11,32 @@
             <a href="prestador.html" class="botao-prestador">Torna-te Prestador!</a>
             
             <div class="user-menu">
-                <a href="#">Baixa a aplicação móvel</a>
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
                 <div class="menu-utilizador">
-                    <a href="login.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle">
+                    <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" id="userIcon">
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <div class="dropdown-section">
+                            <a href="messages.html" class="dropdown-item">Messages</a>
+                            <a href="notifications.html" class="dropdown-item">Notifications</a>
+                            <a href="reservations.html" class="dropdown-item">Reservations</a>
+                            <a href="wishlists.html" class="dropdown-item">Wishlists</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">
+                            <a href="account-edit.html" class="dropdown-item">Account</a>
+                            <a href="help-center.html" class="dropdown-item">Help Center</a>
+                            <a href="#" class="dropdown-item logout-link">Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Dropdown Overlay -->
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
         </div>
 
         <div class="conteudo-central">
@@ -287,8 +308,7 @@
     </div>
 </footer>
 
-<script src="js/navbar.js"></script>
-
+<script src="js/index.js"></script>
 
 </body>
 </html>
