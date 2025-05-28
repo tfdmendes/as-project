@@ -145,16 +145,6 @@ if (ratingsSection) {
     observer.observe(ratingsSection);
 }
 
-// Add subtle parallax effect to main image
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const mainImage = document.querySelector('.main-image');
-    if (mainImage) {
-        const speed = scrolled * 0.5;
-        mainImage.style.transform = `translateY(${speed}px)`;
-    }
-});
-
 let currentPosition = 0;
         const cardWidth = 270; // 250px + 20px gap
         const visibleCards = 3;
@@ -216,5 +206,49 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.opacity = '1';
             section.style.transform = 'translateY(0)';
         }, index * 100);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const titleRight = document.querySelector('.title-right');
+    const container = document.querySelector('.container');
+    
+    if (!titleRight || !container) return;
+    
+    // Guarda a posição inicial
+    const originalOffsetTop = titleRight.offsetTop;
+    const originalOffsetLeft = titleRight.offsetLeft;
+    
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const containerRect = container.getBoundingClientRect();
+        const containerBottom = containerRect.bottom + scrollTop;
+        
+        // Se o scroll passou da posição original E ainda estamos dentro do container
+        if (scrollTop > originalOffsetTop - 20 && scrollTop < containerBottom - titleRight.offsetHeight - 40) {
+            titleRight.classList.add('fixed');
+        } else {
+            titleRight.classList.remove('fixed');
+        }
+    }
+    
+    // Otimização com throttle para melhor performance
+    let ticking = false;
+    function optimizedHandleScroll() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', optimizedHandleScroll);
+    
+    // Recalcula posições quando a janela é redimensionada
+    window.addEventListener('resize', function() {
+        titleRight.classList.remove('fixed');
+        setTimeout(handleScroll, 100);
     });
 });

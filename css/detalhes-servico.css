@@ -10,7 +10,7 @@ body, html {
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: #FAFAFA;
-    color: #484848;
+    color: var(--COLOR);
     scroll-behavior: smooth;
 }
 
@@ -25,7 +25,7 @@ body, html {
 }
 
 h1 {
-    color: #484848;
+    color: var(--COLOR);
     font-family: Montserrat;
     font-size: 120px;
     font-style: normal;
@@ -51,7 +51,7 @@ h1 {
     text-decoration: none;
     margin-left: 2px;
     margin-top: 2px;
-    color: #484848;
+    color: var(--COLOR);
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
@@ -81,7 +81,7 @@ h1 {
 }
 
 .botao-prestador {
-    background-color: #196085;
+    background-color: var(--TITLE-COLOR);
     color: white;
     padding: 12px 14px;
     border-radius: 23px;
@@ -120,7 +120,7 @@ h1 {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 5px;
-    height: 507 px;
+    height: 507px;
 }
 
 .main-image {
@@ -195,7 +195,7 @@ h1 {
 
 .title-left h1 {
     font-size: 28px;
-    color: #196085;
+    color: var(--TITLE-COLOR);
     margin-bottom: 5px;
     display: inline-block
 }
@@ -231,7 +231,7 @@ h1 {
 }
 
 .fa-share {
-    color: #196085;
+    color: var(--TITLE-COLOR);
     font-size: 2rem
 }
 
@@ -282,12 +282,21 @@ h1 {
     text-align: left;
     width: 350px;
     height: 400px;
+
+    transition: all 0.3s ease;
+}
+
+.title-right.fixed {
+    position: fixed;
+    top: 20px;
+    right: calc((100vw - 90vw) / 2 + 40px); /* Alinha com a margem direita original */
+    z-index: 100;
 }
 
 .price {
     font-size: 24px;
     font-weight: bold;
-    color: #484848;
+    color: var(--COLOR);
     margin-bottom: 10px;
 }
 
@@ -298,13 +307,13 @@ h1 {
 
 .price-note {
     font-size: 16px;
-    color: #9A9A9A;
+    color: var(--LIGTH-FONT);
     margin-top: 40px;
     margin-bottom: 15px;
 }
 
 .reserve-btn {
-    background: #196085;
+    background: var(--TITLE-COLOR);
     color: white;
     margin-top: 65px;
     padding: 12px 24px;
@@ -342,7 +351,7 @@ h1 {
 .section h2 {
     font-size: 20px;
     margin-bottom: 20px;
-    color: #484848;
+    color: var(--COLOR);
 }
 
 .service-list {
@@ -351,14 +360,14 @@ h1 {
 
 .service-list li {
     padding: 2px 0;
-    color: #9A9A9A;
+    color: var(--LIGTH-FONT);
     position: relative;
     padding-left: 20px;
 }
 
 .service-list li::before {
     content: '•';
-    color: #9A9A9A;
+    color: var(--LIGTH-FONT);
     position: absolute;
     left: 0;
 }
@@ -366,12 +375,12 @@ h1 {
 .first-section-p {
     margin-top: 20px;
     margin-left: 30px;
-    color: #9A9A9A;
+    color: var(--LIGTH-FONT);
     font-size: 16px;
 }
 
 .second-section {
-    margin-top: 300px;
+    margin-top: 440px;
 }
 
 .features-grid {
@@ -389,11 +398,11 @@ h1 {
 }
 
 .feature-item span {
-    color: #484848;
+    color: var(--COLOR);
 }
 
 .feature-icon {
-    color: #196085;
+    color: var(--TITLE-COLOR);
     font-size: 18px;
 }
 
@@ -435,7 +444,7 @@ h1 {
 
 .services-title {
     font-size: 20px;
-    color: #484848;
+    color: var(--COLOR);
     margin: 0;
 }
 
@@ -526,7 +535,7 @@ h1 {
 
 .service-card h4 {
     margin: 0 0 5px 0;
-    color: #196085;
+    color: var(--TITLE-COLOR);
     font-size: 16px;
 }
 
@@ -553,7 +562,7 @@ h1 {
 
 .view-map-btn {
     margin-top: 30px;
-    background: #196085;
+    background: var(--TITLE-COLOR);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -770,7 +779,7 @@ h1 {
   .footer-logo-text {
     font-size: 24px;
     font-weight: 700;
-    color: #196085;
+    color: var(--TITLE-COLOR);
   }
   
   .footer-slogan {
@@ -788,7 +797,7 @@ h1 {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #484848;
+    color: var(--COLOR);
   }
   
   .footer-links {
@@ -837,7 +846,7 @@ h1 {
     padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
-    color: #484848;
+    color: var(--COLOR);
     font-size: 14px;
     font-weight: 500;
   }
