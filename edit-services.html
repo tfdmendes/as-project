@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-o-Tel | Os meus Serviços</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/edit-services.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
+                <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <a href="login.html" class="nav-link login-link">Login</a>
+            <div class="menu-user">
+                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" loading="lazy">
+                <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" id="userIcon" loading="lazy">
+                
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-section">
+                        <a href="messages.html" class="dropdown-item">Messages</a>
+                        <a href="notifications.html" class="dropdown-item">Notifications</a>
+                        <a href="reservations.html" class="dropdown-item">Reservations</a>
+                        <a href="wishlists.html" class="dropdown-item">Wishlists</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-section">
+                        <a href="account-edit.html" class="dropdown-item">Account</a>
+                        <a href="help-center.html" class="dropdown-item">Help Center</a>
+                        <a href="#" class="dropdown-item logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Dropdown Overlay -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
+
+    <main class="main-container">
+        <h1 class="page-title">Os meus Serviços</h1>
+
+        <div class="services-grid">
+            <!-- Pet Sitting Service -->
+            <div class="service-card">
+                <div class="service-image-container">
+                    <img src="assets/edit-services/service1.png" alt="Pet Sitting" class="service-image" loading="lazy">
+                    <div class="service-menu">
+                        <span class="service-menu-dots">•••</span>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Pet Sitting</h3>
+                    <p class="service-location">Aveiro, Portugal</p>
+                    <div class="service-rating">
+                        <div class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star empty">★</span>
+                        </div>
+                        <span class="rating-text">4/5</span>
+                        <span class="reviews-count">12 avaliações</span>
+                    </div>
+                    <div class="service-price">10€/dia</div>
+                </div>
+            </div>
+
+            <!-- Dog and Cat Bathing Service -->
+            <div class="service-card">
+                <div class="service-image-container">
+                    <img src="assets/edit-services/service2.png" alt="Banho para Cães e Gatos" class="service-image" loading="lazy">
+                    <div class="service-menu">
+                        <span class="service-menu-dots">•••</span>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Banho para Cães e Gatos</h3>
+                    <p class="service-location">Aveiro, Portugal</p>
+                    <div class="service-rating">
+                        <div class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                        <span class="rating-text">5/5</span>
+                        <span class="reviews-count">2 avaliações</span>
+                    </div>
+                    <div class="service-price">25€</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" loading="lazy">
+                    <span class="footer-logo-text">Pet-O-Tel</span>
+                </div>
+                <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+            </div>
+            
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4 class="column-title">COMPANY</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre nós</a></li>
+                        <li><a href="#">Informação legal</a></li>
+                        <li><a href="#">Contacta-nos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="column-title">HELP CENTER</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Encontra um serviço</a></li>
+                        <li><a href="#">Porquê nós?</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="column-title">CONTACT INFO</h4>
+                    <ul class="footer-links">
+                        <li>Contacto: 123456789</li>
+                        <li>Email: pet_o_tel@gmail.com</li>
+                        <li class="social-icons">
+                            <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook" loading="lazy"></a>
+                            <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter" loading="lazy"></a>
+                            <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram" loading="lazy"></a>
+                            <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn" loading="lazy"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="app-buttons">
+            <a href="#" class="app-button playstore">
+                <img src="assets/logos/playstore.svg" alt="Play Store" loading="lazy">
+                PlayStore
+            </a>
+            <a href="#" class="app-button appstore">
+                <img src="assets/logos/applestore.svg" alt="App Store" loading="lazy">
+                AppStore
+            </a>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+            <p class="project">Projeto Grupo 401</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/edit-services.js"></script>
+</body>
+</html>
