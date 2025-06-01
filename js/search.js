@@ -1,55 +1,65 @@
 const servicesData = [
-            {
-                icon: '🐾',
-                category: 'Pet Care',
-                title: 'Quinta Dona Maria',
-                rating: '★★★★★',
-                ratingText: '5.0 (24 avaliações)',
-                location: '📍 Sintra, Portugal',
-                description: 'Serviço especializado em cuidados com animais de estimação. Ambiente seguro e acolhedor para o seu pet.'
-            },
-            {
-                icon: '🏠',
-                category: 'House Sitting',
-                title: 'Casa dos Sonhos',
-                rating: '★★★★☆',
-                ratingText: '4.8 (15 avaliações)',
-                location: '📍 Cascais, Portugal',
-                description: 'Cuidamos da sua casa como se fosse nossa. Serviço de confiança para quando está ausente.'
-            },
-            {
-                icon: '🌸',
-                category: 'Garden Care',
-                title: 'Jardim Encantado',
-                rating: '★★★★★',
-                ratingText: '4.9 (32 avaliações)',
-                location: '📍 Oeiras, Portugal',
-                description: 'Manutenção profissional de jardins e espaços verdes. Transformamos o seu jardim num paraíso.'
-            },
-            {
-                icon: '🚗',
-                category: 'Transport',
-                title: 'Transporte Rápido',
-                rating: '★★★★☆',
-                ratingText: '4.7 (18 avaliações)',
-                location: '📍 Lisboa, Portugal',
-                description: 'Serviço de transporte rápido e seguro. Chegue ao seu destino com conforto e pontualidade.'
-            },
-            {
-                icon: '🏡',
-                category: 'Cleaning',
-                title: 'Limpeza Premium',
-                rating: '★★★★★',
-                ratingText: '5.0 (41 avaliações)',
-                location: '📍 Almada, Portugal',
-                description: 'Serviços de limpeza profissional. Deixamos a sua casa impecável e brilhante.'
-            }
-        ];
+    {
+        icon: 'assets/search/hamster1.jpg',
+        category: 'Hotel Hamster',
+        title: 'Pacote Roda Relax',
+        rating: '★★★★★',
+        ratingText: '5.0 (24 avaliações)',
+        location: '99 Rua do Carmo, Medas, Portugal',
+        description: 'Aberto, das 8h30 às 19h30'
+    },
+    {
+        icon: 'assets/search/hamster2.jpg',
+        category: 'Resort Fofuxo',
+        title: 'Suite Toca Quentinha',
+        rating: '★★★★☆',
+        ratingText: '4.8 (15 avaliações)',
+        location: '25 Rua da Agra, Medas, Portugal',
+        description: 'Aberto, das 9h às 20h'
+    },
+    {
+        icon: 'assets/search/hamster3.jpg',
+        category: 'Refúgio Roedor',
+        title: 'Ninho Zen',
+        rating: '★★★★★',
+        ratingText: '4.9 (32 avaliações)',
+        location: '113 Rua dos Carvalhos, Medas, Portugal',
+        description: 'Aberto, das 9h às 21h'
+    },
+
+];
+
+//------------------- Pesquisa na barra
+document.addEventListener('DOMContentLoaded', function () {
+    const searchButton = document.querySelector('.search-button');
+    const searchInput = document.querySelector('.search-input');
+    const filterSelect = document.querySelector('.filter-select');
+
+    if (searchButton && searchInput && filterSelect) {
+        searchButton.addEventListener('click', function (event) {
+            // Previne navegação imediata se estiver num <a>
+            event.preventDefault();
+
+            const termo = searchInput.value.trim() || 'tudo';
+            const categoriaSelecionada = filterSelect.options[filterSelect.selectedIndex].text;
+
+            alert(`A pesquisar "${termo}" na categoria de ${categoriaSelecionada}...`);
+
+            // Depois do alert, podes redirecionar se quiseres:
+            window.location.href = "search.html";
+        });
+    }
+});
+
 
 function updateFeaturedService(serviceIndex) {
     const service = servicesData[serviceIndex];
+
+    const featuredIcon = document.getElementById('featured-icon');
+    featuredIcon.src = service.icon;
+    featuredIcon.alt = service.category;
     
-    document.getElementById('featured-icon').textContent = service.icon;
+    
     document.getElementById('featured-category').textContent = service.category;
     document.getElementById('featured-title').textContent = service.title;
     document.getElementById('featured-rating').textContent = service.rating;
@@ -81,3 +91,39 @@ window.addEventListener('scroll', function() {
     // Add subtle parallax effect
     sidebar.style.transform = `translateY(${scrollTop * 0.1}px)`;
 });
+
+document.getElementById("mapImage").addEventListener("click", function () {
+    // Obter o card ativo
+    const activeCard = document.querySelector(".service-card.active");
+
+    if (!activeCard) {
+        alert("Nenhum serviço selecionado.");
+        return;
+    }
+
+    // Obter a localização
+    const locationText = activeCard.querySelector(".service-location").textContent;
+
+    // Remover o ícone 📍 se existir
+    const cleanedLocation = locationText.replace("📍", "").trim();
+
+    // Codificar para URL
+    const query = encodeURIComponent(cleanedLocation);
+
+    // Abrir Google Maps com a localização
+    window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, "_blank");
+});
+
+document.getElementById("featured-icon").addEventListener("click", function () {
+    alert("A redirecionar para a página...");
+    // Aqui podes depois adicionar a lógica de redirecionamento se quiseres
+});
+
+
+
+
+// Atualiza a sidebar com o primeiro serviço ao carregar a página
+updateFeaturedService(0);
+
+// Opcional: define o primeiro cartão como "ativo" visualmente
+document.querySelectorAll('.service-card')[0].classList.add('active');

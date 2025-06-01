@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -29,6 +30,23 @@
         </nav>
     </header>
     <main>
+        <div class="barra-pesquisa">
+            <input type="text" placeholder="Pesquise por um serviço aqui..." class="search-input">
+            <div class="filter-container">
+                <select class="filter-select">
+                    <option value="">Todos os serviços</option>
+                    <option value="alojamento">🏠 Alojamento</option>
+                    <option value="petsitting">👤 Pet Sitting</option>
+                    <option value="higiene">✨ Higiene & Estética</option>
+                    <option value="atividade">🏃 Atividade & Exercício</option>
+                    <option value="treino">🎯 Treino & Comportamento</option>
+                    <option value="veterinario">🏥 Veterinário</option>
+                </select>
+            </div>
+            <button class="search-button">
+                <a href="search.html"><img src="assets/index/header/search.svg" alt="Pesquisar" class="icon-search"></a>
+            </button>
+        </div>
         <div class="container">
             <div class="header">
                 <h1>3 Resultados Encontrados</h1>
@@ -39,7 +57,6 @@
                 <div class="service-card active" data-service="0">
                     <div class="service-image">
                         <img src="assets/search/hamster1.jpg" class="hamster_pic" loading="lazy">
-                        <div class="service-badge">VIP</div>
                     </div>
                     <div class="service-content">
                         <div class="service-category">Hotel Hamster</div>
@@ -55,40 +72,41 @@
 
                 <div class="service-card" data-service="1">
                     <div class="service-image">
-                        <span><img src="assets/search/hamster2.jpg" class="hamster_pic" loading="lazy"></span>
+                        <img src="assets/search/hamster2.jpg" class="hamster_pic" loading="lazy">
                     </div>
                     <div class="service-content">
-                        <div class="service-category">House Sitting</div>
-                        <div class="service-title">Casa dos Sonhos</div>
+                        <div class="service-category">Resort Fofuxo</div>
+                        <div class="service-title">Suite Toca Quentinha</div>
                         <div class="service-rating">
                             <span class="star">★★★★☆</span>
                             <span>4.8 (15 avaliações)</span>
                         </div>
                         <div class="preco"> 3€ a 7.5€/noite </div>
-                        <div class="service-location">📍 Cascais, Portugal</div>
+                        <div class="service-location">📍 25 Rua da Agra, Medas, Portugal</div>
                     </div>
                 </div>
-
+            
                 <div class="service-card" data-service="2">
                     <div class="service-image">
                         <img src="assets/search/hamster3.jpg" class="hamster_pic" loading="lazy">
                     </div>
                     <div class="service-content">
-                        <div class="service-category">Garden Care</div>
-                        <div class="service-title">Jardim Encantado</div>
+                        <div class="service-category">Refúgioj do Roedor</div>
+                        <div class="service-title">Ninho Zen</div>
                         <div class="service-rating">
                             <span class="star">★★★★★</span>
                             <span>4.9 (32 avaliações)</span>
                         </div>
                         <div class="preco"> 3€ a 7.5€/noite </div>
-                        <div class="service-location">📍 Oeiras, Portugal</div>
+                        <div class="service-location">📍 113 Rua dos Carvalhos, Medas, Portugal</div>
                     </div>
                 </div>
-
+            </div>
+            
             <div class="sidebar">
                 <div class="featured-service">
                     <div class="featured-image">
-                        <span id="featured-icon">🐾</span>
+                        <img id="featured-icon" src="" alt="Ícone do serviço" />
                     </div>
                     <div class="featured-content">
                         <div class="featured-category" id="featured-category">Pet Care</div>
@@ -106,7 +124,7 @@
 
                 <div class="map-container">
                     <div class="map-placeholder">
-                        🗺️ Mapa da Localização
+                        <img src="assets/vista_prestador_outros/mapa.png" alt="Mapa" class="map-image" id="mapImage" loading="lazy">
                     </div>
                 </div>
             </div>
