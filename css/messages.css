@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto; /* ou remover height: 100vh */
+}
+
+.sidebar {
+    width: 350px;
+    background: white;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #196085;
+    color: white;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.messages-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.message-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.message-item:hover {
+    background-color: #f8f9fa;
+}
+
+.message-item.active {
+    background-color: #e8f5e8;
+    border-right: 3px solid #196085;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.pet-nanny { background: #FF9800; }
+.pet-centro { background: #f44336; }
+.tiago { background: #2196F3; }
+
+.message-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sender-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.message-date {
+    font-size: 12px;
+    color: #666;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chat-header {
+    background: #85C6B2;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.chat-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #196085;
+    margin-bottom: 4px;
+}
+
+.chat-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+.content-area {
+    flex: 1;
+    display: flex;
+}
+
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #FCC9AA47;
+}
+
+.messages-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message-bubble {
+    margin-bottom: 16px;
+}
+
+.message-sender {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.message-text {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 16px;
+    max-width: 70%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.message-images {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.message-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.message-image:hover {
+    transform: scale(1.05);
+}
+
+.status-badge {
+    background: #FFC107;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.message-input-area {
+    padding: 16px 20px;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.message-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    outline: none;
+    font-size: 14px;
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.send-btn:hover {
+    background: #45a049;
+}
+
+.calendar-panel {
+    width: 400px;
+    background: white;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    background: #196085;
+    color: white;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.mini-calendar {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background: #f0f0f0;
+}
+
+.month-year {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    margin-top: 8px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    padding: 8px 4px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+    background: #f0f0f0;
+}
+
+.calendar-day.today {
+    background: #4CAF50;
+    color: white;
+    font-weight: 600;
+}
+
+.calendar-day.has-appointment {
+    background: #e8f5e8;
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.upcoming-appointments {
+    flex: 1;
+    padding: 20px;
+}
+
+.appointments-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.appointment-item {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid #196085;
+}
+
+.appointment-time {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.appointment-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.appointment-client {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+@media (max-width: 1024px) {
+    .calendar-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: absolute;
+        z-index: 10;
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        width: 100%;
+    }
+}

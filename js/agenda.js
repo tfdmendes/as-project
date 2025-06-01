@@ -18,8 +18,8 @@ function initializeEvents() {
     const nextWeek = new Date();
     nextWeek.setDate(today.getDate() + 7);
     
-    events[formatDateKey(today)] = ['Reunião às 10h'];
-    events[formatDateKey(nextWeek)] = ['Consulta médica'];
+    events[formatDateKey(today)] = ['Dia Ocupado'];
+    events[formatDateKey(nextWeek)] = ['Dia Ocupado'];
 }
 
 function renderCalendar() {
