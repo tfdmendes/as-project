@@ -282,15 +282,17 @@ h1 {
     text-align: left;
     width: 350px;
     height: 400px;
-
     transition: all 0.3s ease;
 }
 
+/* CORRIGIDO: Melhor comportamento da div fixa */
 .title-right.fixed {
     position: fixed;
     top: 20px;
-    right: calc((100vw - 90vw) / 2 + 40px); /* Alinha com a margem direita original */
     z-index: 100;
+    /* Removemos o cálculo complexo e deixamos o JavaScript definir a posição left */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .price {
@@ -323,13 +325,15 @@ h1 {
     cursor: pointer;
     width: 350px;
     height: 55px;
+    transition: background-color 0.3s ease;
+}
+
+.reserve-btn:hover {
+    background-color: #145670;
 }
 
 .action-icons-right {
     margin-top: 50px;
-    /*display: flex;
-    justify-content: space-between;
-    align-items: start;*/
 }
 
 .action-icons-right a {
@@ -421,20 +425,28 @@ h1 {
 .map-block {
     flex: 1;
     width: 700px;
-  }
-  
-  .map-block h3 {
+}
+
+.map-block h3 {
     margin-bottom: 10px;
-  }
-  
-  .map-img {
+}
+
+/* ADICIONADO: Cursor pointer para a imagem do mapa */
+.map-img {
     margin-top: 30px;
     width: 100%;
     border-radius: 10px;
     object-fit: cover;
-  }
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .services-container {
+.map-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.services-container {
     max-width: 800px;
     margin: 0 auto;
 }
@@ -579,6 +591,11 @@ h1 {
     width: 168px;
     height: 48px;
     font-weight: 800;
+    transition: background-color 0.3s ease;
+}
+
+.view-map-btn:hover {
+    background-color: #145670;
 }
 
 .reviews-section {
@@ -676,7 +693,6 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .rhyan {
@@ -721,132 +737,110 @@ h1 {
     display: block;
     margin: 0;
     margin-bottom: 150px;
+    transition: background-color 0.3s ease;
 }
 
-/*@media (max-width: 768px) {
-    .service-images {
-        grid-template-columns: 1fr;
-        height: 200px;
-    }
-    
-    .side-images {
-        display: none;
-    }
-    
-    .service-title {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .service-details {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .features-grid, .rating-overview, .reviews-list {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-}*/
+.show-more-btn:hover {
+    background: #85C6B2;
+    color: white;
+}
 
 .footer {
     background-color: #f0f0f0;
     padding: 60px 0 20px;
-  }
-  
-  .footer-container {
+}
+
+.footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 60px;
-  }
-  
-  .footer-top {
+}
+
+.footer-top {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
-  }
-  
-  .footer-brand {
+}
+
+.footer-brand {
     max-width: 300px;
-  }
-  
-  .footer-logo {
+}
+
+.footer-logo {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-  }
-  
-  .logo-footer {
+}
+
+.logo-footer {
     width: 32px;
     height: 32px;
     margin-right: 10px;
-  }
-  
-  .footer-logo-text {
+}
+
+.footer-logo-text {
     font-size: 24px;
     font-weight: 700;
     color: var(--TITLE-COLOR);
-  }
-  
-  .footer-slogan {
+}
+
+.footer-slogan {
     margin: 5px 0 0;
     font-size: 14px;
     color: #666;
-  }
-  
-  .footer-columns {
+}
+
+.footer-columns {
     display: flex;
     gap: 60px;
-  }
-  
-  .column-title {
+}
+
+.column-title {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 20px;
     color: var(--COLOR);
-  }
-  
-  .footer-links {
+}
+
+.footer-links {
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .footer-links li {
+}
+
+.footer-links li {
     margin-bottom: 10px;
     font-size: 14px;
     color: #666;
-  }
-  
-  .footer-links a {
+}
+
+.footer-links a {
     text-decoration: none;
     color: #666;
-  }
-  
-  .social-icons {
+}
+
+.social-icons {
     display: flex;
     gap: 10px;
     margin-top: 15px;
-  }
-  
-  .social-icons a {
+}
+
+.social-icons a {
     display: inline-block;
-  }
-  
-  .social-icons img {
+}
+
+.social-icons img {
     width: 24px;
     height: 24px;
-  }
-  
-  .app-buttons {
+}
+
+.app-buttons {
     display: flex;
     gap: 15px;
     margin-bottom: 40px;
-  }
-  
-  .app-button {
+}
+
+.app-button {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -857,22 +851,22 @@ h1 {
     color: var(--COLOR);
     font-size: 14px;
     font-weight: 500;
-  }
-  
-  .app-button img {
+}
+
+.app-button img {
     width: 18px;
     height: 18px;
-  }
-  
-  .footer-bottom {
+}
+
+.footer-bottom {
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
     border-top: 1px solid #ddd;
     font-size: 14px;
     color: #777;
-  }
-  
-  .copyright, .project {
+}
+
+.copyright, .project {
     margin: 0;
-  }
+}

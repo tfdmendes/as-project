@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/detalhes-servico.css">
     <link rel="stylesheet" href="css/navbar.css">
     <script src="js/detalhes-servico.js" defer></script>
+        <script src="js/auth.js"></script>
 </head>
 <body>
     <header>
@@ -98,7 +99,7 @@
                                     <img src="assets/detalhes-servico/front-car.png" alt="front car icon" width="50" height="50" loading="lazy">
                                 </div>
                                 <div class="detail-label">Por Marcação</div>
-                                <div class="detail-value">Transporte</div>
+                                <div class="detail-value">Tipo</div>
                             </div>
                         </div>
                     </div>
@@ -106,9 +107,7 @@
                         <div class="price">20€ a 40€</div>
                         <hr>
                         <div class="price-note">O preço varia conforme o tamanho e tipo do animal.</div>
-                        <a href="reserva-form.html">
-                            <button class="reserve-btn">Reservar agora</button>
-                        </a>
+                        <button class="reserve-btn">Reservar agora</button>
                         <div class="action-icons action-icons-right">
                             <a href="mailto:pet-p-tel@gmail.com">
                                 <div class="icon-container">
@@ -139,7 +138,7 @@
                 <li>Tosquia com tesoura ou máquina, conforme a raça, padrão de corte e preferências do tutor;</li>
                 <li>Higiene das orelhas e limpeza das glândulas anais;</li>
                 <li>Corte de unhas incluído</li>
-                <li>Finalização com perfume suave (opcional) e laço decorativo ou <!--lenço de banho  (AI hehe)--> se assim desejado;</li>
+                <li>Finalização com perfume suave (opcional) e laço decorativo se assim desejado;</li>
             </ul>
             <p class="first-section-p">
                 Todos os serviços são realizados por profissionais experientes, com atenção ao comportamento e 
@@ -211,28 +210,10 @@
                 <h3>Localização</h3>
                 <img src="assets/vista_prestador_outros/mapa.png" alt="mapa" class="map-img" loading="lazy">
             </div>
-            <!--<h3 class="recommended-services-title">Serviços Recomendados</h3>
-                <div class="recommended-services">
-                    <div class="service-card">
-                    <h4>Pet Shop Plus</h4>
-                    <div class="distance">a 100 metros</div>
-                    <div class="stars">★★★★★</div>
-                </div>
-                <div class="service-card">
-                    <h4>Petaria - Vila de Patos</h4>
-                    <div class="distance">a 200 metros</div>
-                    <div class="stars">★★★★</div>
-                </div>
-                <div class="service-card">
-                    <h4>Cão&Co Spa</h4>
-                    <div class="distance">a 500 metros</div>
-                    <div class="stars">★★★★</div>
-                </div>
-                </div>-->
             <div class="services-container">
                 <div class="services-section">
                     <div class="services-header">
-                        <h3 class="services-title">Serviços Recomendados</h3>
+                        <h3 class="services-title">Outros Serviços Recomendados</h3>
                         <div class="carousel-controls">
                             <button class="carousel-btn disabled" id="prevBtn" onclick="navigateCarousel('prev')">
                                 <span class="arrow arrow-left"></span>
@@ -273,7 +254,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="view-map-btn">Ver no mapa</button>
             </div>
         </div>
 
@@ -332,18 +312,6 @@
 
             <div class="reviews-list">
                 <div class="review">
-                    <div class="review-profile rhyan">
-                        <div class="review-avatar">
-                            <img src="assets/people/RyanMatos.png" alt="Ryan Matos" width="55" height="55" loading="lazy">
-                        </div>
-                        <div class="review-content">
-                            <h4>Rhyan Matos</h4>
-                            <div class="review-date">12 Mar 2024</div>
-                        </div>
-                    </div>
-                    <div class="review-text">Excelente serviço, o meu cão saiu lindo, cheiroso e muito feliz!</div> 
-                </div>
-                <div class="review">
                     <div class="review-profile">
                         <div class="review-avatar">
                             <img src="assets/people/IrisBiague.png" alt="Íris Biaguê" width="55" height="55" loading="lazy">
@@ -358,27 +326,26 @@
                 <div class="review">
                     <div class="review-profile">
                         <div class="review-avatar">
-                            <img src="assets/people/EllenSales.svg" alt="Íris Biaguê" width="55" height="55" loading="lazy">
+                            <img src="assets/people/EllenSales.svg" alt="Ellen Sales" width="55" height="55" loading="lazy">
                         </div>
                         <div class="review-content">
                             <h4>Ellen Sales</h4>
                             <div class="review-date">24 Jan 2025</div>
                         </div>
                     </div>
-                    <div class="review-text">Ambiente calmo, ideal para o meu gato Neko!<!--ideal para o meu gato! Salio! (eia bem AI hahaha)--> Voltaremos com certeza!!</div>
+                    <div class="review-text">Ambiente calmo, ideal para o meu gato Neko! Voltaremos com certeza!!</div>
                 </div>
                 <div class="review">
                     <div class="review-profile manuel">
                         <div class="review-avatar">
-                            <img src="assets/people/ManuelPereira.svg" alt="Íris Biaguê" width="55" height="55" loading="lazy">
+                            <img src="assets/people/ManuelPereira.svg" alt="Manuel Pereira" width="55" height="55" loading="lazy">
                         </div>
                         <div class="review-content">
                             <h4>Manuel Pereira</h4>
                             <div class="review-date">2 Fev 2025</div>
                         </div>
                     </div>
-                    <div class="review-text">O serviço foi bom 👍  as foi muito difícil encontar sítio para estacionar o carro.<!--O serviço foi bom e os preços não aceitei recomendo para pessoas o cães. (eia bem, fun time hahaha, ai poderosa)--></div>
-                    </div>
+                    <div class="review-text">O serviço foi bom 👍 mas foi muito difícil encontrar sítio para estacionar o carro.</div>
                 </div>
             </div>
 

@@ -16,19 +16,43 @@ document.querySelectorAll('.icon-btn').forEach(btn => {
     });
 });
 
+// Função para verificar se o usuário está logado
+function isUserLoggedIn() {
+    // Aqui você pode implementar sua lógica de verificação de login
+    // Por exemplo, verificar se existe um token no localStorage, cookie, etc.
+    // Por agora, vamos assumir que o usuário não está logado (você pode ajustar isso)
+    return false; // Mude para true se quiser testar como usuário logado
+}
+
 // Handle reserve button
-document.querySelector('.reserve-btn').addEventListener('click', function() {
-    alert('Redirecionando para página de reserva...');
+document.querySelector('.reserve-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (!isUserLoggedIn()) {
+        alert('Por favor, faça login primeiro');
+        // Redirecionar para página de login
+        window.location.href = 'login.html'; // Ajuste o caminho conforme sua estrutura
+    } else {
+        // Se estiver logado, prosseguir com a reserva
+        window.location.href = 'reserva-form.html';
+    }
 });
 
-// Handle show more reviews button
+// Handle show more reviews button - removido o alert
 document.querySelector('.show-more-btn').addEventListener('click', function() {
-    alert('Carregando mais comentários...');
+    // Aqui você pode implementar a funcionalidade real de carregar mais comentários
+    // Por exemplo, fazer uma requisição AJAX ou mostrar comentários ocultos
+    console.log('Carregando mais comentários...');
 });
 
-// Handle view map button
+// Handle view map button - removido o alert e adicionado link do Google Maps
 document.querySelector('.view-map-btn').addEventListener('click', function() {
-    alert('Abrindo mapa...');
+    window.open('https://www.google.com/maps/place/41%C2%B009\'10.2%22N+8%C2%B037\'55.0%22W/@41.152837,-8.6348941,17z/data=!3m1!4b1!4m13!1m8!3m7!1s0xd24650b47f65075:0xc88efe2e1a5ce3be!2sRua+do+Campo+Alegre,+Porto!3b1!8m2!3d41.1528295!4d-8.6375316!16s%2Fg%2F119vl1183!3m3!8m2!3d41.152837!4d-8.63193?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
+});
+
+// Handle map image click - novo
+document.querySelector('.map-img').addEventListener('click', function() {
+    window.open('https://www.google.com/maps/place/41%C2%B009\'10.2%22N+8%C2%B037\'55.0%22W/@41.152837,-8.6348941,17z/data=!3m1!4b1!4m13!1m8!3m7!1s0xd24650b47f65075:0xc88efe2e1a5ce3be!2sRua+do+Campo+Alegre,+Porto!3b1!8m2!3d41.1528295!4d-8.6375316!16s%2Fg%2F119vl1183!3m3!8m2!3d41.152837!4d-8.63193?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
 });
 
 // Add smooth scrolling for any potential anchor links
@@ -93,7 +117,7 @@ if (mobileMenuBtn) {
     });
 }
 
-// Add loading states for buttons
+// Add loading states for buttons - removido o alert
 function addLoadingState(button, duration = 2000) {
     const originalText = button.textContent;
     button.textContent = 'Carregando...';
@@ -106,15 +130,6 @@ function addLoadingState(button, duration = 2000) {
         button.style.opacity = '1';
     }, duration);
 }
-
-// Enhanced reserve button with loading state
-document.querySelector('.reserve-btn').addEventListener('click', function() {
-    addLoadingState(this);
-    // Simulate booking process
-    setTimeout(() => {
-        alert('Reserva realizada com sucesso! Você receberá uma confirmação por email.');
-    }, 2000);
-});
 
 // Add animation to rating bars on scroll
 const observerOptions = {
@@ -146,52 +161,52 @@ if (ratingsSection) {
 }
 
 let currentPosition = 0;
-        const cardWidth = 270; // 250px + 20px gap
-        const visibleCards = 3;
-        const totalCards = document.querySelectorAll('.service-card').length;
-        const maxPosition = Math.max(0, totalCards - visibleCards);
+const cardWidth = 270; // 250px + 20px gap
+const visibleCards = 3;
+const totalCards = document.querySelectorAll('.service-card').length;
+const maxPosition = Math.max(0, totalCards - visibleCards);
 
-        function navigateCarousel(direction) {
-            const servicesList = document.getElementById('servicesList');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
+function navigateCarousel(direction) {
+    const servicesList = document.getElementById('servicesList');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-            if (direction === 'next' && currentPosition < maxPosition) {
-                currentPosition++;
-            } else if (direction === 'prev' && currentPosition > 0) {
-                currentPosition--;
-            }
+    if (direction === 'next' && currentPosition < maxPosition) {
+        currentPosition++;
+    } else if (direction === 'prev' && currentPosition > 0) {
+        currentPosition--;
+    }
 
-            // Aplicar transformação
-            const translateX = -currentPosition * cardWidth;
-            servicesList.style.transform = `translateX(${translateX}px)`;
+    // Aplicar transformação
+    const translateX = -currentPosition * cardWidth;
+    servicesList.style.transform = `translateX(${translateX}px)`;
 
-            // Atualizar estado dos botões
-            updateButtonStates(prevBtn, nextBtn);
-        }
+    // Atualizar estado dos botões
+    updateButtonStates(prevBtn, nextBtn);
+}
 
-        function updateButtonStates(prevBtn, nextBtn) {
-            // Botão anterior
-            if (currentPosition === 0) {
-                prevBtn.classList.add('disabled');
-            } else {
-                prevBtn.classList.remove('disabled');
-            }
+function updateButtonStates(prevBtn, nextBtn) {
+    // Botão anterior
+    if (currentPosition === 0) {
+        prevBtn.classList.add('disabled');
+    } else {
+        prevBtn.classList.remove('disabled');
+    }
 
-            // Botão próximo
-            if (currentPosition >= maxPosition) {
-                nextBtn.classList.add('disabled');
-            } else {
-                nextBtn.classList.remove('disabled');
-            }
-        }
+    // Botão próximo
+    if (currentPosition >= maxPosition) {
+        nextBtn.classList.add('disabled');
+    } else {
+        nextBtn.classList.remove('disabled');
+    }
+}
 
-        // Inicializar estados dos botões
-        document.addEventListener('DOMContentLoaded', function() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            updateButtonStates(prevBtn, nextBtn);
-        });
+// Inicializar estados dos botões
+document.addEventListener('DOMContentLoaded', function() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    updateButtonStates(prevBtn, nextBtn);
+});
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// CORRIGIDO: Sistema de scroll da div do preço mais suave e sem problemas visuais
 document.addEventListener('DOMContentLoaded', function() {
     const titleRight = document.querySelector('.title-right');
     const container = document.querySelector('.container');
@@ -224,6 +240,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const wasFixed = titleRight.classList.contains('fixed');
         if (wasFixed) {
             titleRight.classList.remove('fixed');
+            titleRight.style.left = '';
+            titleRight.style.top = '';
         }
         
         originalOffsetLeft = titleRight.offsetLeft;
@@ -231,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (wasFixed) {
             titleRight.classList.add('fixed');
             titleRight.style.left = originalOffsetLeft + 'px';
+            titleRight.style.top = '20px';
         }
     }
     
@@ -238,18 +257,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const containerRect = container.getBoundingClientRect();
         const containerBottom = containerRect.bottom + scrollTop;
+        const windowHeight = window.innerHeight;
         
-        // Se o scroll passou da posição original E ainda estamos dentro do container
-        if (scrollTop > originalOffsetTop - 20 && scrollTop < containerBottom - titleRight.offsetHeight - 40) {
-            if (!titleRight.classList.contains('fixed')) {
-                titleRight.classList.add('fixed');
-                titleRight.style.left = originalOffsetLeft + 'px';
-            }
-        } else {
-            if (titleRight.classList.contains('fixed')) {
-                titleRight.classList.remove('fixed');
-                titleRight.style.left = ''; // Remove o estilo inline
-            }
+        // Condições mais precisas para quando ativar/desativar o fixed
+        const shouldBeFixed = scrollTop > originalOffsetTop - 100 && 
+                             scrollTop < containerBottom - titleRight.offsetHeight - 100;
+        
+        if (shouldBeFixed && !titleRight.classList.contains('fixed')) {
+            titleRight.classList.add('fixed');
+            titleRight.style.left = originalOffsetLeft + 'px';
+            titleRight.style.top = '20px';
+        } else if (!shouldBeFixed && titleRight.classList.contains('fixed')) {
+            titleRight.classList.remove('fixed');
+            titleRight.style.left = '';
+            titleRight.style.top = '';
         }
     }
     
@@ -271,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         titleRight.classList.remove('fixed');
         titleRight.style.left = '';
+        titleRight.style.top = '';
         
         setTimeout(() => {
             updateOriginalPosition();

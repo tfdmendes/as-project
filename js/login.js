@@ -1,15 +1,19 @@
+// login.js - Sistema de login atualizado
+
 // Dictionary with fixed login credentials
 const users = {
     "user@petotel.com": {
         password: "user123",
         role: "user",
         name: "Rhyan Matos",
+        avatar: "assets/people/RhyanMatos.png",
         redirectUrl: "account-edit.html"
     },
     "prestador@petotel.com": {
         password: "prestador123",
         role: "prestador-de-servicos",
         name: "Tiago Fernandes",
+        avatar: "assets/people/tiago.png",
         redirectUrl: "prestador-edit.html" 
     }
 };
@@ -23,6 +27,17 @@ const rememberMeCheckbox = document.getElementById('rememberMe');
 
 // Check if user is already logged in
 window.addEventListener('DOMContentLoaded', () => {
+    // Se já está logado, redirecionar
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    if (currentUser.isLoggedIn) {
+        const user = users[currentUser.email];
+        if (user) {
+            window.location.href = user.redirectUrl;
+            return;
+        }
+    }
+
+    // Preencher email se foi lembrado
     const savedEmail = localStorage.getItem('rememberedEmail');
     if (savedEmail) {
         emailInput.value = savedEmail;
@@ -45,11 +60,12 @@ loginForm.addEventListener('submit', (e) => {
         // Success! Store user session
         const user = users[email];
         
-        // Store session data (in a real app, this would be handled server-side)
+        // Store session data
         sessionStorage.setItem('currentUser', JSON.stringify({
             email: email,
             name: user.name,
             role: user.role,
+            avatar: user.avatar,
             isLoggedIn: true
         }));
         

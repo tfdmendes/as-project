@@ -368,3 +368,56 @@ function updateUIForLoggedInUser() {
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(updateUIForLoggedInUser, 100); // Small delay to ensure everything is loaded
 });
+
+// Adicionar ao arquivo index.js ou criar um novo arquivo service-cards.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevenir propagação de cliques nos elementos internos
+    setupServiceCardClicks();
+});
+
+function setupServiceCardClicks() {
+    // Selecionar todos os cards de serviço
+    const serviceCards = document.querySelectorAll('.cards-servicos .card');
+    
+    serviceCards.forEach(card => {
+        // Prevenir propagação no favorito
+        const favorito = card.querySelector('.favorito');
+        if (favorito) {
+            favorito.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // A função toggleFavorito já está definida
+            });
+        }
+        
+        // Prevenir propagação na imagem circular (link do prestador)
+        const imagemCircular = card.querySelector('.imagem-circular');
+        if (imagemCircular) {
+            imagemCircular.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // O link já está configurado no HTML
+            });
+        }
+        
+        // Opcional: Adicionar cursor pointer nas áreas clicáveis
+        const mainImageLink = card.querySelector('.card-image-wrapper > a:first-child');
+        if (mainImageLink) {
+            mainImageLink.style.cursor = 'pointer';
+        }
+    });
+    
+    // Log para debug
+    console.log('Service card clicks configurados');
+}
+
+// Função melhorada para toggle de favorito
+function toggleFavorito(el) {
+    el.classList.toggle('ativo');
+    
+    // Opcional: Adicionar feedback visual ou salvar estado
+    const isActive = el.classList.contains('ativo');
+    console.log('Favorito', isActive ? 'adicionado' : 'removido');
+    
+    // Aqui você pode adicionar lógica para salvar o estado do favorito
+    // Por exemplo, salvar no localStorage ou enviar para um servidor
+}
