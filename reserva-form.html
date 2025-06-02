@@ -56,7 +56,8 @@
             <form id="bookingForm">
                 <div class="pets-selection">
                     <label class="pets-label">Seleciona um dos teus pets</label>
-                       <div class="pets-grid">
+                    <div class="pets-grid">
+                        <!-- Hardcoded pets -->
                         <div class="pet-option" data-pet="sasha">
                             <div class="pet-avatar">
                                 <a href="agenda.html">
@@ -75,9 +76,11 @@
                             <div class="pet-name">Marcos</div>
                             <div class="pet-breed">Khao Manee</div>
                         </div>
+                        <!-- Dynamic pets from localStorage will be added here by JavaScript -->
                     </div>
                 </div>
 
+                <!-- Uncomment when ready to use the full form -->
                 <!-- <div class="form-fields">
                     <div class="form-row">
                         <div class="form-group">
@@ -118,22 +121,7 @@
                     </div>
                 </div> -->
 
-                <button type="submit" class="submit-btn">Fazer Reserva</button>
             </form>
-        </div>
-
-        <div class="service-details">
-            <div class="service-header">
-                <div class="service-icon">
-                    <img src="assets/detalhes-servico/Cat_shower.png" alt="Serviço" width="100" height="80" loading="lazy">
-                </div>
-                <div class="service-info">
-                     <h3>Banho & Tosquia Profissional</h3>
-                     <p>TOP Spa & Grooming</p>
-                     <hr>
-                  </div>
-            </div>
-            <button class="details-btn" onclick="showServiceDetails()">Detalhes</button>
         </div>
     </div>
 
