@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar/Editar Serviço - Pet Care</title>
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/criar_servico.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">🐾 Pet Care Provider</div>
+            <div class="header-actions">
+                <button class="btn btn-outline" onclick="togglePreview()">👁️ Pré-visualizar</button>
+                <button class="btn btn-secondary" onclick="saveDraft()">💾 Guardar Rascunho</button>
+                <button class="btn btn-primary" onclick="publishService()">🚀 Publicar Serviço</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="successMessage" class="success-message" style="display: none;"></div>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <!-- Informações Básicas -->
+                <div class="card">
+                    <h2 class="section-title">📝 Informações Básicas</h2>
+                    
+                    <div class="form-group">
+                        <label for="serviceName">Nome do Serviço *</label>
+                        <input type="text" id="serviceName" class="form-control" placeholder="Ex: Banho & Tosquia Profissional" value="Banho & Tosquia Profissional">
+                        <div class="error-message" style="display: none;">O nome do serviço é obrigatório</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceDescription">Descrição do Serviço *</label>
+                        <textarea id="serviceDescription" class="form-control" placeholder="Descreva o seu serviço, experiência e o que torna o seu trabalho especial...">Ofereço serviços profissionais de banho e tosquia para cães e gatos há mais de 5 anos. Trabalho com carinho e dedicação, garantindo o bem-estar e conforto dos seus pets. Uso apenas produtos de qualidade e técnicas seguras.</textarea>
+                        <div class="error-message" style="display: none;">A descrição é obrigatória</div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="form-group">
+                            <label for="priceFrom">Preço Desde (€) *</label>
+                            <input type="number" id="priceFrom" class="form-control" placeholder="15" value="15" min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="priceTo">Preço Até (€)</label>
+                            <input type="number" id="priceTo" class="form-control" placeholder="50" value="50" min="0" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload de Imagens -->
+                <div class="card">
+                    <h2 class="section-title">📸 Imagens do Serviço</h2>
+                    
+                    <div class="image-upload-area" onclick="triggerFileInput()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                        <div class="upload-icon">📷</div>
+                        <h3>Arraste imagens aqui ou clique para selecionar</h3>
+                        <p>Adicione até 6 fotos dos seus trabalhos (JPG, PNG - máx. 5MB cada)</p>
+                        <input type="file" id="imageInput" multiple accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+                    </div>
+
+                    <div class="image-grid" id="imageGrid">
+                        <!-- Placeholder images -->
+                        <div class="image-preview">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjhGOUZBIi8+CjxwYXRoIGQ9Ik02MCA0NUMzNS4xNDcgNDUgMTUgNjUuMTQ3IDE1IDkwUzM1LjE0NyAxMzUgNjAgMTM1IDEwNSAxMTQuODUzIDEwNSA5MCA4NC44NTMgNDUgNjAgNDVaTTYwIDEyNUM0MC4xMTggMTI1IDI1IDEwOS44ODIgMjUgOTBTNDAuMTE4IDU1IDYwIDU1IDk1IDcwLjExOCA5NSA5MCA3OS44ODIgMTI1IDYwIDEyNVoiIGZpbGw9IiM2Qzc1N0QiLz4KPHA+PHBhdGggZD0iTTc1IDc1SDQ1VjY1SDc1Vjc1WiIgZmlsbD0iIzZDNzU3RCIvPgo8L3BhdGg+CjxwYXRoIGQ9Ik03NSAxMDVINDVWOTVINzVWMTA1WiIgZmlsbD0iIzZDNzU3RCIvPgo8L3N2Zz4K" alt="Placeholder">
+                            <button class="remove-btn" onclick="removeImage(this)">×</button>
+                        </div>
+                        <div class="image-preview">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjhGOUZBIi8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjNkM3NTdEIi8+CjxyZWN0IHg9IjQwIiB5PSI4MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjgiIGZpbGw9IiM2Qzc1N0QiLz4KPC9zdmc+" alt="Placeholder">
+                            <button class="remove-btn" onclick="removeImage(this)">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comodidades -->
+                <div class="card">
+                    <h2 class="section-title">✨ Comodidades e Serviços</h2>
+                    
+                    <div class="amenities-grid" id="amenitiesGrid">
+                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
+                            <input type="checkbox" checked>
+                            <span>🚿 Banho completo</span>
+                        </div>
+                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
+                            <input type="checkbox" checked>
+                            <span>✂️ Tosquia profissional</span>
+                        </div>
+                        <div class="amenity-item" onclick="toggleAmenity(this)">
+                            <input type="checkbox">
+                            <span>💅 Corte de unhas</span>
+                        </div>
+                        <div class="amenity-item" onclick="toggleAmenity(this)">
+                            <input type="checkbox">
+                            <span>👂 Limpeza de ouvidos</span>
+                        </div>
+                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
+                            <input type="checkbox" checked>
+                            <span>🏠 Serviço ao domicílio</span>
+                        </div>
+                        <div class="amenity-item" onclick="toggleAmenity(this)">
+                            <input type="checkbox">
+                            <span>🚗 Transporte incluído</span>
+                        </div>
+                        <div class="amenity-item" onclick="toggleAmenity(this)">
+                            <input type="checkbox">
+                            <span>⏰ Serviço 24h</span>
+                        </div>
+                        <div class="amenity-item" onclick="toggleAmenity(this)">
+                            <input type="checkbox">
+                            <span>🎯 Especialista em raças</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="customAmenity">Adicionar comodidade personalizada</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="customAmenity" class="form-control" placeholder="Ex: Produtos orgânicos">
+                            <button class="btn btn-outline" onclick="addCustomAmenity()">➕ Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Localização -->
+                <div class="card">
+                    <h2 class="section-title">📍 Localização</h2>
+                    
+                    <div class="location-search">
+                        <label for="locationInput">Endereço ou Localização *</label>
+                        <input type="text" id="locationInput" class="form-control" placeholder="Digite o endereço ou cidade..." value="Aveiro, Portugal" oninput="searchLocation(this.value)">
+                        <div class="location-suggestions" id="locationSuggestions"></div>
+                        <div class="error-message" style="display: none;">A localização é obrigatória</div>
+                    </div>
+
+                    <div class="map-container" id="mapContainer">
+                        <div>
+                            <p>🗺️ Mapa da localização</p>
+                            <small>A localização será mostrada aqui após selecionar o endereço</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <!-- Estatísticas -->
+                <div class="card">
+                    <h2 class="section-title">📊 Estatísticas</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">127</div>
+                            <div class="stat-label">Visualizações</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">23</div>
+                            <div class="stat-label">Contactos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Serviços Realizados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">Avaliação</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configurações de Publicação -->
+                <div class="card">
+                    <h2 class="section-title">⚙️ Configurações</h2>
+                    
+                    <div class="form-group">
+                        <label for="serviceStatus">Estado do Serviço</label>
+                        <select id="serviceStatus" class="form-control">
+                            <option value="draft">Rascunho</option>
+                            <option value="active" selected>Ativo</option>
+                            <option value="paused">Pausado</option>
+                            <option value="inactive">Inativo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="instantBooking" checked> Reserva instantânea
+                        </label>
+                        <small style="display: block; color: #6c757d; margin-top: 4px;">
+                            Permite que clientes reservem diretamente sem aprovação prévia
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="emailNotifications" checked> Notificações por email
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availability">Disponibilidade</label>
+                        <select id="availability" class="form-control">
+                            <option value="weekdays">Dias de semana</option>
+                            <option value="weekends">Fins de semana</option>
+                            <option value="always" selected>Sempre disponível</option>
+                            <option value="custom">Horário personalizado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dicas -->
+                <div class="card" style="background: #f0f4f8; border: 1px solid #2c5aa0;">
+                    <h2 class="section-title" style="color: #2c5aa0;">💡 Dicas para o Sucesso</h2>
+                    
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                            <span>📸</span>
+                            <span><strong>Fotos de qualidade:</strong> Use imagens claras e bem iluminadas dos seus trabalhos</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                            <span>📝</span>
+                            <span><strong>Descrição detalhada:</strong> Mencione sua experiência e diferenciais</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                            <span>💰</span>
+                            <span><strong>Preços competitivos:</strong> Pesquise os preços da sua região</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span>⚡</span>
+                            <span><strong>Resposta rápida:</strong> Responda aos clientes rapidamente</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/criar_servico.js"></script>
+</body>
+</html>
