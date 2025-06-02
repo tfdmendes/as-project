@@ -16,12 +16,18 @@ document.querySelectorAll('.icon-btn').forEach(btn => {
     });
 });
 
-// Função para verificar se o usuário está logado
+// FIXED: Updated function to check sessionStorage instead of localStorage
 function isUserLoggedIn() {
-    // Aqui você pode implementar sua lógica de verificação de login
-    // Por exemplo, verificar se existe um token no localStorage, cookie, etc.
-    // Por agora, vamos assumir que o usuário não está logado (você pode ajustar isso)
-    return false; // Mude para true se quiser testar como usuário logado
+    const currentUser = sessionStorage.getItem('currentUser');
+    if (!currentUser) return false;
+    
+    try {
+        const user = JSON.parse(currentUser);
+        return user && user.isLoggedIn === true;
+    } catch (e) {
+        console.error('Error parsing user data:', e);
+        return false;
+    }
 }
 
 // Handle reserve button
@@ -148,7 +154,7 @@ const observer = new IntersectionObserver((entries) => {
                     bar.style.width = '0%';
                     setTimeout(() => {
                         bar.style.width = width;
-                    }, 100);
+                    }, index * 200);
                 }, index * 200);
             });
         }
