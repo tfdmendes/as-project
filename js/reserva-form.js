@@ -1,11 +1,5 @@
     document.addEventListener('DOMContentLoaded', function () {
       // Verifica se já houve agendamento feito
-      const agendamentoFeito = localStorage.getItem('agendamentoFeito');
-      if (agendamentoFeito !== '1') {
-        alert('Por favor, selecione um horário no calendário antes de continuar com a reserva.');
-        window.location.href = 'agenda.html'; // <-- substitui pelo nome real da tua página do calendário
-        return;
-      }
 
       // Pet selection
       document.querySelectorAll('.pet-option').forEach(option => {
