@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/pagamento.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
+                    <span class="logo-text">Pet-o-Tel</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+                <div class="menu-user">
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" loading="lazy">
+                    <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="payment-container">
+            <div class="header">
+                <h1>💳 Checkout</h1>
+                <p>Finalize seu pedido de forma segura</p>
+            </div>
+
+            <div class="order-summary">
+                <div class="order-item">
+                    <span>Serviço</span>
+                    <span>€20,90</span>
+                </div>
+                <div class="order-item">
+                    <span>Total</span>
+                    <span>€20,90</span>
+                </div>
+            </div>
+
+            <div class="amount-display">
+                €20,90
+            </div>
+
+            <div class="payment-methods">
+                <h3>Escolha o método de pagamento</h3>
+                
+                <div class="payment-option" onclick="selectPayment('credit')">
+                    <input type="radio" name="payment" value="credit" id="credit">
+                    <div class="payment-icon credit-card">💳</div>
+                    <div>
+                        <strong>Cartão de Crédito</strong>
+                        <div style="font-size: 0.9em; color: #666;">Visa, Mastercard, American Express</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('debit')">
+                    <input type="radio" name="payment" value="debit" id="debit">
+                    <div class="payment-icon debit-card">💳</div>
+                    <div>
+                        <strong>Cartão de Débito</strong>
+                        <div style="font-size: 0.9em; color: #666;">Débito direto da conta</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('mbway')">
+                    <input type="radio" name="payment" value="mbway" id="mbway">
+                    <div class="payment-icon pix">📱</div>
+                    <div>
+                        <strong>MB WAY</strong>
+                        <div style="font-size: 0.9em; color: #666;">Pagamento por telemóvel</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('paypal')">
+                    <input type="radio" name="payment" value="paypal" id="paypal">
+                    <div class="payment-icon paypal">🅿️</div>
+                    <div>
+                        <strong>PayPal</strong>
+                        <div style="font-size: 0.9em; color: #666;">Pagamento seguro online</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulários de detalhes por método de pagamento -->
+            <div id="credit-details" class="payment-details">
+                <div class="form-group">
+                    <label>Número do Cartão</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="cardNumber">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Validade</label>
+                        <input type="text" placeholder="MM/AA" maxlength="5" id="expiry">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" maxlength="3" id="cvv">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nome no Cartão</label>
+                    <input type="text" placeholder="João Silva">
+                </div>
+            </div>
+
+            <div id="debit-details" class="payment-details">
+                <div class="form-group">
+                    <label>Número do Cartão</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Validade</label>
+                        <input type="text" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nome no Cartão</label>
+                    <input type="text" placeholder="João Silva">
+                </div>
+            </div>
+
+            <div id="mbway-details" class="payment-details">
+                <div class="form-group">
+                    <label>Número de Telemóvel</label>
+                    <input type="text" placeholder="+351 9XX XXX XXX" maxlength="13" id="mbwayPhone">
+                </div>
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="margin: 20px 0; font-size: 2em;">📱</div>
+                    <p style="color: #666;">Receberá uma notificação no seu telemóvel para confirmar o pagamento</p>
+                </div>
+            </div>
+
+            <div id="paypal-details" class="payment-details">
+                <div style="text-align: center; padding: 20px;">
+                    <h4>PayPal</h4>
+                    <p>Você será redirecionado para o PayPal para completar o pagamento de forma segura.</p>
+                    <div style="margin: 20px 0; font-size: 3em;">🔒</div>
+                    <p style="color: #666;">Login necessário na sua conta PayPal</p>
+                </div>
+            </div>
+
+
+            <button class="pay-button" onclick="processPayment()">
+                🔒 Pagar €89,90
+            </button>
+
+            <div class="security-info">
+                <p>🔒 Pagamento 100% seguro e protegido</p>
+                <div class="security-icons">
+                    <span class="security-icon">SSL</span>
+                    <span class="security-icon">PCI DSS</span>
+                    <span class="security-icon">256-bit</span>
+                </div>
+            </div>
+        </div>
+    </main>
+        <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" loading="lazy">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn" loading="lazy"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store" loading="lazy">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store" loading="lazy">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/pagamento.js"></script>
+</body>
+</html>

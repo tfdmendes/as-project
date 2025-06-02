@@ -351,7 +351,7 @@ function toggleConfirmButton() {
 function proceedWithSelection() {
     const count = getUserBookingCount();
     if (count === 1) {
-        window.location.href = 'reserva-form.html';
+        window.location.href = 'pagamento.html';
     } else {
         alert('Por favor, faça um agendamento primeiro para prosseguir.');
     }
