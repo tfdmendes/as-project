@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="css/messages.css">
-     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Messagens e Calendário</title>
 </head>
 <body>
@@ -26,10 +27,10 @@
         </div>
         </nav>
     </header>
-    <main>
+    <main class="main">
         <div class="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title">Todas as mensagens</div>
+                <div class="sidebar-title">Todas as conversas</div>
             </div>
             <div class="messages-list">
                 <div class="message-item active" onclick="selectChat('tiago')">
@@ -58,8 +59,7 @@
 
         <div class="main-content">
             <div class="chat-header">
-                <div class="chat-title">Pet Sitting</div>
-                <div class="chat-subtitle">50€</div>
+                <div class="chat-title">Mensagens</div>
             </div>
             
             <div class="content-area">
@@ -93,54 +93,8 @@
                     </div>
                     
                     <div class="message-input-area">
-                        <input type="text" class="message-input" placeholder="Type your message..." id="messageInput">
+                        <input type="text" class="message-input" placeholder="Escreve a tua mensagem..." id="messageInput">
                         <button class="send-btn" onclick="sendMessage()">→</button>
-                    </div>
-                </div>
-                
-                <div class="calendar-panel">
-                    <div class="calendar-header">
-                        Agenda e Marcações
-                    </div>
-                    
-                    <div class="mini-calendar">
-                        <div class="calendar-nav">
-                            <button class="nav-btn" onclick="previousMonth()">&lt;</button>
-                            <div class="month-year" id="monthYear"></div>
-                            <button class="nav-btn" onclick="nextMonth()">&gt;</button>
-                        </div>
-                        
-                        <div class="calendar-grid" id="calendarGrid">
-                            <div class="weekday">D</div>
-                            <div class="weekday">S</div>
-                            <div class="weekday">T</div>
-                            <div class="weekday">Q</div>
-                            <div class="weekday">Q</div>
-                            <div class="weekday">S</div>
-                            <div class="weekday">S</div>
-                        </div>
-                    </div>
-                    
-                    <div class="upcoming-appointments">
-                        <div class="appointments-title">Marcações agendadas</div>
-                        
-                        <div class="appointment-item">
-                            <div class="appointment-time">Hoje, 14:00</div>
-                            <div class="appointment-title">Pet Sitting - Sasha</div>
-                            <div class="appointment-client">Tiago Fernandes</div>
-                        </div>
-                        
-                        <div class="appointment-item">
-                            <div class="appointment-time">Amanhã, 10:00</div>
-                            <div class="appointment-title">Passear o cão</div>
-                            <div class="appointment-client">Pet Nanny</div>
-                        </div>
-                        
-                        <div class="appointment-item">
-                            <div class="appointment-time">Abr 15, 15:00</div>
-                            <div class="appointment-title">Consulta</div>
-                            <div class="appointment-client">PetCentro</div>
-                        </div>
                     </div>
                 </div>
             </div>
