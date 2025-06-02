@@ -5,11 +5,25 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
+        margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #FCC9AA47;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
+.main-container {
+    
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    overflow: hidden;
+}
+
 
 .container {
     max-width: 1200px;
@@ -36,43 +50,12 @@ body {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #2c5aa0;
+    color: #196085;
 }
 
 .header-actions {
     display: flex;
     gap: 10px;
-}
-
-/* botão "flutuante" padrão */
-.add-event-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: #85C6B2;
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    transition: all 0.2s;
-}
-
-/* estilo do botão com texto */
-.add-event-btn.text {
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-}
-
-/* estilo do botão redondo + */
-.add-event-btn.circle {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .btn {
@@ -85,34 +68,36 @@ body {
     display: inline-block;
     text-align: center;
     transition: all 0.2s;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn-primary {
-    background: #28a745;
+    background: #196085;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #218838;
+    background: #134b66;
 }
 
 .btn-secondary {
-    background: #6c757d;
+    background: #85C6B2;
     color: white;
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #6ba899;
 }
 
 .btn-outline {
     background: transparent;
-    color: #6c757d;
-    border: 1px solid #dee2e6;
+    color: #196085;
+    border: 1px solid #196085;
 }
 
 .btn-outline:hover {
-    background: #f8f9fa;
+    background: #196085;
+    color: white;
 }
 
 .main-content {
@@ -147,12 +132,13 @@ body {
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: #2c5aa0;
-    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+    border-color: #196085;
+    box-shadow: 0 0 0 3px rgba(25, 96, 133, 0.1);
 }
 
 textarea.form-control {
@@ -171,12 +157,12 @@ textarea.form-control {
 }
 
 .image-upload-area:hover {
-    border-color: #2c5aa0;
+    border-color: #196085;
     background: #f0f4f8;
 }
 
 .image-upload-area.dragover {
-    border-color: #28a745;
+    border-color: #85C6B2;
     background: #f0fff4;
 }
 
@@ -235,11 +221,12 @@ textarea.form-control {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px;
+    padding: 12px;
     border: 1px solid #dee2e6;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
+    background: white;
 }
 
 .amenity-item:hover {
@@ -247,12 +234,13 @@ textarea.form-control {
 }
 
 .amenity-item.selected {
-    background: #e3f2fd;
-    border-color: #2c5aa0;
+    background: rgba(133, 198, 178, 0.1);
+    border-color: #85C6B2;
 }
 
 .amenity-item input[type="checkbox"] {
     margin: 0;
+    cursor: pointer;
 }
 
 .stats-grid {
@@ -263,7 +251,7 @@ textarea.form-control {
 }
 
 .stat-card {
-    background: #f8f9fa;
+    background: rgba(133, 198, 178, 0.1);
     border-radius: 8px;
     padding: 16px;
     text-align: center;
@@ -272,7 +260,7 @@ textarea.form-control {
 .stat-number {
     font-size: 24px;
     font-weight: bold;
-    color: #2c5aa0;
+    color: #196085;
     margin-bottom: 4px;
 }
 
@@ -324,19 +312,13 @@ textarea.form-control {
     background: #f8f9fa;
 }
 
-.pricing-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
 .preview-mode {
-    border: 2px solid #28a745;
-    background: #f8fff9;
+    border: 2px solid #85C6B2;
+    background: rgba(133, 198, 178, 0.05);
 }
 
 .preview-header {
-    background: #28a745;
+    background: #85C6B2;
     color: white;
     padding: 12px 20px;
     margin: -24px -24px 20px -24px;
@@ -347,10 +329,10 @@ textarea.form-control {
 .section-title {
     font-size: 18px;
     font-weight: 600;
-    color: #2c5aa0;
+    color: #196085;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #f0f4f8;
+    border-bottom: 2px solid rgba(133, 198, 178, 0.2);
 }
 
 .input-error {
@@ -364,12 +346,66 @@ textarea.form-control {
 }
 
 .success-message {
-    background: #d4edda;
-    color: #155724;
+    background: rgba(133, 198, 178, 0.2);
+    color: #196085;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border: 1px solid #c3e6cb;
+    border: 1px solid #85C6B2;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.day-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+
+.day-item:hover {
+    background: #f8f9fa;
+}
+
+.day-item.selected {
+    background: rgba(133, 198, 178, 0.1);
+    border-color: #85C6B2;
+}
+
+.day-item input[type="checkbox"] {
+    margin-bottom: 4px;
+}
+
+.day-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #6c757d;
+}
+
+.time-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.custom-schedule {
+    display: none;
+}
+
+.custom-schedule.show {
+    display: block;
 }
 
 @media (max-width: 768px) {
@@ -377,11 +413,11 @@ textarea.form-control {
         grid-template-columns: 1fr;
     }
     
-    .pricing-section {
-        grid-template-columns: 1fr;
-    }
-    
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .days-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

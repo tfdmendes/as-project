@@ -10,11 +10,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
+                    <span class="logo-text">Pet-o-Tel</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+                <div class="menu-user">
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" loading="lazy">
+                    <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+     <main class="main-container">
+     
     <div class="header">
         <div class="header-content">
-            <div class="logo">🐾 Pet Care Provider</div>
             <div class="header-actions">
-                <button class="btn btn-outline" onclick="togglePreview()">👁️ Pré-visualizar</button>
                 <button class="btn btn-secondary" onclick="saveDraft()">💾 Guardar Rascunho</button>
                 <button class="btn btn-primary" onclick="publishService()">🚀 Publicar Serviço</button>
             </div>
@@ -32,7 +50,7 @@
                     
                     <div class="form-group">
                         <label for="serviceName">Nome do Serviço *</label>
-                        <input type="text" id="serviceName" class="form-control" placeholder="Ex: Banho & Tosquia Profissional" value="Banho & Tosquia Profissional">
+                        <input type="text" id="serviceName" class="form-control" placeholder="Ex: Banho & Tosquia Profissional" value="Banho para Cães e Gatos">
                         <div class="error-message" style="display: none;">O nome do serviço é obrigatório</div>
                     </div>
 
@@ -42,15 +60,10 @@
                         <div class="error-message" style="display: none;">A descrição é obrigatória</div>
                     </div>
 
-                    <div class="pricing-section">
-                        <div class="form-group">
-                            <label for="priceFrom">Preço Desde (€) *</label>
-                            <input type="number" id="priceFrom" class="form-control" placeholder="15" value="15" min="0" step="0.01">
-                        </div>
-                        <div class="form-group">
-                            <label for="priceTo">Preço Até (€)</label>
-                            <input type="number" id="priceTo" class="form-control" placeholder="50" value="50" min="0" step="0.01">
-                        </div>
+                    <div class="form-group">
+                        <label for="servicePrice">Preço (€) *</label>
+                        <input type="number" id="servicePrice" class="form-control" placeholder="25" value="25" min="0" step="0.01">
+                        <div class="error-message" style="display: none;">O preço é obrigatório</div>
                     </div>
                 </div>
 
@@ -68,11 +81,11 @@
                     <div class="image-grid" id="imageGrid">
                         <!-- Placeholder images -->
                         <div class="image-preview">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjhGOUZBIi8+CjxwYXRoIGQ9Ik02MCA0NUMzNS4xNDcgNDUgMTUgNjUuMTQ3IDE1IDkwUzM1LjE0NyAxMzUgNjAgMTM1IDEwNSAxMTQuODUzIDEwNSA5MCA4NC44NTMgNDUgNjAgNDVaTTYwIDEyNUM0MC4xMTggMTI1IDI1IDEwOS44ODIgMjUgOTBTNDAuMTE4IDU1IDYwIDU1IDk1IDcwLjExOCA5NSA5MCA3OS44ODIgMTI1IDYwIDEyNVoiIGZpbGw9IiM2Qzc1N0QiLz4KPHA+PHBhdGggZD0iTTc1IDc1SDQ1VjY1SDc1Vjc1WiIgZmlsbD0iIzZDNzU3RCIvPgo8L3BhdGg+CjxwYXRoIGQ9Ik03NSAxMDVINDVWOTVINzVWMTA1WiIgZmlsbD0iIzZDNzU3RCIvPgo8L3N2Zz4K" alt="Placeholder">
+                            <img src="assets/edit-services/service2.png" alt="Serviço Pet Care">
                             <button class="remove-btn" onclick="removeImage(this)">×</button>
                         </div>
                         <div class="image-preview">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjhGOUZBIi8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjNkM3NTdEIi8+CjxyZWN0IHg9IjQwIiB5PSI4MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjgiIGZpbGw9IiM2Qzc1N0QiLz4KPC9zdmc+" alt="Placeholder">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSJyZ2JhKDI1MiwgMjAxLCAxNzAsIDAuNSkiLz4KPGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMjAiIGZpbGw9IiM4NUM2QjIiLz4KPHJlY3QgeD0iNDAiIHk9IjgwIiB3aWR0aD0iNDAiIGhlaWdodD0iOCIgZmlsbD0iIzE5NjA4NSIvPgo8L3N2Zz4=" alt="Exemplo Serviço">
                             <button class="remove-btn" onclick="removeImage(this)">×</button>
                         </div>
                     </div>
@@ -83,36 +96,36 @@
                     <h2 class="section-title">✨ Comodidades e Serviços</h2>
                     
                     <div class="amenities-grid" id="amenitiesGrid">
-                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
-                            <input type="checkbox" checked>
+                        <div class="amenity-item selected">
+                            <input type="checkbox" checked onchange="toggleAmenityCheck(this)">
                             <span>🚿 Banho completo</span>
                         </div>
-                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
-                            <input type="checkbox" checked>
+                        <div class="amenity-item selected">
+                            <input type="checkbox" checked onchange="toggleAmenityCheck(this)">
                             <span>✂️ Tosquia profissional</span>
                         </div>
-                        <div class="amenity-item" onclick="toggleAmenity(this)">
-                            <input type="checkbox">
+                        <div class="amenity-item">
+                            <input type="checkbox" onchange="toggleAmenityCheck(this)">
                             <span>💅 Corte de unhas</span>
                         </div>
-                        <div class="amenity-item" onclick="toggleAmenity(this)">
-                            <input type="checkbox">
+                        <div class="amenity-item">
+                            <input type="checkbox" onchange="toggleAmenityCheck(this)">
                             <span>👂 Limpeza de ouvidos</span>
                         </div>
-                        <div class="amenity-item selected" onclick="toggleAmenity(this)">
-                            <input type="checkbox" checked>
+                        <div class="amenity-item selected">
+                            <input type="checkbox" checked onchange="toggleAmenityCheck(this)">
                             <span>🏠 Serviço ao domicílio</span>
                         </div>
-                        <div class="amenity-item" onclick="toggleAmenity(this)">
-                            <input type="checkbox">
+                        <div class="amenity-item">
+                            <input type="checkbox" onchange="toggleAmenityCheck(this)">
                             <span>🚗 Transporte incluído</span>
                         </div>
-                        <div class="amenity-item" onclick="toggleAmenity(this)">
-                            <input type="checkbox">
+                        <div class="amenity-item">
+                            <input type="checkbox" onchange="toggleAmenityCheck(this)">
                             <span>⏰ Serviço 24h</span>
                         </div>
-                        <div class="amenity-item" onclick="toggleAmenity(this)">
-                            <input type="checkbox">
+                        <div class="amenity-item">
+                            <input type="checkbox" onchange="toggleAmenityCheck(this)">
                             <span>🎯 Especialista em raças</span>
                         </div>
                     </div>
@@ -202,18 +215,68 @@
 
                     <div class="form-group">
                         <label for="availability">Disponibilidade</label>
-                        <select id="availability" class="form-control">
+                        <select id="availability" class="form-control" onchange="toggleCustomSchedule()">
                             <option value="weekdays">Dias de semana</option>
                             <option value="weekends">Fins de semana</option>
                             <option value="always" selected>Sempre disponível</option>
                             <option value="custom">Horário personalizado</option>
                         </select>
                     </div>
+
+                    <div class="custom-schedule" id="customSchedule">
+                        <div class="form-group">
+                            <label>Selecione os dias da semana:</label>
+                            <div class="days-grid">
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="monday">
+                                    <span class="day-label">Seg</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="tuesday">
+                                    <span class="day-label">Ter</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="wednesday">
+                                    <span class="day-label">Qua</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="thursday">
+                                    <span class="day-label">Qui</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="friday">
+                                    <span class="day-label">Sex</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="saturday">
+                                    <span class="day-label">Sáb</span>
+                                </div>
+                                <div class="day-item" onclick="toggleDay(this)">
+                                    <input type="checkbox" id="sunday">
+                                    <span class="day-label">Dom</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Horário de Funcionamento</label>
+                        <div class="time-inputs">
+                            <div>
+                                <label for="startTime" style="font-size: 12px; color: #6c757d;">Abertura</label>
+                                <input type="time" id="startTime" class="form-control" value="09:00">
+                            </div>
+                            <div>
+                                <label for="endTime" style="font-size: 12px; color: #6c757d;">Encerramento</label>
+                                <input type="time" id="endTime" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Dicas -->
-                <div class="card" style="background: #f0f4f8; border: 1px solid #2c5aa0;">
-                    <h2 class="section-title" style="color: #2c5aa0;">💡 Dicas para o Sucesso</h2>
+                <div class="card" style="background: rgba(133, 198, 178, 0.1); border: 1px solid #85C6B2;">
+                    <h2 class="section-title" style="color: #196085;">💡 Dicas para o Sucesso</h2>
                     
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
@@ -237,7 +300,71 @@
             </div>
         </div>
     </div>
-
+    
+    </main>
+          <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" loading="lazy">
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram" loading="lazy"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn" loading="lazy"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store" loading="lazy">
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store" loading="lazy">
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
     <script src="js/criar_servico.js"></script>
 </body>
 </html>

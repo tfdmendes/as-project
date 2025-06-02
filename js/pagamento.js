@@ -43,23 +43,33 @@ document.getElementById('cvv')?.addEventListener('input', function(e) {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
 });
 
-// Formatação do número de telemóvel MB WAY
 document.getElementById('mbwayPhone')?.addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
+    let value = e.target.value.replace(/\D/g, ''); // Apenas números
+
+    // Remove o prefixo 351 se estiver presente
     if (value.startsWith('351')) {
-        value = value.substring(3);
+        value = value.slice(3);
     }
+
+    // Limita a 9 dígitos nacionais
+    value = value.slice(0, 9);
+
+    // Aplica formatação: 999 999 999
+    let formatted = '+351';
+
     if (value.length > 0) {
-        if (value.length <= 3) {
-            value = '+351 ' + value;
-        } else if (value.length <= 6) {
-            value = '+351 ' + value.substring(0, 3) + ' ' + value.substring(3);
-        } else {
-            value = '+351 ' + value.substring(0, 3) + ' ' + value.substring(3, 6) + ' ' + value.substring(6, 9);
-        }
+        formatted += ' ' + value.slice(0, 3);
     }
-    e.target.value = value;
+    if (value.length > 3) {
+        formatted += ' ' + value.slice(3, 6);
+    }
+    if (value.length > 6) {
+        formatted += ' ' + value.slice(6, 9);
+    }
+
+    e.target.value = formatted;
 });
+
 
 function processPayment() {
     if (!selectedPayment) {
@@ -67,22 +77,26 @@ function processPayment() {
         return;
     }
 
-    // Simulação de processamento
     const button = document.querySelector('.pay-button');
     const originalText = button.innerHTML;
-    
+
     button.innerHTML = '⏳ Processando...';
     button.disabled = true;
     button.style.opacity = '0.7';
 
     setTimeout(() => {
-        alert(`✅ Pagamento processado com sucesso!\n\nMétodo: ${getPaymentMethodName(selectedPayment)}\nValor: €89,90\n\nObrigado por sua compra!`);
+        alert(`✅ Pagamento processado com sucesso!\n\nMétodo: ${getPaymentMethodName(selectedPayment)}\nValor: €20,90\n\nObrigado por sua compra!`);
         
+        // Redireciona após o utilizador clicar em OK
+        window.location.href = 'index.html';
+
+        // (Opcional) Restaura o botão — pode remover estas linhas se fores redirecionar mesmo
         button.innerHTML = originalText;
         button.disabled = false;
         button.style.opacity = '1';
     }, 2000);
 }
+
 
 function getPaymentMethodName(method) {
     const names = {

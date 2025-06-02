@@ -123,7 +123,7 @@ function editService(serviceTitle) {
     alert(`Editar serviço: ${serviceTitle}\n\nEsta funcionalidade irá redirecionar para a página de edição do serviço.`);
     
     // Example of what you could implement:
-    // window.location.href = `service-edit.html?service=${encodeURIComponent(serviceTitle)}`;
+    window.location.href = `criar_servico.html?service=${encodeURIComponent(serviceTitle)}`;
 }
 
 function viewServiceStats(serviceTitle) {

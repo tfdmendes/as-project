@@ -50,54 +50,51 @@ function addImageToGrid(src, name) {
         <button class="remove-btn" onclick="removeImage(this)">×</button>
     `;
     imageGrid.appendChild(imagePreview);
-    uploadedImages.push({src, name});
+    uploadedImages.push({ src, name });
 }
 
 function removeImage(button) {
-    const imagePreview = button.parentElement;
-    const img = imagePreview.querySelector('img');
-    const index = uploadedImages.findIndex(item => item.src === img.src);
-    if (index > -1) {
-        uploadedImages.splice(index, 1);
-    }
-    imagePreview.remove();
+    const preview = button.parentElement;
+    const imgSrc = preview.querySelector('img').src;
+    
+    // Remove da array
+    uploadedImages = uploadedImages.filter(img => img.src !== imgSrc);
+    
+    // Remove do DOM
+    preview.remove();
 }
 
 // Comodidades
-function toggleAmenity(element) {
-    const checkbox = element.querySelector('input[type="checkbox"]');
-    const text = element.querySelector('span').textContent;
-    
-    checkbox.checked = !checkbox.checked;
-    element.classList.toggle('selected', checkbox.checked);
+function toggleAmenityCheck(checkbox) {
+    const amenityItem = checkbox.parentElement;
+    const amenityText = amenityItem.querySelector('span').textContent;
     
     if (checkbox.checked) {
-        if (!selectedAmenities.includes(text)) {
-            selectedAmenities.push(text);
+        amenityItem.classList.add('selected');
+        if (!selectedAmenities.includes(amenityText)) {
+            selectedAmenities.push(amenityText);
         }
     } else {
-        const index = selectedAmenities.indexOf(text);
-        if (index > -1) {
-            selectedAmenities.splice(index, 1);
-        }
+        amenityItem.classList.remove('selected');
+        selectedAmenities = selectedAmenities.filter(item => item !== amenityText);
     }
 }
 
 function addCustomAmenity() {
     const input = document.getElementById('customAmenity');
-    const value = input.value.trim();
+    const amenityText = input.value.trim();
     
-    if (value) {
+    if (amenityText) {
         const amenitiesGrid = document.getElementById('amenitiesGrid');
         const amenityItem = document.createElement('div');
         amenityItem.className = 'amenity-item selected';
-        amenityItem.onclick = () => toggleAmenity(amenityItem);
         amenityItem.innerHTML = `
-            <input type="checkbox" checked>
-            <span>✨ ${value}</span>
+            <input type="checkbox" checked onchange="toggleAmenityCheck(this)">
+            <span>⭐ ${amenityText}</span>
         `;
         amenitiesGrid.appendChild(amenityItem);
-        selectedAmenities.push(`✨ ${value}`);
+        
+        selectedAmenities.push(`⭐ ${amenityText}`);
         input.value = '';
     }
 }
@@ -110,20 +107,23 @@ function searchLocation(query) {
         suggestions.style.display = 'none';
         return;
     }
-
-    // Simulação de sugestões (em produção, usaria uma API real)
+    
+    // Simulação de sugestões (em produção, usar API de geocoding)
     const mockSuggestions = [
-        'Aveiro, Distrito de Aveiro, Portugal',
-        'Aveiro Centro, Aveiro, Portugal',
-        'Avenida Dr. Lourenço Peixinho, Aveiro, Portugal',
-        'Universidade de Aveiro, Aveiro, Portugal'
-    ].filter(suggestion => 
-        suggestion.toLowerCase().includes(query.toLowerCase())
+        'Aveiro, Portugal',
+        'Aveiro Centro, Portugal',
+        'Universidade de Aveiro, Portugal',
+        'Gafanha da Nazaré, Aveiro',
+        'Ílhavo, Aveiro'
+    ];
+    
+    const filteredSuggestions = mockSuggestions.filter(location => 
+        location.toLowerCase().includes(query.toLowerCase())
     );
-
-    if (mockSuggestions.length > 0) {
-        suggestions.innerHTML = mockSuggestions.map(suggestion => 
-            `<div class="location-suggestion" onclick="selectLocation('${suggestion}')">${suggestion}</div>`
+    
+    if (filteredSuggestions.length > 0) {
+        suggestions.innerHTML = filteredSuggestions.map(location => 
+            `<div class="location-suggestion" onclick="selectLocation('${location}')">${location}</div>`
         ).join('');
         suggestions.style.display = 'block';
     } else {
@@ -138,340 +138,246 @@ function selectLocation(location) {
     // Simular atualização do mapa
     const mapContainer = document.getElementById('mapContainer');
     mapContainer.innerHTML = `
-        <div style="text-align: center;">
+        <div style="text-align: center; color: #196085;">
             <p>📍 ${location}</p>
-            <small style="color: #28a745;">✅ Localização confirmada</small>
+            <small>Localização selecionada</small>
         </div>
     `;
 }
 
-// Validação do formulário
-function validateForm() {
-    let isValid = true;
-    const errors = [];
-
-    // Nome do serviço
-    const serviceName = document.getElementById('serviceName');
-    if (!serviceName.value.trim()) {
-        serviceName.classList.add('input-error');
-        serviceName.nextElementSibling.style.display = 'block';
-        errors.push('Nome do serviço é obrigatório');
-        isValid = false;
+// Configurações de horário
+function toggleCustomSchedule() {
+    const availability = document.getElementById('availability').value;
+    const customSchedule = document.getElementById('customSchedule');
+    
+    if (availability === 'custom') {
+        customSchedule.classList.add('show');
     } else {
-        serviceName.classList.remove('input-error');
-        serviceName.nextElementSibling.style.display = 'none';
+        customSchedule.classList.remove('show');
     }
-
-    // Descrição
-    const serviceDescription = document.getElementById('serviceDescription');
-    if (!serviceDescription.value.trim()) {
-        serviceDescription.classList.add('input-error');
-        serviceDescription.nextElementSibling.style.display = 'block';
-        errors.push('Descrição é obrigatória');
-        isValid = false;
-    } else {
-        serviceDescription.classList.remove('input-error');
-        serviceDescription.nextElementSibling.style.display = 'none';
-    }
-
-    // Preço
-    const priceFrom = document.getElementById('priceFrom');
-    if (!priceFrom.value || parseFloat(priceFrom.value) <= 0) {
-        priceFrom.classList.add('input-error');
-        errors.push('Preço inicial deve ser maior que 0');
-        isValid = false;
-    } else {
-        priceFrom.classList.remove('input-error');
-    }
-
-    // Localização
-    const locationInput = document.getElementById('locationInput');
-    if (!locationInput.value.trim()) {
-        locationInput.classList.add('input-error');
-        locationInput.nextElementSibling.nextElementSibling.style.display = 'block';
-        errors.push('Localização é obrigatória');
-        isValid = false;
-    } else {
-        locationInput.classList.remove('input-error');
-        locationInput.nextElementSibling.nextElementSibling.style.display = 'none';
-    }
-
-    return { isValid, errors };
 }
 
-// Função para mostrar mensagem de sucesso
-function showSuccessMessage(message) {
-    const successDiv = document.getElementById('successMessage');
-    successDiv.textContent = message;
-    successDiv.style.display = 'block';
+function toggleDay(dayElement) {
+    const checkbox = dayElement.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
     
-    // Scroll para o topo
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Esconder após 5 segundos
-    setTimeout(() => {
-        successDiv.style.display = 'none';
-    }, 5000);
+    if (checkbox.checked) {
+        dayElement.classList.add('selected');
+    } else {
+        dayElement.classList.remove('selected');
+    }
 }
 
-// Função para alternar pré-visualização
+// Pré-visualização
 function togglePreview() {
-    isPreviewMode = !isPreviewMode;
     const cards = document.querySelectorAll('.card');
-    const button = document.querySelector('.btn-outline');
+    isPreviewMode = !isPreviewMode;
     
-    if (isPreviewMode) {
-        cards.forEach(card => {
+    cards.forEach(card => {
+        if (isPreviewMode) {
             card.classList.add('preview-mode');
-            const title = card.querySelector('.section-title');
-            if (title && !card.querySelector('.preview-header')) {
+            // Adicionar header de pré-visualização apenas nos cards principais
+            if (!card.querySelector('.preview-header')) {
                 const previewHeader = document.createElement('div');
                 previewHeader.className = 'preview-header';
-                previewHeader.textContent = '👁️ Pré-visualização - Como os clientes veem';
+                previewHeader.textContent = '👁️ Modo Pré-visualização - Como os clientes verão';
                 card.insertBefore(previewHeader, card.firstChild);
             }
-        });
-        button.textContent = '✏️ Modo Edição';
-        button.style.background = '#28a745';
-        button.style.color = 'white';
-        
-        // Desabilitar inputs
-        const inputs = document.querySelectorAll('input, textarea, select');
-        inputs.forEach(input => input.disabled = true);
-    } else {
-        cards.forEach(card => {
+        } else {
             card.classList.remove('preview-mode');
             const previewHeader = card.querySelector('.preview-header');
             if (previewHeader) {
                 previewHeader.remove();
             }
-        });
-        button.textContent = '👁️ Pré-visualizar';
-        button.style.background = 'transparent';
-        button.style.color = '#6c757d';
-        
-        // Reabilitar inputs
-        const inputs = document.querySelectorAll('input, textarea, select');
-        inputs.forEach(input => input.disabled = false);
+        }
+    });
+    
+    // Atualizar botão
+    const previewBtn = document.querySelector('.btn-outline');
+    previewBtn.textContent = isPreviewMode ? '✏️ Modo Edição' : '👁️ Pré-visualizar';
+}
+
+// Validação e salvamento
+function validateForm() {
+    let isValid = true;
+    const errors = [];
+    
+    // Validar nome do serviço
+    const serviceName = document.getElementById('serviceName').value.trim();
+    if (!serviceName) {
+        isValid = false;
+        errors.push('Nome do serviço é obrigatório');
+        document.getElementById('serviceName').classList.add('input-error');
+    } else {
+        document.getElementById('serviceName').classList.remove('input-error');
     }
+    
+    // Validar descrição
+    const description = document.getElementById('serviceDescription').value.trim();
+    if (!description || description.length < 50) {
+        isValid = false;
+        errors.push('Descrição deve ter pelo menos 50 caracteres');
+        document.getElementById('serviceDescription').classList.add('input-error');
+    } else {
+        document.getElementById('serviceDescription').classList.remove('input-error');
+    }
+    
+    // Validar preço
+    const price = parseFloat(document.getElementById('servicePrice').value);
+    if (!price || price <= 0) {
+        isValid = false;
+        errors.push('Preço deve ser maior que zero');
+        document.getElementById('servicePrice').classList.add('input-error');
+    } else {
+        document.getElementById('servicePrice').classList.remove('input-error');
+    }
+    
+    // Validar localização
+    const location = document.getElementById('locationInput').value.trim();
+    if (!location) {
+        isValid = false;
+        errors.push('Localização é obrigatória');
+        document.getElementById('locationInput').classList.add('input-error');
+    } else {
+        document.getElementById('locationInput').classList.remove('input-error');
+    }
+    
+    return { isValid, errors };
 }
 
-// Função para guardar rascunho
-function saveDraft() {
-    const formData = collectFormData();
+function showMessage(message, type = 'success') {
+    const messageDiv = document.getElementById('successMessage');
+    messageDiv.textContent = message;
+    messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+    messageDiv.style.display = 'block';
     
-    // Simular salvamento (em produção, seria uma chamada à API)
-    console.log('Salvando rascunho:', formData);
-    
-    // Mudar status para rascunho
-    document.getElementById('serviceStatus').value = 'draft';
-    
-    showSuccessMessage('✅ Rascunho guardado com sucesso! Pode continuar a editar mais tarde.');
-    
-    // Simular carregamento
-    const button = event.target;
-    const originalText = button.textContent;
-    button.textContent = '💾 A guardar...';
-    button.disabled = true;
-    
+    // Auto-hide após 5 segundos
     setTimeout(() => {
-        button.textContent = originalText;
-        button.disabled = false;
-    }, 1500);
+        messageDiv.style.display = 'none';
+    }, 5000);
+    
+    // Scroll para o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Função para publicar serviço
+function saveDraft() {
+    const serviceData = collectFormData();
+    
+    // Simular salvamento (em produção, enviar para API)
+    console.log('Salvando rascunho:', serviceData);
+    
+    showMessage('✅ Rascunho salvo com sucesso!');
+    
+    // Atualizar estado
+    document.getElementById('serviceStatus').value = 'draft';
+}
+
 function publishService() {
     const validation = validateForm();
     
     if (!validation.isValid) {
-        alert('Por favor, corrija os seguintes erros:\n\n' + validation.errors.join('\n'));
+        showMessage('❌ Corrija os erros antes de publicar: ' + validation.errors.join(', '), 'error');
         return;
     }
-
-    const formData = collectFormData();
     
-    // Simular publicação (em produção, seria uma chamada à API)
-    console.log('Publicando serviço:', formData);
+    const serviceData = collectFormData();
     
-    // Mudar status para ativo
+    // Simular publicação (em produção, enviar para API)
+    console.log('Publicando serviço:', serviceData);
+    
+    showMessage('🚀 Serviço publicado com sucesso! Agora está visível para os clientes.');
+    
+    // Atualizar estado
     document.getElementById('serviceStatus').value = 'active';
     
-    showSuccessMessage('🚀 Serviço publicado com sucesso! Já está visível para os clientes.');
-    
-    // Simular carregamento
-    const button = event.target;
-    const originalText = button.textContent;
-    button.textContent = '🚀 A publicar...';
-    button.disabled = true;
-    
-    setTimeout(() => {
-        button.textContent = originalText;
-        button.disabled = false;
-        
-        // Simular atualização das estatísticas
-        updateStats();
-    }, 2000);
+    // Simular atualização de estatísticas
+    updateStats();
 }
 
-// Função para coletar dados do formulário
 function collectFormData() {
     return {
-        serviceName: document.getElementById('serviceName').value,
-        serviceDescription: document.getElementById('serviceDescription').value,
-        priceFrom: parseFloat(document.getElementById('priceFrom').value),
-        priceTo: parseFloat(document.getElementById('priceTo').value) || null,
+        name: document.getElementById('serviceName').value,
+        description: document.getElementById('serviceDescription').value,
+        price: parseFloat(document.getElementById('servicePrice').value),
         location: document.getElementById('locationInput').value,
-        amenities: selectedAmenities,
         images: uploadedImages,
+        amenities: selectedAmenities,
         status: document.getElementById('serviceStatus').value,
         instantBooking: document.getElementById('instantBooking').checked,
         emailNotifications: document.getElementById('emailNotifications').checked,
         availability: document.getElementById('availability').value,
-        timestamp: new Date().toISOString()
+        startTime: document.getElementById('startTime').value,
+        endTime: document.getElementById('endTime').value,
+        customDays: getSelectedDays()
     };
 }
 
-// Função para atualizar estatísticas
+function getSelectedDays() {
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    return days.filter(day => document.getElementById(day).checked);
+}
+
 function updateStats() {
+    // Simular incremento das estatísticas
     const stats = document.querySelectorAll('.stat-number');
     stats[0].textContent = parseInt(stats[0].textContent) + Math.floor(Math.random() * 10) + 1; // Visualizações
     stats[1].textContent = parseInt(stats[1].textContent) + Math.floor(Math.random() * 3) + 1; // Contactos
 }
 
-// Função para auto-save (salvar automaticamente a cada 30 segundos)
-let autoSaveInterval = setInterval(() => {
-    if (!isPreviewMode) {
-        const formData = collectFormData();
-        // Simular auto-save silencioso
-        console.log('Auto-save:', new Date().toLocaleTimeString());
-        localStorage.setItem('serviceProviderDraft', JSON.stringify(formData));
-    }
-}, 30000);
-
-// Carregar dados salvos ao inicializar a página
-function loadSavedData() {
-    const savedData = localStorage.getItem('serviceProviderDraft');
-    if (savedData) {
-        try {
-            const data = JSON.parse(savedData);
-            
-            // Carregar dados básicos
-            if (data.serviceName) document.getElementById('serviceName').value = data.serviceName;
-            if (data.serviceDescription) document.getElementById('serviceDescription').value = data.serviceDescription;
-            if (data.priceFrom) document.getElementById('priceFrom').value = data.priceFrom;
-            if (data.priceTo) document.getElementById('priceTo').value = data.priceTo;
-            if (data.location) document.getElementById('locationInput').value = data.location;
-            if (data.status) document.getElementById('serviceStatus').value = data.status;
-            if (data.availability) document.getElementById('availability').value = data.availability;
-            
-            // Carregar checkboxes
-            document.getElementById('instantBooking').checked = data.instantBooking !== false;
-            document.getElementById('emailNotifications').checked = data.emailNotifications !== false;
-            
-            console.log('Dados carregados automaticamente');
-        } catch (e) {
-            console.log('Erro ao carregar dados salvos:', e);
+// Event listeners para inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar comodidades selecionadas
+    document.querySelectorAll('.amenity-item input[type="checkbox"]').forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.parentElement.classList.add('selected');
         }
+    });
+    
+    // Prevenir submit do formulário ao pressionar Enter
+    document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+        }
+    });
+    
+    // Auto-save a cada 2 minutos (opcional)
+    setInterval(function() {
+        if (document.getElementById('serviceStatus').value === 'draft') {
+            saveDraft();
+        }
+    }, 120000); // 2 minutos
+});
+
+// Função para limpar formulário
+function clearForm() {
+    if (confirm('Tem certeza que deseja limpar todos os dados?')) {
+        document.getElementById('serviceName').value = '';
+        document.getElementById('serviceDescription').value = '';
+        document.getElementById('servicePrice').value = '';
+        document.getElementById('locationInput').value = '';
+        
+        // Limpar imagens
+        document.getElementById('imageGrid').innerHTML = '';
+        uploadedImages = [];
+        
+        // Desmarcar comodidades
+        document.querySelectorAll('.amenity-item').forEach(item => {
+            item.classList.remove('selected');
+            item.querySelector('input[type="checkbox"]').checked = false;
+        });
+        selectedAmenities = [];
+        
+        showMessage('📝 Formulário limpo com sucesso!');
     }
 }
 
-// Event listeners para validação em tempo real
-document.addEventListener('DOMContentLoaded', function() {
-    loadSavedData();
+// Função para duplicar serviço
+function duplicateService() {
+    const currentData = collectFormData();
+    currentData.name = currentData.name + ' (Cópia)';
     
-    // Validação em tempo real
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.hasAttribute('required') || this.id === 'serviceName' || this.id === 'serviceDescription' || this.id === 'locationInput') {
-                if (!this.value.trim()) {
-                    this.classList.add('input-error');
-                    const errorMsg = this.nextElementSibling;
-                    if (errorMsg && errorMsg.classList.contains('error-message')) {
-                        errorMsg.style.display = 'block';
-                    }
-                } else {
-                    this.classList.remove('input-error');
-                    const errorMsg = this.nextElementSibling;
-                    if (errorMsg && errorMsg.classList.contains('error-message')) {
-                        errorMsg.style.display = 'none';
-                    }
-                }
-            }
-        });
-    });
-
-    // Fechar sugestões quando clicar fora
-    document.addEventListener('click', function(event) {
-        const locationSuggestions = document.getElementById('locationSuggestions');
-        const locationInput = document.getElementById('locationInput');
-        
-        if (!locationInput.contains(event.target) && !locationSuggestions.contains(event.target)) {
-            locationSuggestions.style.display = 'none';
-        }
-    });
-
-    // Atalhos de teclado
-    document.addEventListener('keydown', function(event) {
-        // Ctrl+S para salvar rascunho
-        if (event.ctrlKey && event.key === 's') {
-            event.preventDefault();
-            saveDraft();
-        }
-        
-        // Ctrl+Enter para publicar
-        if (event.ctrlKey && event.key === 'Enter') {
-            event.preventDefault();
-            publishService();
-        }
-        
-        // Ctrl+P para pré-visualizar
-        if (event.ctrlKey && event.key === 'p') {
-            event.preventDefault();
-            togglePreview();
-        }
-    });
-});
-
-// Limpeza ao sair da página
-window.addEventListener('beforeunload', function(event) {
-    if (!isPreviewMode) {
-        const formData = collectFormData();
-        localStorage.setItem('serviceProviderDraft', JSON.stringify(formData));
-    }
-    clearInterval(autoSaveInterval);
-});
-
-// Função para resetar formulário
-function resetForm() {
-    if (confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.')) {
-        document.getElementById('serviceName').value = '';
-        document.getElementById('serviceDescription').value = '';
-        document.getElementById('priceFrom').value = '';
-        document.getElementById('priceTo').value = '';
-        document.getElementById('locationInput').value = '';
-        document.getElementById('serviceStatus').value = 'draft';
-        document.getElementById('availability').value = 'always';
-        document.getElementById('instantBooking').checked = true;
-        document.getElementById('emailNotifications').checked = true;
-        
-        // Limpar imagens
-        uploadedImages = [];
-        const imageGrid = document.getElementById('imageGrid');
-        imageGrid.innerHTML = '';
-        
-        // Limpar comodidades selecionadas
-        selectedAmenities = [];
-        const amenities = document.querySelectorAll('.amenity-item');
-        amenities.forEach(amenity => {
-            amenity.classList.remove('selected');
-            amenity.querySelector('input[type="checkbox"]').checked = false;
-        });
-        
-        // Limpar localStorage
-        localStorage.removeItem('serviceProviderDraft');
-        
-        showSuccessMessage('✅ Formulário limpo com sucesso!');
-    }
+    // Simular criação de novo serviço
+    console.log('Duplicando serviço:', currentData);
+    
+    showMessage('📋 Serviço duplicado! Edite as informações conforme necessário.');
 }
