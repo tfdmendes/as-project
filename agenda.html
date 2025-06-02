@@ -4,47 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/agenda.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
     <title>Agenda</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
-        <div class="logo-container">
-            <a href="index.html" class="logo-link">
-            <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
-            <span class="logo-text">Pet-o-Tel</span>
-            </a>
-        </div>
-        <div class="nav-menu">
-            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
-            <div class="menu-user">
-                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" loading="lazy">
-                <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" loading="lazy">
+                    <span class="logo-text">Pet-o-Tel</span>
+                </a>
             </div>
-        </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+                <div class="menu-user">
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" loading="lazy">
+                    <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+                </div>
+            </div>
         </nav>
     </header>
+    
     <main>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <div class="header-title">Agenda</div>
-                    <div class="view-controls">
-                        <button class="view-btn" onclick="changeView('day')">Dia</button>
-                        <button class="view-btn" onclick="changeView('week')">Semana</button>
-                        <button class="view-btn active" onclick="changeView('month')">Mês</button>
-                        <div class="nav-buttons">
-                            <button class="nav-btn" onclick="previousMonth()">&lt;</button>
-                            <button class="nav-btn" onclick="nextMonth()">&gt;</button>
-                            <button class="nav-btn" onclick="goToToday()">Hoje</button>
-                        </div>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="header-title">Agenda</div>
+                <div class="view-controls">
+                    <button class="view-btn" onclick="changeView('day')">Dia</button>
+                    <button class="view-btn" onclick="changeView('week')">Semana</button>
+                    <button class="view-btn active" onclick="changeView('month')">Mês</button>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="previousMonth()">&lt;</button>
+                        <button class="nav-btn" onclick="nextMonth()">&gt;</button>
+                        <button class="nav-btn" onclick="goToToday()">Hoje</button>
                     </div>
                 </div>
-                
+            </div>
+            
+            <!-- Month View -->
+            <div class="month-view" id="monthView">
                 <div class="month-year" id="monthYear"></div>
-                
                 <div class="calendar-grid" id="calendar">
                     <!-- Weekday headers -->
                     <div class="weekday-header">Dom</div>
@@ -57,76 +59,25 @@
                 </div>
             </div>
 
-            
-
-    </main>
-    <!--rodapé-->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" loading="lazy">
-                        <span class="footer-logo-text">Pet-O-Tel</span>
-                    </div>
-                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+            <!-- Day View -->
+            <div class="day-view" id="dayView">
+                <div class="day-header">
+                    <div class="day-title" id="dayTitle"></div>
+                    <button class="back-btn" onclick="backToMonth()">Voltar ao Mês</button>
                 </div>
                 
-                <div class="footer-columns">
-                    <div class="footer-column">
-                        <h4 class="column-title">COMPANY</h4>
-                        <ul class="footer-links">
-                            <li><a href="#">Sobre nós</a></li>
-                            <li><a href="#">Informação legal</a></li>
-                            <li><a href="#">Contacta-nos</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4 class="column-title">HELP CENTER</h4>
-                        <ul class="footer-links">
-                            <li><a href="#">Encontra um serviço</a></li>
-                            <li><a href="#">Porquê nós?</a></li>
-                            <li><a href="#">FAQs</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4 class="column-title">CONTACT INFO</h4>
-                        <ul class="footer-links">
-                            <li>Contacto: 123456789</li>
-                            <li>Email: pet_o_tel@gmail.com</li>
-                            <li class="social-icons">
-                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
-                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
-                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
-                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="store-hours-info">
+                    Loja aberta das 9h às 19h • Segunda a Sábado
                 </div>
-            </div>
-            
-            <div class="app-buttons">
-                <a href="#" class="app-button playstore">
-                    <img src="assets/logos/playstore.svg" alt="Play Store" loading="lazy">
-                    PlayStore
-                </a>
-                <a href="#" class="app-button appstore">
-                    <img src="assets/logos/applestore.svg" alt="App Store" loading="lazy">
-                    AppStore
-                </a>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
-                <p class="project">Projeto Grupo 401</p>
+                
+                <div class="time-slots" id="timeSlots"></div>
             </div>
         </div>
-    </footer>
+    </main>
 
+    <button class="add-event-btn" id="addEventBtn" onclick="proceedWithSelection()">Confirmar e prosseguir</button>
+    <button class="confirm-time-btn" id="confirmTimeBtn" onclick="confirmTimeSelection()">Confirmar Horário</button>
 
     <script src="js/agenda.js"></script>
-    <script src="js/navbar.js"></script>
 </body>
 </html>
