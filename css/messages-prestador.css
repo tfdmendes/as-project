@@ -12,9 +12,8 @@ html, body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    background-color: #fdf5ed;
+    background-color: #fdf5ed; /* Azul claro em vez de bege */
 }
-
 
 main {
     flex: 1;
@@ -27,13 +26,13 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: auto; /* ou remover height: 100vh */
+    height: auto;
 }
 
 .sidebar {
     width: 350px;
     background: white;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid #d0d7e0; /* Azul mais suave */
     display: flex;
     flex-direction: column;
     height: auto;
@@ -43,8 +42,8 @@ main {
 
 .sidebar-header {
     padding: 20px;
-    border-bottom: 1px solid #e0e0e0;
-    background: #196085;
+    border-bottom: 1px solid #d0d7e0;
+    background: #0B4F6C; /* Azul mais escuro complementar */
     color: white;
 }
 
@@ -62,7 +61,7 @@ main {
 
 .message-item {
     padding: 16px 20px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #e8ebf0; /* Azul muito claro */
     cursor: pointer;
     transition: background-color 0.2s;
     display: flex;
@@ -71,11 +70,11 @@ main {
 }
 
 .message-item:hover {
-    background-color: #f8f9fa;
+    background-color: #f0f3f8; /* Azul claro no hover */
 }
 
 .message-item.active {
-    background-color: #e8f5e8;
+    background-color: #e8f5e8; /* Azul claro ativo */
     border-right: 3px solid #196085;
 }
 
@@ -93,9 +92,9 @@ main {
     flex-shrink: 0;
 }
 
-.pet-nanny { background: #FF9800; }
-.pet-centro { background: #f44336; }
-.tiago { background: #2196F3; }
+.pet-nanny { background: #2196F3; } /* Azul em vez de laranja */
+.pet-centro { background: #3F51B5; } /* Azul-roxo em vez de vermelho */
+.tiago { background: #FF9800; } /* Laranja em vez de azul */
 
 .message-info {
     flex: 1;
@@ -114,9 +113,9 @@ main {
     color: #666;
 }
 
-.main{
-    padding-left: 50px; /* espaçamento à esquerda */
-    padding-right: 50px; /* espaçamento à direita */
+.main {
+    padding-left: 150px;
+    padding-right: 150px;
 }
 
 .main-content {
@@ -125,26 +124,27 @@ main {
     flex-direction: column;
     height: auto;
     max-height: 90vh;
-    position: relative;
 }
 
 .chat-header {
-    background: #85C6B2;
+    background: #85C6B2; /* Azul complementar ao verde */
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .chat-title {
     font-size: 24px;
     font-weight: 600;
-    color: #196085;
+    color: #0B4F6C; /* Azul escuro */
     margin-bottom: 4px;
 }
 
 .chat-subtitle {
     font-size: 14px;
-    color: #666;
+    color: #5a6c7d; /* Azul acinzentado */
 }
 
 .content-area {
@@ -156,7 +156,7 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #EFF0F2;
+    background: #EFF0F2; /* Cinza-azul claro */
 }
 
 .messages-container {
@@ -171,22 +171,15 @@ main {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     min-height: 450px;
     max-height: 450px;
     scroll-behavior: smooth;
-    position: relative;
-    z-index: 1;
 }
-
-#messagesContainer::after {
-    content: '';
-    flex-grow: 1;
-}
-
-
 
 .message-bubble {
-    margin-bottom: 16px;
+    display: flex;
+    margin-bottom: 0px;
 }
 
 .message-sender {
@@ -201,7 +194,7 @@ main {
     padding: 12px 16px;
     border-radius: 16px;
     max-width: 70%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(11,79,108,0.1); /* Sombra azulada */
     font-size: 14px;
     line-height: 1.4;
 }
@@ -227,8 +220,8 @@ main {
 }
 
 .status-badge {
-    background: #FFC107;
-    color: #333;
+     background: #FFC107; /* Azul em vez de amarelo */
+    color: #333; /* Texto branco para contraste */
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 11px;
@@ -239,7 +232,7 @@ main {
 .message-input-area {
     padding: 16px 20px;
     background: white;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #d0d7e0;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -248,17 +241,21 @@ main {
 .message-input {
     flex: 1;
     padding: 12px 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #c5d1dd; /* Borda azul claro */
     border-radius: 24px;
     outline: none;
     font-size: 14px;
+}
+
+.message-input:focus {
+    border-color: #0B4F6C; /* Azul escuro no foco */
 }
 
 .send-btn {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #4CAF50;
+   background: #4CAF50; /* Azul em vez de verde */
     color: white;
     border: none;
     cursor: pointer;
@@ -269,10 +266,47 @@ main {
 }
 
 .send-btn:hover {
-    background: #45a049;
+    background: #45a049; /* Azul mais escuro no hover */
+}
+
+.message-bubble.received {
+    justify-content: flex-start;
+}
+
+.message-bubble.sent {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin: 5px 0;
+    word-wrap: break-word;
+}
+
+.message-content.received {
+    background-color: #f8f9fa;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message-content.sent {
+    background-color: #FFC107;
+    color: black;
+    border-bottom-right-radius: 4px;
 }
 
 
+.message-time {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.chat-tiago { display: block; }
+.chat-mariana { display: none; }
+.chat-daniela { display: none; }
 
 @media (max-width: 768px) {
     .sidebar {
@@ -289,5 +323,10 @@ main {
     
     .main-content {
         width: 100%;
+    }
+    
+    .main {
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }

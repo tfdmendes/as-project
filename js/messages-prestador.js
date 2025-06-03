@@ -1,15 +1,21 @@
 function selectChat(chatId) {
-    // Remove active class from all message items
-    document.querySelectorAll('.message-item').forEach(item => {
-        item.classList.remove('active');
+    const allChats = document.querySelectorAll('.chat-box');
+    allChats.forEach(chat => {
+        chat.style.display = 'none'; // esconde todos os chats
     });
 
-    // Add active class to selected item
-    event.currentTarget.classList.add('active');
+    const selectedChat = document.getElementById(`chat-${chatId}`);
+    if (selectedChat) {
+        selectedChat.style.display = 'block'; // mostra o chat selecionado
+    }
 
-    // Update chat content based on selection
-    updateChatContent(chatId);
+    // (Opcional) destaca a conversa selecionada na sidebar
+    const allItems = document.querySelectorAll('.message-item');
+    allItems.forEach(item => item.classList.remove('active'));
+    const activeItem = document.querySelector(`.message-item[onclick="selectChat('${chatId}')"]`);
+    if (activeItem) activeItem.classList.add('active');
 }
+
 
 function updateChatContent(chatId) {
     const messagesContainer = document.getElementById('messagesContainer');
@@ -69,7 +75,6 @@ function sendMessage() {
     }
 }
 
-
 function getCurrentTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
@@ -81,6 +86,9 @@ function getCurrentTime() {
 document.addEventListener('DOMContentLoaded', function() {
     const messageInput = document.getElementById('messageInput');
     if (messageInput) {
+        // Bloqueia escrita
+        messageInput.readOnly = true;
+
         messageInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -91,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with first chat selected
     const firstChatItem = document.querySelector('.message-item');
     if (firstChatItem) {
-        // Get the onclick parameter to determine which chat to show
         const onclickAttr = firstChatItem.getAttribute('onclick');
         const chatId = onclickAttr.match(/selectChat\('(.+?)'\)/)?.[1];
         

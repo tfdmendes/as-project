@@ -11,43 +11,7 @@
     <title>Messagens e Calendário</title>
     
     <style>
-        .message-bubble.received {
-            justify-content: flex-start;
-        }
         
-        .message-bubble.sent {
-            justify-content: flex-end;
-        }
-        
-        .message-content {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            margin: 5px 0;
-            word-wrap: break-word;
-        }
-        
-        .message-content.received {
-            background-color: #f1f3f4;
-            color: #333;
-            border-bottom-left-radius: 4px;
-        }
-        
-        .message-content.sent {
-            background-color: #007bff;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .message-time {
-            font-size: 11px;
-            opacity: 0.7;
-            margin-top: 4px;
-        }
-        
-        .chat-tiago { display: block; }
-        .chat-mariana { display: none; }
-        .chat-daniela { display: none; }
     </style>
 </head>
 
@@ -76,9 +40,9 @@
             </div>
             <div class="messages-list">
                 <div class="message-item active" onclick="selectChat('tiago')">
-                    <div class="avatar tiago">TF</div>
+                    <div class="avatar tiago">RH</div>
                     <div class="message-info">
-                        <div class="sender-name">Tiago Ferreira</div>
+                        <div class="sender-name">Rhyan Matos</div>
                         <div class="message-date">Em 13 Abr 2025</div>
                     </div>
                 </div>
@@ -116,65 +80,29 @@
                         <div class="chat-tiago">
                             <div class="message-bubble sent">
                                 <div class="message-content sent">
-                                    Olá Tiago! Obrigado por escolher os nossos serviços. Como posso ajudar o seu pet hoje?
-                                    <div class="message-time">14:20</div>
+                                    Bom dia Rhyan, só para te dizer que a Sasha portou-se muito bem no seu primeiro dia! Aqui vão algumas fotos dela!
+                                    <div class="message-images" style="margin-left: 20px; margin-bottom: 16px;">
+                                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&h=200&fit=crop&crop=face" alt="Pet photo" class="message-image">
+                                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200&h=200&fit=crop&crop=face" alt="Pet photo" class="message-image">
+                                        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=200&h=200&fit=crop&crop=face" alt="Pet photo" class="message-image">
+                                    </div>
+                                    <div class="message-time">15:30</div>
                                 </div>
                             </div>
                             
                             <div class="message-bubble received">
-                                <div class="message-sender">
-                                    <div class="avatar tiago">TF</div>
-                                </div>
                                 <div class="message-content received">
-                                    Olá! Preciso de alguém para cuidar do meu cão durante o fim de semana. Ele é muito dócil.
-                                    <div class="message-time">14:25</div>
+                                    Muito obrigado!
+                                    <div class="message-time">16:25</div>
                                 </div>
+                                
                             </div>
                             
-                            <div class="message-bubble sent">
-                                <div class="message-content sent">
-                                    Perfeito! Que raça é o seu cão e que cuidados específicos precisa?
-                                    <div class="message-time">14:27</div>
-                                </div>
-                            </div>
                             
-                            <div class="message-bubble received">
-                                <div class="message-sender">
-                                    <div class="avatar tiago">TF</div>
-                                </div>
-                                <div class="message-content received">
-                                    É um Golden Retriever, o Max. Precisa de duas refeições por dia e um passeio pela manhã.
-                                    <div class="message-time">14:30</div>
-                                </div>
-                            </div>
-                            
-                            <div class="message-bubble sent">
-                                <div class="message-content sent">
-                                    Excelente! Tenho experiência com Golden Retrievers. Posso cuidar do Max no sábado e domingo. O valor seria 40€ por dia.
-                                    <div class="message-time">14:35</div>
-                                </div>
-                            </div>
-                            
-                            <div class="message-bubble received">
-                                <div class="message-sender">
-                                    <div class="avatar tiago">TF</div>
-                                </div>
-                                <div class="message-content received">
-                                    Perfeito! Pode vir buscar o Max no sábado de manhã às 9h?
-                                    <div class="message-time">14:38</div>
-                                </div>
-                            </div>
-                            
-                            <div class="message-bubble sent">
-                                <div class="message-content sent">
-                                    Claro! Estarei aí às 9h em ponto. Pode enviar-me a sua morada por favor?
-                                    <div class="message-time">14:40</div>
-                                </div>
-                            </div>
-                        </div>
+                               
                         
                         <!-- Chat com Mariana Fernando -->
-                        <div class="chat-mariana">
+                        <div class="chat-box" id="chat-mariana" style="display: none;">
                             <div class="message-bubble received">
                                 <div class="message-sender">
                                     <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
@@ -227,7 +155,7 @@
                             
                             <div class="message-bubble sent">
                                 <div class="message-content sent">
-                                    Perfeito! Para pet-sitting em casa durante uma semana seriam 25€ por dia. Inclui alimentação, limpeza da caixa de areia e carinho! 😊
+                                    Perfeito! Para pet-sitting em casa durante uma semana seriam 25€ por dia. Inclui alimentação, limpeza da caixa de areia e muito mimos! 😊
                                     <div class="message-time">09:35</div>
                                 </div>
                             </div>
@@ -239,14 +167,14 @@
                                     </div>
                                 </div>
                                 <div class="message-content received">
-                                    Está bem! Pode vir conhecer a Luna amanhã para se familiarizarem?
+                                    ok! Pode vir conhecer a Luna amanhã para se familiarizarem?
                                     <div class="message-time">09:40</div>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Chat com Daniela Duarte -->
-                        <div class="chat-daniela">
+                        <div class="chat-box" id="chat-daniela" style="display: none;">
                             <div class="message-bubble received">
                                 <div class="message-sender">
                                     <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
@@ -261,7 +189,7 @@
                             
                             <div class="message-bubble sent">
                                 <div class="message-content sent">
-                                    Olá Daniela! Claro que sim! Que raças são os seus cãezinhos?
+                                    Olá Daniela! Claro que sim! 
                                     <div class="message-time">16:50</div>
                                 </div>
                             </div>
@@ -273,14 +201,14 @@
                                     </div>
                                 </div>
                                 <div class="message-content received">
-                                    São dois Yorkshire Terriers, o Simão e a Mia. Precisam de um passeio de manhã e outro à tarde, todos os dias.
+                                    O Bali e a Camila precisam de um passeio de manhã e outro à tarde, todos os dias.
                                     <div class="message-time">16:55</div>
                                 </div>
                             </div>
                             
                             <div class="message-bubble sent">
                                 <div class="message-content sent">
-                                    Que fofinhos! Yorkshire são uma das minhas raças favoritas. Que horários prefere para os passeios?
+                                    Que horários prefere para os passeios?
                                     <div class="message-time">17:00</div>
                                 </div>
                             </div>
