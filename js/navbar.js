@@ -32,6 +32,9 @@ function initializeNavbar() {
         updateDropdownLinksForRole(currentUser.role);
     }
     
+    // Also update links in any existing dropdown menus
+    updateAllDropdownLinks();
+    
     // Setup dropdown menu toggle
     if (menuToggle && dropdownMenu) {
         menuToggle.addEventListener('click', function(e) {
@@ -126,23 +129,56 @@ function updateDropdownLinksForRole(role) {
     const dropdownMenu = document.getElementById('dropdownMenu');
     if (!dropdownMenu) return;
     
-    // Find and update the account link
-    const accountLinks = dropdownMenu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
-    accountLinks.forEach(link => {
-        if (role === 'prestador-de-servicos') {
-            link.href = 'prestador-edit.html';
-            if (link.textContent.trim() === 'Account') {
-                link.textContent = 'Painel Prestador';
+    // Determine if user is prestador
+    const isPrestador = role === 'prestador-de-servicos';
+    
+    // Update main navigation links based on role
+    const navigationLinks = {
+        'messages.html': isPrestador ? 'messages_prestador.html' : 'messages.html',
+        'messages_prestador.html': isPrestador ? 'messages_prestador.html' : 'messages.html',
+        'notifications.html': isPrestador ? 'notifications_prestador.html' : 'notifications.html',
+        'notifications_prestador.html': isPrestador ? 'notifications_prestador.html' : 'notifications.html',
+        'reservations.html': isPrestador ? 'reservations_prestador.html' : 'reservations.html',
+        'reservations_prestador.html': isPrestador ? 'reservations_prestador.html' : 'reservations.html',
+        'wishlists.html': isPrestador ? 'wishlists_prestador.html' : 'wishlists.html',
+        'wishlists_prestador.html': isPrestador ? 'wishlists_prestador.html' : 'wishlists.html'
+    };
+    
+    // Update all links in the dropdown
+    const allLinks = dropdownMenu.querySelectorAll('a');
+    allLinks.forEach(link => {
+        const currentHref = link.getAttribute('href');
+        
+        // Check if this link needs to be updated
+        if (navigationLinks[currentHref]) {
+            link.href = navigationLinks[currentHref];
+        }
+        
+        // Update account/prestador panel link
+        if (currentHref === 'account-edit.html' || currentHref === 'prestador-edit.html') {
+            if (isPrestador) {
+                link.href = 'prestador-edit.html';
+                if (link.textContent.trim() === 'Account') {
+                    link.textContent = 'Painel Prestador';
+                }
+            } else {
+                link.href = 'account-edit.html';
+                link.textContent = 'Account';
             }
-        } else {
-            link.href = 'account-edit.html';
-            link.textContent = 'Account';
         }
     });
     
     // Add prestador-specific menu items if needed
-    if (role === 'prestador-de-servicos') {
+    if (isPrestador) {
         addPrestadorMenuItems(dropdownMenu);
+    }
+}
+
+// Helper function to update links on page load
+function updateAllDropdownLinks() {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    if (currentUser.isLoggedIn && currentUser.role) {
+        updateDropdownLinksForRole(currentUser.role);
     }
 }
 
@@ -157,7 +193,8 @@ function addPrestadorMenuItems(dropdownMenu) {
     // Create prestador-specific links
     const prestadorItems = [
         { href: 'criar_servico.html', text: 'Criar Serviço' },
-        { href: 'edit-services.html', text: 'Meus Serviços' }
+        { href: 'edit-services.html', text: 'Meus Serviços' },
+        { href: 'prestador-dashboard.html', text: 'Dashboard' }
     ];
     
     // Find the position after "Account" link

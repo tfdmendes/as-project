@@ -50,9 +50,25 @@ class AuthManager {
     init() {
         // Aguardar o DOM carregar
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.updateUI());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.updateUI();
+                // Update dropdown links for existing menus in HTML
+                if (this.isLoggedIn()) {
+                    const profile = this.getUserProfile();
+                    if (profile && profile.role) {
+                        this.updateDropdownLinksForRole(profile.role);
+                    }
+                }
+            });
         } else {
             this.updateUI();
+            // Update dropdown links for existing menus in HTML
+            if (this.isLoggedIn()) {
+                const profile = this.getUserProfile();
+                if (profile && profile.role) {
+                    this.updateDropdownLinksForRole(profile.role);
+                }
+            }
         }
     }
 
@@ -128,15 +144,37 @@ class AuthManager {
 
     // Atualizar links do dropdown baseado no role do utilizador
     updateDropdownLinksForRole(role) {
-        // Atualizar links no dropdown menu existente
+        const isPrestador = role === 'prestador-de-servicos';
+        
+        // Define URL mappings based on role
+        const urlMappings = {
+            'messages.html': isPrestador ? 'messages_prestador.html' : 'messages.html',
+            'messages_prestador.html': isPrestador ? 'messages_prestador.html' : 'messages.html',
+            'notifications.html': isPrestador ? 'notifications_prestador.html' : 'notifications.html',
+            'notifications_prestador.html': isPrestador ? 'notifications_prestador.html' : 'notifications.html',
+            'reservations.html': isPrestador ? 'reservations_prestador.html' : 'reservations.html',
+            'reservations_prestador.html': isPrestador ? 'reservations_prestador.html' : 'reservations.html',
+            'wishlists.html': isPrestador ? 'wishlists_prestador.html' : 'wishlists.html',
+            'wishlists_prestador.html': isPrestador ? 'wishlists_prestador.html' : 'wishlists.html'
+        };
+        
+        // Update links in all dropdown menus
         const dropdownMenus = document.querySelectorAll('.dropdown-menu');
         
         dropdownMenus.forEach(menu => {
-            // Encontrar link de Account/Prestador Panel
-            const accountLinks = menu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
+            // Update navigation links
+            const links = menu.querySelectorAll('a');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && urlMappings[href]) {
+                    link.href = urlMappings[href];
+                }
+            });
             
+            // Update account/prestador panel links
+            const accountLinks = menu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
             accountLinks.forEach(link => {
-                if (role === 'prestador-de-servicos') {
+                if (isPrestador) {
                     link.href = 'prestador-edit.html';
                     if (link.textContent.includes('Account')) {
                         link.textContent = 'Painel Prestador';
@@ -146,12 +184,14 @@ class AuthManager {
                     link.textContent = 'Account';
                 }
             });
-
-            // Adicionar opções específicas do prestador se necessário
-            if (role === 'prestador-de-servicos') {
-                this.addPrestadorMenuItems(menu);
-            }
         });
+        
+        // Add prestador-specific menu items if needed
+        if (isPrestador) {
+            dropdownMenus.forEach(menu => {
+                this.addPrestadorMenuItems(menu);
+            });
+        }
     }
 
     // Adicionar itens específicos do menu prestador
@@ -195,6 +235,13 @@ class AuthManager {
             dropdownContainer = wrapper;
         }
 
+        // Determine URLs based on role
+        const isPrestador = profile.role === 'prestador-de-servicos';
+        const messageUrl = isPrestador ? 'messages_prestador.html' : 'messages.html';
+        const notificationsUrl = isPrestador ? 'notifications_prestador.html' : 'notifications.html';
+        const reservationsUrl = isPrestador ? 'reservations_prestador.html' : 'reservations.html';
+        const wishlistsUrl = isPrestador ? 'wishlists_prestador.html' : 'wishlists.html';
+
         // Criar estrutura do dropdown
         const dropdown = document.createElement('div');
         dropdown.className = 'user-dropdown';
@@ -207,6 +254,23 @@ class AuthManager {
                 </div>
             </div>
             <div class="dropdown-menu">
+                <a href="${messageUrl}" class="dropdown-item">
+                    <span class="dropdown-icon">💬</span>
+                    <span>Mensagens</span>
+                </a>
+                <a href="${notificationsUrl}" class="dropdown-item">
+                    <span class="dropdown-icon">🔔</span>
+                    <span>Notificações</span>
+                </a>
+                <a href="${reservationsUrl}" class="dropdown-item">
+                    <span class="dropdown-icon">📅</span>
+                    <span>Reservas</span>
+                </a>
+                <a href="${wishlistsUrl}" class="dropdown-item">
+                    <span class="dropdown-icon">❤️</span>
+                    <span>Favoritos</span>
+                </a>
+                <div class="dropdown-divider"></div>
                 <a href="${profile.editUrl}" class="dropdown-item">
                     <span class="dropdown-icon">👤</span>
                     <span>Meu Perfil</span>
