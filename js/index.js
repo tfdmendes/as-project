@@ -1,7 +1,9 @@
-// Index page specific header functionality
+// index.js - Index page specific functionality with role awareness
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeIndexHeader();
-    initializeDropdownMenu();
+    setupServiceCardClicks();
+    setupPrestadorSection();
 });
 
 function initializeIndexHeader() {
@@ -15,66 +17,9 @@ function initializeIndexHeader() {
     // Add body class for CSS targeting
     if (isLoggedIn) {
         document.body.classList.add('user-logged-in');
-    }
-    
-    // Get header elements
-    const menuIcon = document.querySelector('.cabecalho .icon-menu');
-    const userIcon = document.querySelector('.cabecalho .icon-user');
-    const mobileAppLink = document.querySelector('.cabecalho .user-menu > a');
-    
-    console.log('Menu icon found:', !!menuIcon);
-    console.log('User icon found:', !!userIcon);
-    
-    // Update menu icon visibility
-    if (menuIcon) {
-        if (!isLoggedIn) {
-            menuIcon.style.display = 'none';
-            console.log('Menu icon hidden - user not logged in');
-        } else {
-            menuIcon.style.display = 'block';
-            menuIcon.style.cursor = 'pointer';
-            console.log('Menu icon shown - user logged in');
+        if (currentUser.role) {
+            document.body.classList.add(`role-${currentUser.role}`);
         }
-    }
-    
-    // Setup user icon click behavior (only redirect if not logged in)
-    if (userIcon) {
-        userIcon.style.cursor = 'pointer';
-        
-        userIcon.addEventListener('click', function(e) {
-            if (!isLoggedIn) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('User icon clicked - redirecting to login');
-                window.location.href = 'login.html';
-            }
-            // If logged in, let the dropdown menu handle the click
-        });
-    }
-    
-    // Setup logout functionality
-    setupLogoutFunctionality(isLoggedIn, currentUser);
-    
-    // Update UI for logged in user
-    updateUIForLoggedInUser(isLoggedIn, currentUser);
-}
-
-// Index page specific header functionality
-document.addEventListener('DOMContentLoaded', function() {
-    initializeIndexHeader();
-});
-
-function initializeIndexHeader() {
-    // Check if user is logged in
-    const isLoggedIn = checkUserSession();
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
-    
-    console.log('Index page - User logged in:', isLoggedIn);
-    console.log('Index page - Current user:', currentUser);
-    
-    // Add body class for CSS targeting
-    if (isLoggedIn) {
-        document.body.classList.add('user-logged-in');
         initializeDropdownMenu(); // Only initialize dropdown if logged in
     }
     
@@ -82,9 +27,6 @@ function initializeIndexHeader() {
     const menuIcon = document.querySelector('.cabecalho .icon-menu');
     const userIcon = document.querySelector('.cabecalho .icon-user');
     
-    console.log('Menu icon found:', !!menuIcon);
-    console.log('User icon found:', !!userIcon);
-    
     // Update menu icon visibility
     if (menuIcon) {
         if (!isLoggedIn) {
@@ -96,7 +38,7 @@ function initializeIndexHeader() {
         }
     }
     
-    // Setup user icon click behavior - SIMPLE VERSION
+    // Setup user icon click behavior
     if (userIcon) {
         userIcon.style.cursor = 'pointer';
         
@@ -108,7 +50,7 @@ function initializeIndexHeader() {
             console.log('User icon clicked. Logged in:', isLoggedIn);
             
             if (!isLoggedIn) {
-                // Simple redirect to login - no interference
+                // Simple redirect to login
                 console.log('Redirecting to login page');
                 window.location.href = 'login.html';
             }
@@ -137,7 +79,13 @@ function initializeDropdownMenu() {
     
     console.log('Initializing dropdown menu for logged in user');
     
-    // ONLY menu icon opens dropdown - very specific
+    // Get current user for role-based updates
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    
+    // Update dropdown links based on user role
+    updateDropdownLinks(currentUser.role);
+    
+    // Menu icon opens dropdown
     menuToggle.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -145,7 +93,7 @@ function initializeDropdownMenu() {
         toggleDropdown();
     });
     
-    // User icon also opens dropdown but ONLY when logged in
+    // User icon also opens dropdown when logged in
     if (userIcon) {
         userIcon.addEventListener('click', function(e) {
             e.preventDefault();
@@ -162,7 +110,6 @@ function initializeDropdownMenu() {
     
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
-        // More specific check - only close if clicking completely outside
         if (!e.target.closest('.menu-utilizador') && !e.target.closest('.dropdown-menu')) {
             closeDropdown();
         }
@@ -175,9 +122,96 @@ function initializeDropdownMenu() {
             logout();
         });
     }
+}
+
+function updateDropdownLinks(role) {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if (!dropdownMenu) return;
     
-    // Update dropdown links based on user role
-    updateDropdownLinks();
+    // Update account link based on user role
+    const accountLinks = dropdownMenu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
+    accountLinks.forEach(link => {
+        if (role === 'prestador-de-servicos') {
+            link.href = 'prestador-edit.html';
+            link.textContent = 'Painel Prestador';
+        } else {
+            link.href = 'account-edit.html';
+            link.textContent = 'Account';
+        }
+    });
+    
+    // Add prestador-specific items if needed
+    if (role === 'prestador-de-servicos') {
+        const firstSection = dropdownMenu.querySelector('.dropdown-section');
+        if (firstSection && !dropdownMenu.querySelector('a[href*="criar_servico"]')) {
+            // Add prestador-specific links
+            const prestadorItems = [
+                { href: 'criar_servico.html', text: 'Criar Serviço' },
+                { href: 'edit-services.html', text: 'Meus Serviços' }
+            ];
+            
+            const accountLink = firstSection.querySelector('a[href*="prestador-edit"]');
+            prestadorItems.forEach(item => {
+                const link = document.createElement('a');
+                link.href = item.href;
+                link.className = 'dropdown-item';
+                link.textContent = item.text;
+                
+                if (accountLink && accountLink.nextSibling) {
+                    firstSection.insertBefore(link, accountLink.nextSibling);
+                } else {
+                    firstSection.appendChild(link);
+                }
+            });
+        }
+    }
+}
+
+// Setup the prestador section with dynamic profile image
+function setupPrestadorSection() {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    const prestadorImage = document.querySelector('.prestador .card-prestador img');
+    
+    if (currentUser.isLoggedIn && prestadorImage) {
+        // Get user profile
+        const userProfiles = {
+            "user@petotel.com": {
+                avatar: "assets/people/RyanMatos.png",
+                editUrl: "account-edit.html"
+            },
+            "prestador@petotel.com": {
+                avatar: "assets/people/tiago.png",
+                editUrl: "prestador-edit.html"
+            }
+        };
+        
+        const profile = userProfiles[currentUser.email];
+        if (profile) {
+            // Update the prestador image to user's profile image
+            prestadorImage.src = profile.avatar;
+            prestadorImage.alt = currentUser.name || 'Perfil';
+            prestadorImage.style.borderRadius = '50%';
+            prestadorImage.style.width = '200px';
+            prestadorImage.style.height = '200px';
+            prestadorImage.style.objectFit = 'cover';
+            prestadorImage.style.cursor = 'pointer';
+            
+            // Make the image clickable
+            prestadorImage.addEventListener('click', function() {
+                window.location.href = profile.editUrl;
+            });
+            
+            // Also make the parent card clickable if it exists
+            const cardPrestador = prestadorImage.closest('.card-prestador');
+            if (cardPrestador) {
+                cardPrestador.style.cursor = 'pointer';
+                cardPrestador.addEventListener('click', function(e) {
+                    if (e.target === prestadorImage) return; // Avoid double navigation
+                    window.location.href = profile.editUrl;
+                });
+            }
+        }
+    }
 }
 
 function toggleDropdown() {
@@ -226,75 +260,7 @@ function closeDropdown() {
     }
 }
 
-function updateDropdownLinks() {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
-    const accountLink = document.querySelector('.dropdown-item[href*="account-edit"]');
-    
-    // Update account link based on user role
-    if (accountLink && currentUser.role === 'prestador-de-servicos') {
-        accountLink.href = 'prestador-edit.html';
-        accountLink.textContent = 'Prestador Panel';
-    }
-}
-
-function toggleDropdown() {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const menuIcon = document.getElementById('menuToggle');
-    
-    if (dropdownMenu && dropdownOverlay) {
-        const isOpen = dropdownMenu.classList.contains('show');
-        
-        if (isOpen) {
-            closeDropdown();
-        } else {
-            openDropdown();
-        }
-    }
-}
-
-function openDropdown() {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const menuIcon = document.getElementById('menuToggle');
-    
-    if (dropdownMenu && dropdownOverlay) {
-        dropdownMenu.classList.add('show');
-        dropdownOverlay.classList.add('show');
-        if (menuIcon) {
-            menuIcon.classList.add('active');
-        }
-        console.log('Dropdown opened');
-    }
-}
-
-function closeDropdown() {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const menuIcon = document.getElementById('menuToggle');
-    
-    if (dropdownMenu && dropdownOverlay) {
-        dropdownMenu.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-        if (menuIcon) {
-            menuIcon.classList.remove('active');
-        }
-        console.log('Dropdown closed');
-    }
-}
-
-function updateDropdownLinks() {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
-    const accountLink = document.querySelector('.dropdown-item[href*="account-edit"]');
-    
-    // Update account link based on user role
-    if (accountLink && currentUser.role === 'prestador-de-servicos') {
-        accountLink.href = 'prestador-edit.html';
-        accountLink.textContent = 'Prestador Panel';
-    }
-}
-
-// Check if user is logged in (improved version)
+// Check if user is logged in
 function checkUserSession() {
     try {
         const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
@@ -313,11 +279,9 @@ function checkUserSession() {
 // Setup logout functionality
 function setupLogoutFunctionality(isLoggedIn) {
     if (isLoggedIn) {
-        // Add logout option to context menu or create a logout button
-        // This could be implemented as a right-click context menu or a separate button
         console.log('Logout functionality available');
         
-        // Example: Add keyboard shortcut for logout (Ctrl+L)
+        // Add keyboard shortcut for logout (Ctrl+L)
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'l') {
                 e.preventDefault();
@@ -336,88 +300,85 @@ function logout() {
     // Clear session
     sessionStorage.removeItem('currentUser');
     
-    // Clear any remember me data if needed
-    // localStorage.removeItem('rememberedEmail'); // Uncomment if you want to clear remember me
-    
     // Reload page to update UI
     window.location.reload();
 }
 
-// Optional: Add visual feedback for logged in state
-function updateUIForLoggedInUser() {
-    const isLoggedIn = checkUserSession();
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
-    
+// Update UI for logged in user
+function updateUIForLoggedInUser(isLoggedIn, currentUser) {
     if (isLoggedIn) {
-        // You could add a welcome message or change some UI elements
         console.log(`Welcome back, ${currentUser.name}!`);
         
-        // Example: Change the "Torna-te Prestador" button text if user is already a prestador
+        // Update "Torna-te Prestador" button based on user role
         const prestadorButton = document.querySelector('.botao-prestador');
-        if (prestadorButton && currentUser.role === 'prestador-de-servicos') {
-            prestadorButton.textContent = 'Meu Painel';
-            prestadorButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'prestador-edit.html';
-            });
+        if (prestadorButton) {
+            if (currentUser.role === 'prestador-de-servicos') {
+                prestadorButton.textContent = 'Meu Painel';
+                prestadorButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'prestador-edit.html';
+                });
+            } else {
+                // Regular users can still become prestador
+                prestadorButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'prestador.html';
+                });
+            }
+        }
+        
+        // Update the bottom "Torna-te Prestador" button as well
+        const bottomPrestadorButton = document.querySelector('.btn-prestador');
+        if (bottomPrestadorButton) {
+            if (currentUser.role === 'prestador-de-servicos') {
+                bottomPrestadorButton.textContent = 'Ir para Meu Painel';
+                bottomPrestadorButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'prestador-edit.html';
+                });
+            }
         }
     }
 }
 
-// Call the UI update function
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(updateUIForLoggedInUser, 100); // Small delay to ensure everything is loaded
-});
-
-// Adicionar ao arquivo index.js ou criar um novo arquivo service-cards.js
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Prevenir propagação de cliques nos elementos internos
-    setupServiceCardClicks();
-});
-
+// Service card click handling
 function setupServiceCardClicks() {
-    // Selecionar todos os cards de serviço
     const serviceCards = document.querySelectorAll('.cards-servicos .card');
     
     serviceCards.forEach(card => {
-        // Prevenir propagação no favorito
+        // Prevent propagation on favorite button
         const favorito = card.querySelector('.favorito');
         if (favorito) {
             favorito.addEventListener('click', function(e) {
                 e.stopPropagation();
-                // A função toggleFavorito já está definida
             });
         }
         
-        // Prevenir propagação na imagem circular (link do prestador)
+        // Prevent propagation on circular image (prestador link)
         const imagemCircular = card.querySelector('.imagem-circular');
         if (imagemCircular) {
             imagemCircular.addEventListener('click', function(e) {
                 e.stopPropagation();
-                // O link já está configurado no HTML
             });
         }
         
-        // Opcional: Adicionar cursor pointer nas áreas clicáveis
+        // Add cursor pointer to clickable areas
         const mainImageLink = card.querySelector('.card-image-wrapper > a:first-child');
         if (mainImageLink) {
             mainImageLink.style.cursor = 'pointer';
         }
     });
     
-    // Log para debug
-    console.log('Service card clicks configurados');
+    console.log('Service card clicks configured');
 }
 
-// Função melhorada para toggle de favorito
+// Toggle favorite function
 function toggleFavorito(el) {
     el.classList.toggle('ativo');
     
-    // Opcional: Adicionar feedback visual ou salvar estado
     const isActive = el.classList.contains('ativo');
     console.log('Favorito', isActive ? 'adicionado' : 'removido');
     
-    // Aqui você pode adicionar lógica para salvar o estado do favorito
-    // Por exemplo, salvar no localStorage ou enviar para um servidor
+    // Here you can add logic to save favorite state
+    // For example, save to localStorage or send to server
 }

@@ -43,8 +43,6 @@ class AuthManager {
     // Fazer logout
     logout() {
         sessionStorage.removeItem('currentUser');
-        // Manter o email se "lembrar-me" estava ativo
-        // localStorage.removeItem('rememberedEmail'); // Comentado para manter o email
         window.location.href = 'index.html';
     }
 
@@ -60,7 +58,6 @@ class AuthManager {
 
     // Atualizar a interface com base no estado de login
     updateUI() {
-        // Selecionar apenas o ícone de utilizador, não o menu
         const userIcons = document.querySelectorAll('.icon-user');
         const profile = this.getUserProfile();
 
@@ -85,7 +82,7 @@ class AuthManager {
                 }
 
                 // Adicionar menu dropdown
-                const menuContainer = icon.closest('.menu-user');
+                const menuContainer = icon.closest('.menu-user') || icon.closest('.menu-utilizador');
                 if (menuContainer && !menuContainer.querySelector('.user-dropdown')) {
                     this.createUserDropdown(menuContainer, profile);
                 }
@@ -94,6 +91,9 @@ class AuthManager {
             // Adicionar classe ao body para estilos específicos
             document.body.classList.add('user-logged-in');
             document.body.classList.add(`role-${profile.role}`);
+
+            // Atualizar links do dropdown existente baseado no role
+            this.updateDropdownLinksForRole(profile.role);
 
         } else {
             // Utilizador não está logado
@@ -126,6 +126,59 @@ class AuthManager {
         }
     }
 
+    // Atualizar links do dropdown baseado no role do utilizador
+    updateDropdownLinksForRole(role) {
+        // Atualizar links no dropdown menu existente
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        
+        dropdownMenus.forEach(menu => {
+            // Encontrar link de Account/Prestador Panel
+            const accountLinks = menu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
+            
+            accountLinks.forEach(link => {
+                if (role === 'prestador-de-servicos') {
+                    link.href = 'prestador-edit.html';
+                    if (link.textContent.includes('Account')) {
+                        link.textContent = 'Painel Prestador';
+                    }
+                } else {
+                    link.href = 'account-edit.html';
+                    link.textContent = 'Account';
+                }
+            });
+
+            // Adicionar opções específicas do prestador se necessário
+            if (role === 'prestador-de-servicos') {
+                this.addPrestadorMenuItems(menu);
+            }
+        });
+    }
+
+    // Adicionar itens específicos do menu prestador
+    addPrestadorMenuItems(menu) {
+        const dropdownSections = menu.querySelectorAll('.dropdown-section');
+        if (dropdownSections.length > 0) {
+            const firstSection = dropdownSections[0];
+            
+            // Verificar se os itens já existem
+            if (!menu.querySelector('a[href*="criar_servico"]')) {
+                const newItems = [
+                    { href: 'criar_servico.html', text: 'Criar Serviço' },
+                    { href: 'edit-services.html', text: 'Meus Serviços' },
+                    { href: 'prestador-dashboard.html', text: 'Dashboard' }
+                ];
+
+                newItems.forEach(item => {
+                    const link = document.createElement('a');
+                    link.href = item.href;
+                    link.className = 'dropdown-item';
+                    link.textContent = item.text;
+                    firstSection.appendChild(link);
+                });
+            }
+        }
+    }
+
     // Criar menu dropdown do utilizador
     createUserDropdown(container, profile) {
         // Criar wrapper para o ícone de utilizador se necessário
@@ -133,7 +186,7 @@ class AuthManager {
         let dropdownContainer = userIcon.parentElement;
         
         // Se o ícone está diretamente no menu-user, criar um wrapper
-        if (dropdownContainer.classList.contains('menu-user')) {
+        if (dropdownContainer.classList.contains('menu-user') || dropdownContainer.classList.contains('menu-utilizador')) {
             const wrapper = document.createElement('div');
             wrapper.className = 'user-icon-wrapper';
             wrapper.style.position = 'relative';
@@ -159,6 +212,14 @@ class AuthManager {
                     <span>Meu Perfil</span>
                 </a>
                 ${profile.role === 'prestador-de-servicos' ? `
+                    <a href="edit-services.html" class="dropdown-item">
+                        <span class="dropdown-icon">🛠️</span>
+                        <span>Meus Serviços</span>
+                    </a>
+                    <a href="criar_servico.html" class="dropdown-item">
+                        <span class="dropdown-icon">➕</span>
+                        <span>Criar Serviço</span>
+                    </a>
                     <a href="prestador-dashboard.html" class="dropdown-item">
                         <span class="dropdown-icon">📊</span>
                         <span>Dashboard</span>
@@ -180,6 +241,16 @@ class AuthManager {
         // Evento de clique para mostrar/esconder dropdown
         userIcon.addEventListener('click', (e) => {
             e.stopPropagation();
+            
+            // Se estamos na página index, verificar role e redirecionar
+            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+                if (e.target.closest('.texto') || e.target.closest('.imagem')) {
+                    // Clique na imagem grande do perfil na seção prestador
+                    window.location.href = profile.editUrl;
+                    return;
+                }
+            }
+            
             dropdown.classList.toggle('show');
         });
 
@@ -287,7 +358,7 @@ class AuthManager {
                 font-size: 1.1rem;
             }
 
-            .menu-user {
+            .menu-user, .menu-utilizador {
                 position: relative;
             }
             
@@ -302,7 +373,7 @@ class AuthManager {
                 background: white;
             }
             
-            .menu-user {
+            .menu-user, .menu-utilizador {
                 display: flex;
                 align-items: center;
                 gap: 1rem;

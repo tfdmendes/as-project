@@ -1,3 +1,5 @@
+// navbar.js - Role-aware navigation for all pages except index.html
+
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize navbar functionality
@@ -18,11 +20,17 @@ function initializeNavbar() {
     const loginLink = document.querySelector('.login-link');
     const logoutLink = document.querySelector('.logout-link');
     
-    // Check if user is logged in
-    const isLoggedIn = checkUserSession();
+    // Check if user is logged in and get user data
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    const isLoggedIn = currentUser.isLoggedIn === true;
     
     // Update navbar based on login status
-    updateNavbarForAuthState(isLoggedIn);
+    updateNavbarForAuthState(isLoggedIn, currentUser);
+    
+    // Update dropdown links based on user role
+    if (isLoggedIn && currentUser.role) {
+        updateDropdownLinksForRole(currentUser.role);
+    }
     
     // Setup dropdown menu toggle
     if (menuToggle && dropdownMenu) {
@@ -42,8 +50,7 @@ function initializeNavbar() {
                 // Redirect to login if not logged in
                 window.location.href = 'login.html';
             } else {
-                // Check user role and redirect accordingly
-                const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+                // Redirect to appropriate edit page based on role
                 if (currentUser.role === 'prestador-de-servicos') {
                     window.location.href = 'prestador-edit.html';
                 } else {
@@ -94,14 +101,8 @@ function initializeNavbar() {
     }
 }
 
-// Check if user is logged in
-function checkUserSession() {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
-    return currentUser.isLoggedIn === true;
-}
-
 // Update navbar UI based on authentication state
-function updateNavbarForAuthState(isLoggedIn) {
+function updateNavbarForAuthState(isLoggedIn, currentUser) {
     const menuToggle = document.getElementById('menuToggle');
     
     if (!isLoggedIn) {
@@ -114,7 +115,67 @@ function updateNavbarForAuthState(isLoggedIn) {
         if (menuToggle) {
             menuToggle.style.display = 'block';
         }
+        
+        // Update user profile image if available
+        updateUserProfileImage(currentUser);
     }
+}
+
+// Update dropdown links based on user role
+function updateDropdownLinksForRole(role) {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if (!dropdownMenu) return;
+    
+    // Find and update the account link
+    const accountLinks = dropdownMenu.querySelectorAll('a[href*="account-edit"], a[href*="prestador-edit"]');
+    accountLinks.forEach(link => {
+        if (role === 'prestador-de-servicos') {
+            link.href = 'prestador-edit.html';
+            if (link.textContent.trim() === 'Account') {
+                link.textContent = 'Painel Prestador';
+            }
+        } else {
+            link.href = 'account-edit.html';
+            link.textContent = 'Account';
+        }
+    });
+    
+    // Add prestador-specific menu items if needed
+    if (role === 'prestador-de-servicos') {
+        addPrestadorMenuItems(dropdownMenu);
+    }
+}
+
+// Add prestador-specific menu items
+function addPrestadorMenuItems(dropdownMenu) {
+    const firstSection = dropdownMenu.querySelector('.dropdown-section');
+    if (!firstSection) return;
+    
+    // Check if items already exist
+    if (dropdownMenu.querySelector('a[href*="criar_servico"]')) return;
+    
+    // Create prestador-specific links
+    const prestadorItems = [
+        { href: 'criar_servico.html', text: 'Criar Serviço' },
+        { href: 'edit-services.html', text: 'Meus Serviços' }
+    ];
+    
+    // Find the position after "Account" link
+    const accountLink = firstSection.querySelector('a[href*="prestador-edit"], a[href*="account-edit"]');
+    
+    prestadorItems.forEach(item => {
+        const link = document.createElement('a');
+        link.href = item.href;
+        link.className = 'dropdown-item';
+        link.textContent = item.text;
+        
+        // Insert after account link
+        if (accountLink && accountLink.nextSibling) {
+            firstSection.insertBefore(link, accountLink.nextSibling);
+        } else {
+            firstSection.appendChild(link);
+        }
+    });
 }
 
 // Toggle dropdown menu
@@ -166,12 +227,28 @@ function logout() {
     window.location.href = 'index.html';
 }
 
-// Utility function to update user profile image if needed
-function updateUserProfileImage() {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+// Update user profile image based on user data
+function updateUserProfileImage(currentUser) {
     const userIcon = document.getElementById('userIcon');
     
-    if (userIcon && currentUser.isLoggedIn && currentUser.profileImage) {
-        userIcon.src = currentUser.profileImage;
+    if (userIcon && currentUser.isLoggedIn) {
+        // Get user profile from auth profiles
+        const userProfiles = {
+            "user@petotel.com": {
+                avatar: "assets/people/RyanMatos.png"
+            },
+            "prestador@petotel.com": {
+                avatar: "assets/people/tiago.png"
+            }
+        };
+        
+        const profile = userProfiles[currentUser.email];
+        if (profile && profile.avatar) {
+            userIcon.src = profile.avatar;
+            userIcon.style.borderRadius = '50%';
+            userIcon.style.width = '32px';
+            userIcon.style.height = '32px';
+            userIcon.style.objectFit = 'cover';
+        }
     }
 }
