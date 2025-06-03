@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/messages-prestador.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <title>Messagens e Calendário</title>
+    
+    <style>
+        .message-bubble.received {
+            justify-content: flex-start;
+        }
+        
+        .message-bubble.sent {
+            justify-content: flex-end;
+        }
+        
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin: 5px 0;
+            word-wrap: break-word;
+        }
+        
+        .message-content.received {
+            background-color: #f1f3f4;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-content.sent {
+            background-color: #007bff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        
+        .chat-tiago { display: block; }
+        .chat-mariana { display: none; }
+        .chat-daniela { display: none; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+            <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" >
+            <span class="logo-text">Pet-o-Tel</span>
+            </a>
+        </div>
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+            <div class="menu-user">
+                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" >
+                <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+            </div>
+        </div>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Todas as conversas</div>
+            </div>
+            <div class="messages-list">
+                <div class="message-item active" onclick="selectChat('tiago')">
+                    <div class="avatar tiago">TF</div>
+                    <div class="message-info">
+                        <div class="sender-name">Tiago Ferreira</div>
+                        <div class="message-date">Em 13 Abr 2025</div>
+                    </div>
+                </div>
+                <div class="message-item" onclick="selectChat('mariana')">
+                    <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                        <img src="assets/messages_prestador/mariana.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="message-info">
+                        <div class="sender-name">Mariana Fernando</div>
+                        <div class="message-date">Em 23 Mai 2025</div>
+                    </div>
+                </div>
+                <div class="message-item" onclick="selectChat('daniela')">
+                    <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                        <img src="assets/messages_prestador/daniela.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="message-info">
+                        <div class="sender-name">Daniela Duarte</div>
+                        <div class="message-date">Em 24 Mai 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="chat-header">
+                <div class="chat-title">Mensagens</div>
+            </div>
+            
+            <div class="content-area">
+                <div class="chat-area">
+                    <div class="messages-container" id="messagesContainer">
+                        
+                        <!-- Chat com Tiago Ferreira (invertido) -->
+                        <div class="chat-tiago">
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Olá Tiago! Obrigado por escolher os nossos serviços. Como posso ajudar o seu pet hoje?
+                                    <div class="message-time">14:20</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar tiago">TF</div>
+                                </div>
+                                <div class="message-content received">
+                                    Olá! Preciso de alguém para cuidar do meu cão durante o fim de semana. Ele é muito dócil.
+                                    <div class="message-time">14:25</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Perfeito! Que raça é o seu cão e que cuidados específicos precisa?
+                                    <div class="message-time">14:27</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar tiago">TF</div>
+                                </div>
+                                <div class="message-content received">
+                                    É um Golden Retriever, o Max. Precisa de duas refeições por dia e um passeio pela manhã.
+                                    <div class="message-time">14:30</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Excelente! Tenho experiência com Golden Retrievers. Posso cuidar do Max no sábado e domingo. O valor seria 40€ por dia.
+                                    <div class="message-time">14:35</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar tiago">TF</div>
+                                </div>
+                                <div class="message-content received">
+                                    Perfeito! Pode vir buscar o Max no sábado de manhã às 9h?
+                                    <div class="message-time">14:38</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Claro! Estarei aí às 9h em ponto. Pode enviar-me a sua morada por favor?
+                                    <div class="message-time">14:40</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat com Mariana Fernando -->
+                        <div class="chat-mariana">
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/mariana.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    Bom dia! Vi o seu perfil e gostaria de saber se tem disponibilidade para cuidar da minha gata.
+                                    <div class="message-time">09:15</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Bom dia Mariana! Claro, tenho disponibilidade. Pode contar-me mais sobre a sua gata?
+                                    <div class="message-time">09:20</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/mariana.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    A Luna é uma gata persa de 3 anos. É muito meiga mas um pouco tímida com estranhos. Preciso de alguém para ficar com ela durante uma semana.
+                                    <div class="message-time">09:25</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Que querida! Tenho muita experiência com gatos persas. Prefere que eu vá à sua casa ou que a Luna fique na minha?
+                                    <div class="message-time">09:28</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/mariana.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    Preferia que fosse à minha casa, assim ela fica no ambiente dela. Qual seria o valor?
+                                    <div class="message-time">09:32</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Perfeito! Para pet-sitting em casa durante uma semana seriam 25€ por dia. Inclui alimentação, limpeza da caixa de areia e carinho! 😊
+                                    <div class="message-time">09:35</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-nanny" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/mariana.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    Está bem! Pode vir conhecer a Luna amanhã para se familiarizarem?
+                                    <div class="message-time">09:40</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat com Daniela Duarte -->
+                        <div class="chat-daniela">
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/daniela.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    Olá! Tenho dois cães pequenos que precisam de passeios diários. Tem disponibilidade?
+                                    <div class="message-time">16:45</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Olá Daniela! Claro que sim! Que raças são os seus cãezinhos?
+                                    <div class="message-time">16:50</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/daniela.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    São dois Yorkshire Terriers, o Simão e a Mia. Precisam de um passeio de manhã e outro à tarde, todos os dias.
+                                    <div class="message-time">16:55</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Que fofinhos! Yorkshire são uma das minhas raças favoritas. Que horários prefere para os passeios?
+                                    <div class="message-time">17:00</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/daniela.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    De manhã por volta das 8h e à tarde às 17h seria ideal. Podem ser passeios de 30 minutos cada.
+                                    <div class="message-time">17:05</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble sent">
+                                <div class="message-content sent">
+                                    Perfeito! Consigo encaixar esses horários. O valor seria 15€ por dia pelos dois passeios. Quando gostaria de começar?
+                                    <div class="message-time">17:08</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message-bubble received">
+                                <div class="message-sender">
+                                    <div class="avatar pet-centro" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                        <img src="assets/messages_prestador/daniela.jpeg" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="message-content received">
+                                    Ótimo! Podemos começar na próxima segunda-feira? Vou enviar-lhe a minha morada.
+                                    <div class="message-time">17:12</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="message-input-area">
+                        <input type="text" class="message-input" placeholder="Escreve a tua mensagem..." id="messageInput">
+                        <button class="send-btn" onclick="sendMessage()">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+        <!--rodapé-->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo-footer" >
+                        <span class="footer-logo-text">Pet-O-Tel</span>
+                    </div>
+                    <p class="footer-slogan">Tornamos simples cuidar de quem te faz bem!</p>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="column-title">COMPANY</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Informação legal</a></li>
+                            <li><a href="#">Contacta-nos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">HELP CENTER</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Encontra um serviço</a></li>
+                            <li><a href="#">Porquê nós?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="column-title">CONTACT INFO</h4>
+                        <ul class="footer-links">
+                            <li>Contacto: 123456789</li>
+                            <li>Email: pet_o_tel@gmail.com</li>
+                            <li class="social-icons">
+                                <a href="#"><img src="assets/logos/facebook.svg" alt="Facebook"></a>
+                                <a href="#"><img src="assets/logos/twitter.svg" alt="Twitter"></a>
+                                <a href="#"><img src="assets/logos/instagram.svg" alt="Instagram"></a>
+                                <a href="#"><img src="assets/logos/linkedin.svg" alt="LinkedIn"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-buttons">
+                <a href="#" class="app-button playstore">
+                    <img src="assets/logos/playstore.svg" alt="Play Store" >
+                    PlayStore
+                </a>
+                <a href="#" class="app-button appstore">
+                    <img src="assets/logos/applestore.svg" alt="App Store" >
+                    AppStore
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Pet-O-Tel | All rights reserved</p>
+                <p class="project">Projeto Grupo 401</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/messages-prestador.js"></script>
+    <script src="js/navbar.js"></script>
+    
+
+</body>
+</html>
