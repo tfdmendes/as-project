@@ -7,27 +7,49 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="css/role-aware.css">
+    <script src="js/auth.js"></script>
     <title>Messagens e Calendário</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
-        <div class="logo-container">
-            <a href="index.html" class="logo-link">
-            <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" >
-            <span class="logo-text">Pet-o-Tel</span>
-            </a>
-        </div>
-        <div class="nav-menu">
-            <a href="#" class="nav-link">Baixa a aplicação móvel</a>
-            <div class="menu-user">
-                <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" >
-                <a href="account-edit.html"><img src="assets/header/user.svg" alt="Utilizador" class="icon-user"></a>
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logos/logo.png" alt="Logo Pet-O-Tel" class="logo" >
+                    <span class="logo-text">Pet-o-Tel</span>
+                </a>
             </div>
-        </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Baixa a aplicação móvel</a>
+                <div class="menu-user">
+                    <img src="assets/header/menu.svg" alt="Menu" class="icon-menu" id="menuToggle" >
+                    <img src="assets/header/user.svg" alt="Utilizador" class="icon-user" id="userIcon" >
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <div class="dropdown-section">
+                            <a href="messages.html" class="dropdown-item">Messages</a>
+                            <a href="notifications.html" class="dropdown-item">Notifications</a>
+                            <a href="reservations.html" class="dropdown-item">Reservations</a>
+                            <a href="wishlists.html" class="dropdown-item">Wishlists</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">
+                            <a href="account-edit.html" class="dropdown-item">Account</a>
+                            <a href="help-center.html" class="dropdown-item">Help Center</a>
+                            <a href="#" class="dropdown-item logout-link">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
+    
+    <!-- Dropdown Overlay - This was missing! -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
+    
     <main class="main">
         <div class="sidebar">
             <div class="sidebar-header">
