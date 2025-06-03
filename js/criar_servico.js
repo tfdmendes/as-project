@@ -2,6 +2,85 @@
 let uploadedImages = [];
 let selectedAmenities = ['🚿 Banho completo', '✂️ Tosquia profissional', '🏠 Serviço ao domicílio'];
 let isPreviewMode = false;
+let editingServiceId = null; // Para rastrear se estamos editando
+
+// Inicialização - verificar se estamos editando um serviço
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se há um ID de serviço na URL (modo edição)
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceId = urlParams.get('edit');
+    
+    if (serviceId) {
+        loadServiceForEditing(serviceId);
+    }
+    
+    // Inicializar comodidades selecionadas
+    document.querySelectorAll('.amenity-item input[type="checkbox"]').forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.parentElement.classList.add('selected');
+        }
+    });
+    
+    // Prevenir submit do formulário ao pressionar Enter
+    document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+        }
+    });
+});
+
+// Função para carregar serviço para edição
+function loadServiceForEditing(serviceId) {
+    const services = JSON.parse(localStorage.getItem('userServices') || '[]');
+    const service = services.find(s => s.id === serviceId);
+    
+    if (service) {
+        editingServiceId = serviceId;
+        
+        // Preencher o formulário com os dados do serviço
+        document.getElementById('serviceName').value = service.name;
+        document.getElementById('serviceDescription').value = service.description;
+        document.getElementById('servicePrice').value = service.price;
+        document.getElementById('locationInput').value = service.location;
+        document.getElementById('serviceStatus').value = service.status || 'active';
+        document.getElementById('instantBooking').checked = service.instantBooking || false;
+        document.getElementById('emailNotifications').checked = service.emailNotifications || false;
+        document.getElementById('availability').value = service.availability || 'always';
+        document.getElementById('startTime').value = service.startTime || '09:00';
+        document.getElementById('endTime').value = service.endTime || '18:00';
+        
+        // Carregar imagens
+        if (service.images && service.images.length > 0) {
+            const imageGrid = document.getElementById('imageGrid');
+            imageGrid.innerHTML = ''; // Limpar grid existente
+            service.images.forEach(img => {
+                addImageToGrid(img.src, img.name || 'Imagem do serviço');
+            });
+        }
+        
+        // Carregar comodidades
+        selectedAmenities = service.amenities || [];
+        document.querySelectorAll('.amenity-item').forEach(item => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            const amenityText = item.querySelector('span').textContent;
+            
+            if (selectedAmenities.includes(amenityText)) {
+                checkbox.checked = true;
+                item.classList.add('selected');
+            } else {
+                checkbox.checked = false;
+                item.classList.remove('selected');
+            }
+        });
+        
+        // Atualizar título da página e botões
+        document.querySelector('.page-title').textContent = 'Editar Serviço';
+        const publishBtn = document.querySelector('.btn-primary');
+        publishBtn.textContent = '💾 Atualizar Serviço';
+        
+        showMessage('📝 Serviço carregado para edição', 'info');
+    }
+}
 
 // Upload de imagens
 function triggerFileInput() {
@@ -168,35 +247,6 @@ function toggleDay(dayElement) {
     }
 }
 
-// Pré-visualização
-function togglePreview() {
-    const cards = document.querySelectorAll('.card');
-    isPreviewMode = !isPreviewMode;
-    
-    cards.forEach(card => {
-        if (isPreviewMode) {
-            card.classList.add('preview-mode');
-            // Adicionar header de pré-visualização apenas nos cards principais
-            if (!card.querySelector('.preview-header')) {
-                const previewHeader = document.createElement('div');
-                previewHeader.className = 'preview-header';
-                previewHeader.textContent = '👁️ Modo Pré-visualização - Como os clientes verão';
-                card.insertBefore(previewHeader, card.firstChild);
-            }
-        } else {
-            card.classList.remove('preview-mode');
-            const previewHeader = card.querySelector('.preview-header');
-            if (previewHeader) {
-                previewHeader.remove();
-            }
-        }
-    });
-    
-    // Atualizar botão
-    const previewBtn = document.querySelector('.btn-outline');
-    previewBtn.textContent = isPreviewMode ? '✏️ Modo Edição' : '👁️ Pré-visualizar';
-}
-
 // Validação e salvamento
 function validateForm() {
     let isValid = true;
@@ -262,9 +312,10 @@ function showMessage(message, type = 'success') {
 
 function saveDraft() {
     const serviceData = collectFormData();
+    serviceData.status = 'draft';
     
-    // Simular salvamento (em produção, enviar para API)
-    console.log('Salvando rascunho:', serviceData);
+    // Salvar no localStorage
+    saveServiceToLocalStorage(serviceData);
     
     showMessage('✅ Rascunho salvo com sucesso!');
     
@@ -281,26 +332,43 @@ function publishService() {
     }
     
     const serviceData = collectFormData();
+    serviceData.status = 'active';
     
-    // Simular publicação (em produção, enviar para API)
-    console.log('Publicando serviço:', serviceData);
+    // Salvar no localStorage
+    saveServiceToLocalStorage(serviceData);
     
-    showMessage('🚀 Serviço publicado com sucesso! Agora está visível para os clientes.');
+    if (editingServiceId) {
+        showMessage('✅ Serviço atualizado com sucesso!');
+    } else {
+        showMessage('🚀 Serviço publicado com sucesso! Agora está visível para os clientes.');
+    }
     
     // Atualizar estado
     document.getElementById('serviceStatus').value = 'active';
     
-    // Simular atualização de estatísticas
-    updateStats();
+    // Redirecionar após 2 segundos
+    setTimeout(() => {
+        window.location.href = 'edit-services.html';
+    }, 2000);
 }
 
 function collectFormData() {
+    // Coletar todas as imagens do grid (incluindo as já carregadas)
+    const currentImages = [];
+    document.querySelectorAll('#imageGrid .image-preview img').forEach(img => {
+        currentImages.push({
+            src: img.src,
+            name: img.alt || 'Imagem do serviço'
+        });
+    });
+    
     return {
+        id: editingServiceId || generateServiceId(),
         name: document.getElementById('serviceName').value,
         description: document.getElementById('serviceDescription').value,
         price: parseFloat(document.getElementById('servicePrice').value),
         location: document.getElementById('locationInput').value,
-        images: uploadedImages,
+        images: currentImages, // Usar as imagens atuais do grid
         amenities: selectedAmenities,
         status: document.getElementById('serviceStatus').value,
         instantBooking: document.getElementById('instantBooking').checked,
@@ -308,8 +376,16 @@ function collectFormData() {
         availability: document.getElementById('availability').value,
         startTime: document.getElementById('startTime').value,
         endTime: document.getElementById('endTime').value,
-        customDays: getSelectedDays()
+        customDays: getSelectedDays(),
+        rating: editingServiceId ? getExistingRating() : 0,
+        reviews: editingServiceId ? getExistingReviews() : 0,
+        createdAt: editingServiceId ? getExistingCreatedAt() : new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     };
+}
+
+function generateServiceId() {
+    return 'service_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }
 
 function getSelectedDays() {
@@ -317,36 +393,49 @@ function getSelectedDays() {
     return days.filter(day => document.getElementById(day).checked);
 }
 
-function updateStats() {
-    // Simular incremento das estatísticas
-    const stats = document.querySelectorAll('.stat-number');
-    stats[0].textContent = parseInt(stats[0].textContent) + Math.floor(Math.random() * 10) + 1; // Visualizações
-    stats[1].textContent = parseInt(stats[1].textContent) + Math.floor(Math.random() * 3) + 1; // Contactos
+function saveServiceToLocalStorage(serviceData) {
+    // Obter serviços existentes
+    let services = JSON.parse(localStorage.getItem('userServices') || '[]');
+    
+    if (editingServiceId) {
+        // Atualizar serviço existente
+        const index = services.findIndex(s => s.id === editingServiceId);
+        if (index !== -1) {
+            // Preservar rating e reviews existentes
+            serviceData.rating = services[index].rating || 0;
+            serviceData.reviews = services[index].reviews || 0;
+            serviceData.createdAt = services[index].createdAt;
+            services[index] = serviceData;
+        }
+    } else {
+        // Adicionar novo serviço
+        serviceData.rating = 0;
+        serviceData.reviews = 0;
+        services.push(serviceData);
+    }
+    
+    // Salvar no localStorage
+    localStorage.setItem('userServices', JSON.stringify(services));
 }
 
-// Event listeners para inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar comodidades selecionadas
-    document.querySelectorAll('.amenity-item input[type="checkbox"]').forEach(checkbox => {
-        if (checkbox.checked) {
-            checkbox.parentElement.classList.add('selected');
-        }
-    });
-    
-    // Prevenir submit do formulário ao pressionar Enter
-    document.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-        }
-    });
-    
-    // Auto-save a cada 2 minutos (opcional)
-    setInterval(function() {
-        if (document.getElementById('serviceStatus').value === 'draft') {
-            saveDraft();
-        }
-    }, 120000); // 2 minutos
-});
+// Funções auxiliares para preservar dados existentes durante edição
+function getExistingRating() {
+    const services = JSON.parse(localStorage.getItem('userServices') || '[]');
+    const service = services.find(s => s.id === editingServiceId);
+    return service ? (service.rating || 0) : 0;
+}
+
+function getExistingReviews() {
+    const services = JSON.parse(localStorage.getItem('userServices') || '[]');
+    const service = services.find(s => s.id === editingServiceId);
+    return service ? (service.reviews || 0) : 0;
+}
+
+function getExistingCreatedAt() {
+    const services = JSON.parse(localStorage.getItem('userServices') || '[]');
+    const service = services.find(s => s.id === editingServiceId);
+    return service ? service.createdAt : new Date().toISOString();
+}
 
 // Função para limpar formulário
 function clearForm() {
@@ -369,15 +458,4 @@ function clearForm() {
         
         showMessage('📝 Formulário limpo com sucesso!');
     }
-}
-
-// Função para duplicar serviço
-function duplicateService() {
-    const currentData = collectFormData();
-    currentData.name = currentData.name + ' (Cópia)';
-    
-    // Simular criação de novo serviço
-    console.log('Duplicando serviço:', currentData);
-    
-    showMessage('📋 Serviço duplicado! Edite as informações conforme necessário.');
 }
