@@ -1,0 +1,47 @@
+
+---
+Teste com:
+Email: 'user@petotel.com'
+Password: 'user123'
+Login com sucesso para user@petotel.com: PASSOU
+
+---
+Teste com:
+Email: 'prestador@petotel.com'
+Password: 'prestador123'
+Login com sucesso para prestador@petotel.com: PASSOU
+
+---
+Teste com:
+Email: 'user@petotel.com'
+Password: 'senhaErrada'
+Login incorreto para user@petotel.com: PASSOU - Mensagem de erro: 'Email ou password incorretos. Por favor, tente novamente.'
+
+---
+Teste com:
+Email: 'emailinvalido@'
+Password: 'qualquer'
+Formulário bloqueado pelo navegador
+ - Email inválido: 'Introduza uma parte a seguir a "@". "emailinvalido@" está incompleto.'
+
+---
+Teste com:
+Email: ''
+Password: ''
+Formulário bloqueado pelo navegador
+ - Email inválido: 'Preencha este campo.'
+ - Password inválida: 'Preencha este campo.'
+
+---
+Teste com:
+Email: ''
+Password: 'senha123'
+Formulário bloqueado pelo navegador
+ - Email inválido: 'Preencha este campo.'
+
+---
+Teste com:
+Email: 'user@petotel.com'
+Password: ''
+Formulário bloqueado pelo navegador
+ - Password inválida: 'Preencha este campo.'
