@@ -66,19 +66,19 @@
                     
                     <div class="form-group">
                         <label for="serviceName">Nome do Serviço *</label>
-                        <input type="text" id="serviceName" class="form-control" placeholder="Ex: Banho & Tosquia Profissional" value="Banho para Cães e Gatos">
+                        <input type="text" id="serviceName" class="form-control" placeholder="Ex: Banho & Tosquia Profissional" value="Banho para Cães e Gatos" required>
                         <div class="error-message" style="display: none;">O nome do serviço é obrigatório</div>
                     </div>
 
                     <div class="form-group">
                         <label for="serviceDescription">Descrição do Serviço *</label>
-                        <textarea id="serviceDescription" class="form-control" placeholder="Descreva o seu serviço, experiência e o que torna o seu trabalho especial...">Ofereço serviços profissionais de banho e tosquia para cães e gatos há mais de 5 anos. Trabalho com carinho e dedicação, garantindo o bem-estar e conforto dos seus pets. Uso apenas produtos de qualidade e técnicas seguras.</textarea>
+                        <textarea id="serviceDescription" class="form-control" placeholder="Descreva o seu serviço, experiência e o que torna o seu trabalho especial..." required>Ofereço serviços profissionais de banho e tosquia para cães e gatos há mais de 5 anos. Trabalho com carinho e dedicação, garantindo o bem-estar e conforto dos seus pets. Uso apenas produtos de qualidade e técnicas seguras.</textarea>
                         <div class="error-message" style="display: none;">A descrição é obrigatória</div>
                     </div>
 
                     <div class="form-group">
                         <label for="servicePrice">Preço (€) *</label>
-                        <input type="number" id="servicePrice" class="form-control" placeholder="25" value="25" min="0" step="0.01">
+                        <input type="number" id="servicePrice" class="form-control" placeholder="25" value="25" min="0" step="0.01" required>
                         <div class="error-message" style="display: none;">O preço é obrigatório</div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                     
                     <div class="location-search">
                         <label for="locationInput">Endereço ou Localização *</label>
-                        <input type="text" id="locationInput" class="form-control" placeholder="Digite o endereço ou cidade..." value="Aveiro, Portugal" oninput="searchLocation(this.value)">
+                        <input type="text" id="locationInput" class="form-control" placeholder="Digite o endereço ou cidade..." value="Aveiro, Portugal" oninput="searchLocation(this.value)" required>
                         <div class="location-suggestions" id="locationSuggestions"></div>
                         <div class="error-message" style="display: none;">A localização é obrigatória</div>
                     </div>

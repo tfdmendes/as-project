@@ -1,0 +1,56 @@
+
+---
+Teste com:
+Nome: 'Banho & Tosquia Profissional'
+Descrição: 'Ofereço serviços profissionais de banho e tosquia para cães e gatos há mais de 5 anos. Trabalho com carinho e dedicação, garantindo o bem-estar e conforto dos seus pets. Uso apenas produtos de qualidade e técnicas seguras.'
+Preço: '25'
+Localização: 'Aveiro, Portugal'
+Serviço adicionado com sucesso: PASSOU
+
+---
+Teste com:
+Nome: ''
+Descrição: 'Sem título - Descrição deve ter no minimo 50 caracteres para funcionar'
+Preço: '70'
+Localização: 'Angra do Heroísmo, Portugal'
+Serviço não foi adicionado: PASSOU - Mensagem de erro: '❌ Corrija os erros antes de publicar: Nome do serviço é obrigatório'
+
+---
+Teste com:
+Nome: 'Cortamento de pelo'
+Descrição: ''
+Preço: '50'
+Localização: 'Praia da Vitória, Portugal'
+Serviço não foi adicionado: PASSOU - Mensagem de erro: '❌ Corrija os erros antes de publicar: Descrição deve ter pelo menos 50 caracteres'
+
+---
+Teste com:
+Nome: 'Consultas'
+Descrição: 'Sem preço - Descrição deve ter no minimo 50 caracteres para funcionar'
+Preço: ''
+Localização: 'Porto Judeu, Portugal'
+Serviço não foi adicionado: PASSOU - Mensagem de erro: '❌ Corrija os erros antes de publicar: Preço deve ser maior que zero'
+
+---
+Teste com:
+Nome: 'Passeios'
+Descrição: 'Sem Localização - Descrição deve ter no minimo 50 caracteres para funcionar'
+Preço: '35'
+Localização: ''
+Serviço não foi adicionado: PASSOU - Mensagem de erro: '❌ Corrija os erros antes de publicar: Localização é obrigatória'
+
+---
+Teste com:
+Nome: 'Hospedagem'
+Descrição: 'outros - Descrição deve ter no minimo 50 caracteres para funcionar'
+Preço: '100'
+Localização: 'Vladivostok, Russia'
+Serviço adicionado com sucesso: PASSOU
+
+---
+Teste com:
+Nome: ''
+Descrição: ''
+Preço: ''
+Localização: ''
+Serviço não foi adicionado: PASSOU - Mensagem de erro: '❌ Corrija os erros antes de publicar: Nome do serviço é obrigatório, Descrição deve ter pelo menos 50 caracteres, Preço deve ser maior que zero, Localização é obrigatória'
