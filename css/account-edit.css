@@ -44,6 +44,8 @@ body {
     border-radius: 15px;
     text-align: center;
     width: 280px;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-photo-container {
@@ -84,6 +86,7 @@ body {
 
 .verification-items {
     text-align: left;
+    margin-bottom: auto; /* Empurra o botão de logout para baixo */
 }
 
 .verification-item {
@@ -97,6 +100,25 @@ body {
 
 .check-icon {
     flex-shrink: 0;
+}
+
+/* Estilo do Botão de Logout */
+.btn-logout {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #c9302c;
 }
 
 /* Right Edit Section */
@@ -207,11 +229,13 @@ body {
 
 .pets-grid {
     display: flex;
-    gap: 30px;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    gap: 20px; /* Reduzido o gap para melhor acomodação */
 }
 
 .pet-card {
     text-align: center;
+    position: relative;
 }
 
 .pet-photo {
@@ -248,6 +272,11 @@ body {
     transition: all 0.3s ease;
 }
 
+.add-pet-button span {
+    font-size: 12px;
+    color: #196085;
+    margin-top: 5px;
+}
 
 /* Pet card enhancements */
 .pet-card {
@@ -324,7 +353,7 @@ body {
 .btn-save:hover {
     background: #145070;
 }
-/* Pet info icon for descriptions */
+
 .pet-info-icon {
     position: absolute;
     top: 5px;
@@ -339,20 +368,4 @@ body {
     font-size: 14px;
     cursor: help;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Ensure pet card is positioned for absolute children */
-.pet-card {
-    position: relative;
-}
-
-/* Textarea specific styling */
-.form-group textarea {
-    resize: vertical;
-    min-height: 60px;
-}
-
-/* Ensure pet card is positioned for absolute children */
-.pet-card {
-    position: relative;
 }

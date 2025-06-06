@@ -111,6 +111,27 @@ class AuthManager {
             // Atualizar links do dropdown existente baseado no role
             this.updateDropdownLinksForRole(profile.role);
 
+            // ==================================================================
+            // INÍCIO DA ALTERAÇÃO: Evento de logout sem confirmação
+            // ==================================================================
+            const logoutLinks = document.querySelectorAll('.logout-link');
+            logoutLinks.forEach(link => {
+                // Remove qualquer listener antigo para evitar duplicados
+                link.replaceWith(link.cloneNode(true));
+            });
+            
+            // Adiciona o novo listener à nova cópia dos elementos
+            document.querySelectorAll('.logout-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.logout(); // A chamada agora é direta, sem o "confirm"
+                });
+            });
+            // ==================================================================
+            // FIM DA ALTERAÇÃO
+            // ==================================================================
+
+
         } else {
             // Utilizador não está logado
             userIcons.forEach(icon => {
@@ -176,12 +197,12 @@ class AuthManager {
             accountLinks.forEach(link => {
                 if (isPrestador) {
                     link.href = 'prestador-edit.html';
-                    if (link.textContent.includes('Account')) {
+                    if (link.textContent.includes('Conta')) { // Changed from 'Account'
                         link.textContent = 'Painel Prestador';
                     }
                 } else {
                     link.href = 'account-edit.html';
-                    link.textContent = 'Account';
+                    link.textContent = 'Conta'; // Changed from 'Account'
                 }
             });
         });
@@ -289,7 +310,7 @@ class AuthManager {
                         <span>Dashboard</span>
                     </a>
                 ` : ''}
-                <a href="#" class="dropdown-item" id="logoutBtn">
+                <a href="#" class="dropdown-item logout-link" id="logoutBtnDynamic">
                     <span class="dropdown-icon">🚪</span>
                     <span>Sair</span>
                 </a>
@@ -325,14 +346,6 @@ class AuthManager {
             }
         });
 
-        // Evento de logout
-        const logoutBtn = dropdown.querySelector('#logoutBtn');
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (confirm('Tem certeza que deseja sair?')) {
-                this.logout();
-            }
-        });
     }
 
     // Adicionar estilos CSS para o dropdown
