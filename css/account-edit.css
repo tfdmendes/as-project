@@ -111,6 +111,26 @@ body {
     margin-bottom: 30px;
 }
 
+/* Estilo para o botão Caixa de Mensagens */
+.btn-messages {
+    display: block;
+    width: 100%;
+    background-color: #196085;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-messages:hover {
+    background-color: #145070;
+}
+
 .share-toggle {
     display: flex;
     align-items: center;
